@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["general1","Formula for computing virtual temperature from temperature and mixing ratio."],["general2","Formula for computing virtual temperature from air temperature, pressure and vapour pressure."],["general3","Formula for computing virtual temperature from air temperature and specific humidity."]]});

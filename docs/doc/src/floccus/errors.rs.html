@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;floccus-0.3.5&#x2F;src&#x2F;errors.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>errors.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../floccus/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
+<span id="2"> 2</span>
+<span id="3"> 3</span>
+<span id="4"> 4</span>
+<span id="5"> 5</span>
+<span id="6"> 6</span>
+<span id="7"> 7</span>
+<span id="8"> 8</span>
+<span id="9"> 9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+</pre><pre class="rust"><code><span class="doccomment">//!Module containing all error enums used by the crate</span>
+
+<span class="kw">use</span> <span class="ident">thiserror::Error</span>;
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Error</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="doccomment">///Error enum returned when provided input will cause function to return erronous result</span>
+<span class="doccomment">///eg. `Inf` or `NaN`</span>
+
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">InputError</span> {
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Value of {0} out of a reasonable range.&quot;</span>)]</span>
+    <span class="doccomment">///Error returned when provided input is out of reasonable range.</span>
+    <span class="doccomment">///Contains the name of variable that is incorrect.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///Valid range for each input of each function can be found in functions&#39; documentation.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///In theory, all formulae should provide a result, although in some cases physically unreasonable, for any inputs.</span>
+    <span class="doccomment">///However, due to the nature of floating-point arithmetic ([read more about it here](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html))</span>
+    <span class="doccomment">///for very small and very large inputs functions, especially those using `exp()`, will return `NaN` or `Inf`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///When using thermodynamic formulae in loops (for example in numerical models), due to a bug one of the quantities can become physically unreasonable.</span>
+    <span class="doccomment">///That can result in a program returning `NaN`s and `Inf`s all over the place and even a program crash.</span>
+    <span class="doccomment">///Bugs like that can be really difficult to track down and truly annoying.</span>
+    <span class="doccomment">///An issue with a thickness of model bottom layer in WRF ([discussed here](https://forum.mmm.ucar.edu/phpBB3/viewtopic.php?t=8325#p14866)) is a good example of such bug.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///The [`InputError::OutOfRange`] error has been introduced to simplify debugging process and comply with [`C-VALIDATE`](https://rust-lang.github.io/api-guidelines/dependability.html#c-validate) rule.</span>
+    <span class="doccomment">///Although restrictive the advantages of having [`InputError::OutOfRange`] in crate outweigh the inconveniences of its presence, and most users should not realise it is present.</span>
+    <span class="doccomment">///Furthermore, it increases users&#39; awarness of practicality of different formulae.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///If you find that in your use case input ranges are too narrow you should first look for a more relevant formula.</span>
+    <span class="doccomment">///If such formula does not exist do not hesitate to create an issue in Github repository.</span>
+    <span class="ident">OutOfRange</span>(<span class="ident">String</span>),
+
+    <span class="doccomment">///Error returned when provided set of arguments will result in invalid output.</span>
+    <span class="doccomment">///Contains detailed information about the error.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///In some cases, provided arguments casue an invalid calculation (eg. division by 0)</span>
+    <span class="doccomment">///to happen due to the nature of a formula, even though all arguments are within the valid range.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///[`mixing_ratio::general1`](crate::mixing_ratio::general1) function is a good example.</span>
+    <span class="doccomment">///In that function, the formula contains substraction of arguments in the denominator.</span>
+    <span class="doccomment">///Therefore when arguments are equal 0 appears in the denominator causing division by 0.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///This error is unlikely to occur in iterative algorithms (eg. numerical models),</span>
+    <span class="doccomment">///due to the nature of floating-point arithmetic. However, it can occur when arguments</span>
+    <span class="doccomment">///are provided manually.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///This error should be handled on case-to-case basis, as it can be returned by functions</span>
+    <span class="doccomment">///for different reasons. Check the documentation of function that you use to learn more</span>
+    <span class="doccomment">///about when this error can appear. </span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Provided arguments result in erronous output. 
+    Check documentation of the function and change one of arguments. Details: {0}&quot;</span>)]</span>
+    <span class="ident">IncorrectArgumentSet</span>(<span class="ident">String</span>),
+}
+</code></pre></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="floccus" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
+</body></html>

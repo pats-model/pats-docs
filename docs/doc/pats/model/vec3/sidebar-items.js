@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Vec3","(TODO: What it is)"]]});

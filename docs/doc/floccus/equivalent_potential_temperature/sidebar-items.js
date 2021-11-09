@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["bryan1","Formula for computing equivalent potential temperature of dry air from temperature, pressure and vapour pressure."]]});

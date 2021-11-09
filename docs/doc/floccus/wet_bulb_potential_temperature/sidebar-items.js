@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["davies_jones1","Formula for computing wet bulb potential temperature from equivalent potential temperature."]]});

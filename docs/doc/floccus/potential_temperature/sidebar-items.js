@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["davies_jones1","Formula for computing potential temperature of dry air from temperature, pressure and vapour pressure."]]});

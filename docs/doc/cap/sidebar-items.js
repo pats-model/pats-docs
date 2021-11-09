@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Cap","A struct that wraps another allocator and limits the number of bytes that can be allocated."]]});

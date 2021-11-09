@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["stull1","Formula for computing wet bulb temperature pressure from dry bulb temperature and relative humidity."]]});

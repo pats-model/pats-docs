@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["pseudoadiabatic_derivative","(TODO: What it is)"]],"struct":[["AdiabaticScheme","(TODO: What it is)"],["PseudoAdiabaticScheme","(TODO: What it is)"]]});

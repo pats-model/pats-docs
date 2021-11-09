@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["read_raw_surface","Reads all values in GRIB file at surface level of variable with given `short_name`."],["truncate_surface_to_extent","Truncates surface data array from GRIB file to cover only the domain + margins extent."]]});

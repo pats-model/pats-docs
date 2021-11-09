@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Unofficial high-level safe Rust bindings to ecCodes library"><meta name="keywords" content="rust, rustlang, rust-lang, eccodes"><title>eccodes - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../eccodes/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><h2 class="location">Crate eccodes</h2><div class="block version"><div class="narrow-helper"></div><p>Version 0.6.6</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all eccodes's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#traits">Traits</a></li></ul></div><div id="sidebar-vars" data-name="eccodes" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">eccodes</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/eccodes/lib.rs.html#1-215" title="goto source code">[src]</a></span></h1><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h1 id="unofficial-high-level-safe-rust-bindings-to-eccodes-library" class="section-header"><a href="#unofficial-high-level-safe-rust-bindings-to-eccodes-library">Unofficial high-level safe Rust bindings to ecCodes library</a></h1>
+<p>This crate contains safe high-level bindings for ecCodes library.
+Bindings can be considered safe mainly because all crate structures
+will take ownership of the data in memory before passing the raw pointer to ecCodes.
+<strong>Currently only reading of GRIB files is supported.</strong></p>
+<p>Because of the ecCodes library API characteristics theses bindings are
+rather thick wrapper to make this crate safe and convenient to use.</p>
+<p>Because ecCodes supports mainly Linux platforms, this crate is not tested on other architectures.</p>
+<p>If you want to see more features released quicker do not hesitate
+to contribute and check out <a href="https://github.com/ScaleWeather/eccodes">Github repository</a>.</p>
+<p><a href="https://confluence.ecmwf.int/display/ECC/ecCodes+Home">ecCodes</a> is an open-source library
+for reading and writing GRIB and BUFR files developed by <a href="https://www.ecmwf.int/">European Centre for Medium-Range Weather Forecasts</a>.</p>
+<h2 id="usage" class="section-header"><a href="#usage">Usage</a></h2><h3 id="accessing-grib-files" class="section-header"><a href="#accessing-grib-files">Accessing GRIB files</a></h3>
+<p>This crate provides an access to GRIB file by creating a
+<a href="codes_handle/struct.CodesHandle.html"><code>CodesHandle</code></a> and reading messages from the file with it.</p>
+<p>The <a href="codes_handle/struct.CodesHandle.html"><code>CodesHandle</code></a> can be constructed in two ways:</p>
+<ul>
+<li>
+<p>The main option is to use <a href="codes_handle/struct.CodesHandle.html#method.new_from_file"><code>new_from_file()</code></a> function
+to open a file under provided <a href="https://doc.rust-lang.org/1.56.1/std/path/struct.Path.html"><code>path</code></a> with filesystem,
+when copying whole file into memory is not desired or not necessary.</p>
+</li>
+<li>
+<p>Alternatively <a href="codes_handle/struct.CodesHandle.html#method.new_from_memory"><code>new_from_memory()</code></a> function can be used
+to access a file that is already in memory. For example, when file is downloaded from the internet
+and does not need to be saved on hard drive.
+The file must be stored in <a href="https://docs.rs/bytes/1.1.0/bytes/struct.Bytes.html"><code>bytes::Bytes</code></a>.</p>
+</li>
+</ul>
+<p>Data (messages) inside the GRIB file can be accessed using the <a href="codes_handle/struct.CodesHandle.html#impl-FallibleIterator"><code>FallibleIterator</code></a>
+by iterating over the <code>CodesHandle</code>.</p>
+<p>The <code>FallibleIterator</code> returns a <a href="codes_handle/struct.KeyedMessage.html"><code>KeyedMessage</code></a> structure which implements some
+methods to access data values. The data inside <code>KeyedMessage</code> is provided directly as <a href="codes_handle/struct.Key.html"><code>Key</code></a>
+or as more specific data type.</p>
+<h4 id="example" class="section-header"><a href="#example">Example</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// We are reading the mean sea level pressure for 4 gridpoints</span>
+<span class="comment">// nearest to Reykjavik (64.13N, -21.89E) for 1st June 2021 00:00 UTC </span>
+<span class="comment">// from ERA5 Climate Reanalysis</span>
+
+<span class="comment">// Open the GRIB file and create the CodesHandle</span>
+<span class="kw">let</span> <span class="ident">file_path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;./data/iceland.grib&quot;</span>);
+<span class="kw">let</span> <span class="ident">product_kind</span> <span class="op">=</span> <span class="ident">ProductKind::GRIB</span>;
+
+<span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">CodesHandle::new_from_file</span>(<span class="ident">file_path</span>, <span class="ident">product_kind</span>)<span class="question-mark">?</span>;
+
+<span class="comment">// Use iterator to get a Keyed message with shortName &quot;msl&quot; and typeOfLevel &quot;surface&quot;</span>
+<span class="comment">// First, filter and collect the messages to get those that we want</span>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">level</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">KeyedMessage</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">handle</span>
+    .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">msg</span><span class="op">|</span> {
+
+    <span class="prelude-val">Ok</span>(<span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Str</span>(<span class="string">&quot;msl&quot;</span>.<span class="ident">to_string</span>())
+        <span class="op">&amp;&amp;</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;typeOfLevel&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Str</span>(<span class="string">&quot;surface&quot;</span>.<span class="ident">to_string</span>()))
+    })
+    .<span class="ident">collect</span>()<span class="question-mark">?</span>;
+
+<span class="comment">// Now unwrap and access the first and only element of resulting vector</span>
+<span class="comment">// Find nearest modifies internal KeyedMessage fields so we need mutable reference</span>
+<span class="kw">let</span> <span class="ident">level</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">level</span>[<span class="number">0</span>];
+
+<span class="comment">// Get the four nearest gridpoints of Reykjavik</span>
+<span class="kw">let</span> <span class="ident">nearest_gridpoints</span> <span class="op">=</span> <span class="ident">level</span>.<span class="ident">find_nearest</span>(<span class="number">64.13</span>, <span class="op">-</span><span class="number">21.89</span>)<span class="question-mark">?</span>;
+
+<span class="comment">// Print value and distance of the nearest gridpoint</span>
+<span class="macro">println!</span>(<span class="string">&quot;value: {}, distance: {}&quot;</span>, 
+    <span class="ident">nearest_gridpoints</span>[<span class="number">3</span>].<span class="ident">value</span>, 
+    <span class="ident">nearest_gridpoints</span>[<span class="number">3</span>].<span class="ident">distance</span>);</code></pre></div>
+<h3 id="writing-grib-files" class="section-header"><a href="#writing-grib-files">Writing GRIB files</a></h3>
+<p>The crate provides a basic support for setting <code>KeyedMessage</code> keys 
+and writing GRIB files. The easiests (and safest) way to create a 
+new custom message is to copy exisitng one from other GRIB file,
+modify the keys and write to new file.</p>
+<h4 id="example-1" class="section-header"><a href="#example-1">Example</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// We are computing the temperature at 850hPa as an average</span>
+<span class="comment">// of 900hPa and 800hPa and writing it to a new file.</span>
+<span class="kw">let</span> <span class="ident">file_path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="string">&quot;./data/iceland-levels.grib&quot;</span>);
+<span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">CodesHandle::new_from_file</span>(<span class="ident">file_path</span>, <span class="ident">GRIB</span>)<span class="question-mark">?</span>;
+
+<span class="comment">// Get messages with temperature levels</span>
+<span class="kw">let</span> <span class="ident">t_levels</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">KeyedMessage</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">handle</span>
+    .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">msg</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Str</span>(<span class="string">&quot;t&quot;</span>.<span class="ident">to_string</span>())))
+    .<span class="ident">collect</span>()<span class="question-mark">?</span>;
+
+<span class="comment">// Get any message to edit it later</span>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_msg</span> <span class="op">=</span> <span class="ident">t_levels</span>[<span class="number">0</span>].<span class="ident">clone</span>();
+
+<span class="comment">// Get temperatures at 800hPa and 900hPa</span>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t800</span> <span class="op">=</span> <span class="macro">vec!</span>[];
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t900</span> <span class="op">=</span> <span class="macro">vec!</span>[];
+
+<span class="kw">for</span> <span class="ident">msg</span> <span class="kw">in</span> <span class="ident">t_levels</span> {
+    <span class="kw">if</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;level&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Int</span>(<span class="number">800</span>) {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FloatArray</span>(<span class="ident">vals</span>) <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;values&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
+            <span class="ident">t800</span> <span class="op">=</span> <span class="ident">vals</span>;
+        }
+    }
+
+    <span class="kw">if</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;level&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Int</span>(<span class="number">900</span>) {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FloatArray</span>(<span class="ident">vals</span>) <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;values&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
+            <span class="ident">t900</span> <span class="op">=</span> <span class="ident">vals</span>;
+        }
+    }
+}
+
+<span class="comment">// Compute temperature at 850hPa</span>
+<span class="kw">let</span> <span class="ident">t850</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">t800</span>
+    .<span class="ident">iter</span>()
+    .<span class="ident">zip</span>(<span class="ident">t900</span>.<span class="ident">iter</span>())
+    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> (<span class="ident">t</span>.<span class="number">0</span> <span class="op">+</span> <span class="ident">t</span>.<span class="number">1</span>) <span class="op">/</span> <span class="number">2.0</span>)
+    .<span class="ident">collect</span>();
+
+<span class="comment">// Edit appropriate keys in the editable message</span>
+<span class="ident">new_msg</span>
+    .<span class="ident">write_key</span>(<span class="ident">Key</span> {
+        <span class="ident">name</span>: <span class="string">&quot;level&quot;</span>.<span class="ident">to_string</span>(),
+        <span class="ident">value</span>: <span class="ident">Int</span>(<span class="number">850</span>),
+    })<span class="question-mark">?</span>;
+<span class="ident">new_msg</span>
+    .<span class="ident">write_key</span>(<span class="ident">Key</span> {
+        <span class="ident">name</span>: <span class="string">&quot;values&quot;</span>.<span class="ident">to_string</span>(),
+        <span class="ident">value</span>: <span class="ident">FloatArray</span>(<span class="ident">t850</span>),
+    })<span class="question-mark">?</span>;
+
+<span class="comment">// Save the message to a new file without appending</span>
+<span class="ident">new_msg</span>
+    .<span class="ident">write_to_file</span>(<span class="ident">Path::new</span>(<span class="string">&quot;iceland-850.grib&quot;</span>), <span class="bool-val">false</span>)<span class="question-mark">?</span>;</code></pre></div>
+<h3 id="eccodes-installation" class="section-header"><a href="#eccodes-installation">ecCodes installation</a></h3>
+<p>This crate uses <a href="https://crates.io/crates/eccodes-sys">eccodes-sys</a> with default options to link ecCodes.
+Check <code>eccodes-sys</code> website for more details on how it links the library.</p>
+<p>The recommended way to install ecCodes on your computer is using your package manager.
+For example, on Ubuntu you can use <code>apt-get</code>:</p>
+<div class="example-wrap"><pre class="language-text"><code>$ sudo apt-get install libeccodes-dev</code></pre></div>
+<p>Alternatively, you can install the library manually from source in suitable directory
+following <a href="https://confluence.ecmwf.int/display/ECC/ecCodes+installation">this instructions</a>.</p>
+<p>Then add the <code>lib/pkgconfig</code> directory from your ecCodes installation directory
+to the <code>PKG_CONFIG_PATH</code> environmental variable. If ecCodes have been compiled
+as shared library you will also need to specify <code>LD_LIBRARY_PATH</code>.
+For example:</p>
+<div class="example-wrap"><pre class="language-text"><code>$ export PKG_CONFIG_PATH=&lt;your_eccodes_path&gt;/lib/pkgconfig
+$ export LD_LIBRARY_PATH=&lt;your_eccodes_path&gt;/lib</code></pre></div><h3 id="features" class="section-header"><a href="#features">Features</a></h3>
+<ul>
+<li><code>docs</code> - builds the crate without linking ecCodes, particularly useful when building the documentation
+on <a href="https://docs.rs/">docs.rs</a>. For more details check documentation of <a href="https://crates.io/crates/eccodes-sys">eccodes-sys</a>.</li>
+</ul>
+<p>To build your own crate with this crate as dependency on docs.rs without linking ecCodes add following lines to your <code>Cargo.toml</code></p>
+<div class="example-wrap"><pre class="language-text"><code>[package.metadata.docs.rs]
+features = [&quot;eccodes/docs&quot;]</code></pre></div></div></details><h2 id="reexports" class="section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-left import-item"><code>pub use codes_handle::<a class="struct" href="codes_handle/struct.CodesHandle.html" title="struct eccodes::codes_handle::CodesHandle">CodesHandle</a>;</code></div><div class="item-right docblock-short"></div><div class="item-left import-item"><code>pub use codes_handle::<a class="struct" href="codes_handle/struct.Key.html" title="struct eccodes::codes_handle::Key">Key</a>;</code></div><div class="item-right docblock-short"></div><div class="item-left import-item"><code>pub use codes_handle::<a class="struct" href="codes_handle/struct.KeyedMessage.html" title="struct eccodes::codes_handle::KeyedMessage">KeyedMessage</a>;</code></div><div class="item-right docblock-short"></div><div class="item-left import-item"><code>pub use codes_handle::<a class="enum" href="codes_handle/enum.KeyType.html" title="enum eccodes::codes_handle::KeyType">KeyType</a>;</code></div><div class="item-right docblock-short"></div><div class="item-left import-item"><code>pub use codes_handle::<a class="enum" href="codes_handle/enum.KeysIteratorFlags.html" title="enum eccodes::codes_handle::KeysIteratorFlags">KeysIteratorFlags</a>;</code></div><div class="item-right docblock-short"></div><div class="item-left import-item"><code>pub use codes_handle::<a class="struct" href="codes_handle/struct.NearestGridpoint.html" title="struct eccodes::codes_handle::NearestGridpoint">NearestGridpoint</a>;</code></div><div class="item-right docblock-short"></div><div class="item-left import-item"><code>pub use codes_handle::<a class="enum" href="codes_handle/enum.ProductKind.html" title="enum eccodes::codes_handle::ProductKind">ProductKind</a>;</code></div><div class="item-right docblock-short"></div><div class="item-left import-item"><code>pub use errors::<a class="enum" href="errors/enum.CodesError.html" title="enum eccodes::errors::CodesError">CodesError</a>;</code></div><div class="item-right docblock-short"></div></div><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-left module-item"><a class="mod" href="codes_handle/index.html" title="eccodes::codes_handle mod">codes_handle</a></div><div class="item-right docblock-short"><p>Main crate module containing definition of <code>CodesHandle</code>
+and all associated functions and data structures</p>
+</div><div class="item-left module-item"><a class="mod" href="errors/index.html" title="eccodes::errors mod">errors</a></div><div class="item-right docblock-short"><p>Module containing all error types used by the crate</p>
+</div></div><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-left module-item"><a class="trait" href="trait.FallibleIterator.html" title="eccodes::FallibleIterator trait">FallibleIterator</a></div><div class="item-right docblock-short"><p>An <code>Iterator</code>-like trait that allows for calculation of items to fail.</p>
+</div><div class="item-left module-item"><a class="trait" href="trait.FromFallibleIterator.html" title="eccodes::FromFallibleIterator trait">FromFallibleIterator</a></div><div class="item-right docblock-short"><p>Conversion from a fallible iterator.</p>
+</div><div class="item-left module-item"><a class="trait" href="trait.IntoFallibleIterator.html" title="eccodes::IntoFallibleIterator trait">IntoFallibleIterator</a></div><div class="item-right docblock-short"><p>Conversion into a <code>FallibleIterator</code>.</p>
+</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="eccodes" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+    <script src="../main.js"></script>
+</body></html>

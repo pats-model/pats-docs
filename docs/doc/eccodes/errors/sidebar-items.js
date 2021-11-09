@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["CodesError","Errors returned by the crate’s functions. These are the only errors that the user may face."],["CodesInternal","Errors returned by internal ecCodes library functions. Copied directly from the ecCodes API."]]});

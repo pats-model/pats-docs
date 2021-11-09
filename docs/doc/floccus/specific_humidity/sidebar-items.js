@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["general1","Formula for computing specific humidity from vapour pressure and pressure. Reverse function of `vapour_pressure::general1`. This function is theoretical not empirical."]]});
