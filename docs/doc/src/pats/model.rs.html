@@ -254,6 +254,7 @@
 <span id="254">254</span>
 <span id="255">255</span>
 <span id="256">256</span>
+<span id="257">257</span>
 </pre><pre class="rust"><code><span class="comment">/*
 Copyright 2021 Jakub Lewandowski
 
@@ -291,9 +292,9 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">use</span> <span class="ident">log</span>::{<span class="ident">debug</span>, <span class="ident">error</span>, <span class="ident">info</span>};
 <span class="kw">use</span> <span class="ident">ndarray::Array1</span>;
 <span class="kw">use</span> <span class="ident">rayon</span>::{<span class="ident">ThreadPool</span>, <span class="ident">ThreadPoolBuilder</span>};
-<span class="kw">use</span> <span class="ident">std::io::Error</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">fs</span>,
+    <span class="ident">io::Error</span>,
     <span class="ident">path::Path</span>,
     <span class="ident">sync</span>::{<span class="ident">mpsc</span>, <span class="ident">Arc</span>},
 };
@@ -357,14 +358,13 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
             }
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="macro">error!</span>(<span class="string">&quot;Parcel simulation handling failed due to an error, check the details and rerun the model: {}&quot;</span>, <span class="ident">err</span>);
+                <span class="comment">// this is neccessary to make sure that all error messages</span>
+                <span class="comment">// are fully written to stdout before the progress bar updates</span>
+                <span class="macro">println!</span>(<span class="string">&quot;&quot;</span>);
             }
         }
         <span class="ident">parcels_bar</span>.<span class="ident">inc</span>(<span class="number">1</span>);
     }
-
-    <span class="comment">// this is neccessary to make sure that all error messages</span>
-    <span class="comment">// are fully written to stdout before the progress bar updates</span>
-    <span class="macro">info!</span>(<span class="string">&quot;&quot;</span>);
 
     <span class="ident">parcels_bar</span>.<span class="ident">finish_with_message</span>(<span class="string">&quot;All parcels finished&quot;</span>);
     <span class="macro">info!</span>(<span class="string">&quot;Writing output&quot;</span>);
@@ -456,7 +456,8 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="kw">let</span> <span class="ident">x_coords</span> <span class="op">=</span> <span class="ident">Array1::linspace</span>(
         <span class="ident">domain_anchor</span>.<span class="number">0</span>,
         <span class="ident">domain_anchor</span>.<span class="number">0</span>
-            <span class="op">+</span> (<span class="ident">Float::from</span>(<span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">shape</span>.<span class="number">0</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">*</span> <span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">spacing</span>),
+            <span class="op">+</span> (<span class="ident">Float::from</span>(<span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">shape</span>.<span class="number">0</span> <span class="op">-</span> <span class="number">1</span>)
+                <span class="op">*</span> <span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">spacing</span>),
         <span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">shape</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>,
     )
     .<span class="ident">to_vec</span>();
@@ -464,7 +465,8 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="kw">let</span> <span class="ident">y_coords</span> <span class="op">=</span> <span class="ident">Array1::linspace</span>(
         <span class="ident">domain_anchor</span>.<span class="number">1</span>,
         <span class="ident">domain_anchor</span>.<span class="number">1</span>
-            <span class="op">+</span> (<span class="ident">Float::from</span>(<span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">shape</span>.<span class="number">1</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">*</span> <span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">spacing</span>),
+            <span class="op">+</span> (<span class="ident">Float::from</span>(<span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">shape</span>.<span class="number">1</span> <span class="op">-</span> <span class="number">1</span>)
+                <span class="op">*</span> <span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">spacing</span>),
         <span class="ident">model_core</span>.<span class="ident">config</span>.<span class="ident">domain</span>.<span class="ident">shape</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">usize</span>,
     )
     .<span class="ident">to_vec</span>();
