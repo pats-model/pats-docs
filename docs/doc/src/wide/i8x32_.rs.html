@@ -612,13 +612,13 @@
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">i8x32</span> { <span class="ident">simd0</span>: <span class="ident">v128</span>, <span class="ident">simd1</span>: <span class="ident">v128</span> }
 
     <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">i8x32</span> {
-      <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+      <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::splat</span>(<span class="number">0</span>)
       }
     }
 
     <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">i8x32</span> {
-      <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+      <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
         <span class="op">!</span><span class="ident">v128_any_true</span>(<span class="ident">v128_or</span>(<span class="ident">v128_xor</span>(<span class="self">self</span>.<span class="ident">simd0</span>, <span class="ident">other</span>.<span class="ident">simd0</span>), <span class="ident">v128_xor</span>(<span class="self">self</span>.<span class="ident">simd1</span>, <span class="ident">other</span>.<span class="ident">simd1</span>)))
       }
     }
@@ -640,7 +640,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span>: <span class="ident">add_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -692,7 +692,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span>: <span class="ident">sub_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -744,7 +744,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="self">self</span>.<span class="ident">add</span>(<span class="ident"><span class="self">Self</span>::splat</span>(<span class="ident">rhs</span>))
   }
 }
@@ -753,7 +753,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="self">self</span>.<span class="ident">sub</span>(<span class="ident"><span class="self">Self</span>::splat</span>(<span class="ident">rhs</span>))
   }
 }
@@ -762,7 +762,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">i8x32</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8x32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8x32</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="ident">i8x32::splat</span>(<span class="self">self</span>).<span class="ident">add</span>(<span class="ident">rhs</span>)
   }
 }
@@ -771,7 +771,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">i8x32</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8x32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i8x32</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="ident">i8x32::splat</span>(<span class="self">self</span>).<span class="ident">sub</span>(<span class="ident">rhs</span>)
   }
 }
@@ -780,7 +780,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
           <span class="self">Self</span> { <span class="ident">avx</span> : <span class="ident">bitand_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -832,7 +832,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span> : <span class="ident">bitor_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -884,7 +884,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">bitxor</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span> : <span class="ident">bitxor_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -936,7 +936,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">cmp_eq</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">cmp_eq</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span> : <span class="ident">cmp_eq_mask_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -946,38 +946,38 @@
         <span class="self">Self</span> { <span class="ident">simd0</span>: <span class="ident">i8x16_eq</span>(<span class="self">self</span>.<span class="ident">simd0</span>, <span class="ident">rhs</span>.<span class="ident">simd0</span>), <span class="ident">simd1</span>: <span class="ident">i8x16_eq</span>(<span class="self">self</span>.<span class="ident">simd1</span>, <span class="ident">rhs</span>.<span class="ident">simd1</span>) }
       } <span class="kw">else</span> {
         <span class="self">Self</span> { <span class="ident">arr</span>: [
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">0</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">0</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">1</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">1</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">2</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">2</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">3</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">3</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">4</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">4</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">5</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">5</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">6</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">6</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">7</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">7</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">8</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">8</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">9</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">9</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">10</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">10</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">11</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">11</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">12</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">12</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">13</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">13</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">14</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">14</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">15</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">15</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">16</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">16</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">17</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">17</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">18</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">18</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">19</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">19</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">20</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">20</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">21</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">21</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">22</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">22</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">23</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">23</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">24</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">24</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">25</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">25</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">26</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">26</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">27</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">27</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">28</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">28</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">29</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">29</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">30</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">30</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
-          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">31</span>] <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">31</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">0</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">0</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">1</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">1</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">2</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">2</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">3</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">3</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">4</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">4</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">5</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">5</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">6</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">6</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">7</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">7</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">8</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">8</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">9</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">9</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">10</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">10</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">11</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">11</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">12</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">12</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">13</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">13</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">14</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">14</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">15</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">15</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">16</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">16</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">17</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">17</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">18</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">18</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">19</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">19</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">20</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">20</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">21</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">21</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">22</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">22</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">23</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">23</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">24</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">24</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">25</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">25</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">26</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">26</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">27</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">27</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">28</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">28</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">29</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">29</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">30</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">30</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
+          <span class="kw">if</span> <span class="self">self</span>.<span class="ident">arr</span>[<span class="number">31</span>] <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">arr</span>[<span class="number">31</span>] { <span class="op">-</span><span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> },
           ]}
       }
     }
@@ -988,7 +988,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">cmp_gt</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">cmp_gt</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span> : <span class="ident">cmp_gt_mask_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -1040,7 +1040,7 @@
   <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">fn</span> <span class="ident">cmp_lt</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+  <span class="kw">fn</span> <span class="ident">cmp_lt</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span> : <span class="op">!</span>(<span class="ident">cmp_gt_mask_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) <span class="op">^</span> <span class="ident">cmp_eq_mask_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>)) }
@@ -1091,7 +1091,7 @@
 <span class="kw">impl</span> <span class="ident">i8x32</span> {
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">blend</span>(<span class="self">self</span>, <span class="ident">t</span>: <span class="self">Self</span>, <span class="ident">f</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">blend</span>(<span class="self">self</span>, <span class="ident">t</span>: <span class="self">Self</span>, <span class="ident">f</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span>: <span class="ident">blend_varying_i8_m256i</span>(<span class="ident">f</span>.<span class="ident">avx</span>, <span class="ident">t</span>.<span class="ident">avx</span>, <span class="self">self</span>.<span class="ident">avx</span>) }
@@ -1106,7 +1106,7 @@
   }
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">abs</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">abs</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span>: <span class="ident">abs_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>) }
@@ -1155,7 +1155,7 @@
   }
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span>: <span class="ident">max_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -1170,7 +1170,7 @@
   }
   <span class="attribute">#[<span class="ident">inline</span>]</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
     <span class="macro">pick!</span> {
       <span class="kw">if</span> <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span><span class="op">=</span><span class="string">&quot;avx2&quot;</span>)]</span> {
         <span class="self">Self</span> { <span class="ident">avx</span>: <span class="ident">min_i8_m256i</span>(<span class="self">self</span>.<span class="ident">avx</span>,<span class="ident">rhs</span>.<span class="ident">avx</span>) }
@@ -1184,7 +1184,7 @@
     }
   }
 
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_array</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> [<span class="ident">i8</span>; <span class="number">32</span>] {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_array</span>(<span class="self">self</span>) -&gt; [<span class="ident">i8</span>; <span class="number">32</span>] {
     <span class="ident">cast</span>(<span class="self">self</span>)
   }
 }

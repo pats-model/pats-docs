@@ -97,13 +97,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// This is unsound if the referenced value isn’t initialized.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_ref</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span>;
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_ref</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Value</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">T</span>;
 
     <span class="doccomment">/// Retrieve a mutable reference to the element, assuming that it is initialized.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// This is unsound if the referenced value isn’t initialized.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_mut</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>;
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_mut</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Value</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>;
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
@@ -122,12 +122,12 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_ref</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_ref</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">T</span> {
         <span class="ident">t</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_mut</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_mut</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="ident">t</span>
     }
 }
@@ -141,12 +141,12 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_ref</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">T</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_ref</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">T</span> {
         <span class="ident">std::mem::transmute</span>(<span class="ident">t</span>.<span class="ident">as_ptr</span>()) <span class="comment">// TODO: use t.assume_init_ref()</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_mut</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_init_mut</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="ident">std::mem::transmute</span>(<span class="ident">t</span>.<span class="ident">as_mut_ptr</span>()) <span class="comment">// TODO: use t.assume_init_mut()</span>
     }
 }

@@ -397,7 +397,7 @@
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
     <span class="kw-2">*</span><span class="self">self</span>
   }
 }
@@ -406,7 +406,7 @@
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::zeroed</span>() }
   }
 }
@@ -416,7 +416,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">i8</span>; <span class="number">32</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i8</span>; <span class="number">32</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i8</span>; <span class="number">32</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -424,7 +424,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">i8</span>; <span class="number">32</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -432,7 +432,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u8</span>; <span class="number">32</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u8</span>; <span class="number">32</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -440,7 +440,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">u8</span>; <span class="number">32</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -450,7 +450,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">i16</span>; <span class="number">16</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i16</span>; <span class="number">16</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i16</span>; <span class="number">16</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -458,7 +458,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">i16</span>; <span class="number">16</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -466,7 +466,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u16</span>; <span class="number">16</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u16</span>; <span class="number">16</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u16</span>; <span class="number">16</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -474,7 +474,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">u16</span>; <span class="number">16</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -484,7 +484,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i32</span>; <span class="number">8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i32</span>; <span class="number">8</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -492,7 +492,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">i32</span>; <span class="number">8</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -500,7 +500,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u32</span>; <span class="number">8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u32</span>; <span class="number">8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u32</span>; <span class="number">8</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -508,7 +508,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">u32</span>; <span class="number">8</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -518,7 +518,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">i64</span>; <span class="number">4</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i64</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">i64</span>; <span class="number">4</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -526,7 +526,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">i64</span>; <span class="number">4</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -534,7 +534,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u64</span>; <span class="number">4</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u64</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">u64</span>; <span class="number">4</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">arr</span>) }
   }
 }
@@ -542,7 +542,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">u64</span>; <span class="number">4</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -552,7 +552,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">i128</span>; <span class="number">2</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">i</span>: [<span class="ident">i128</span>; <span class="number">2</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">i</span>: [<span class="ident">i128</span>; <span class="number">2</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">i</span>) }
   }
 }
@@ -560,7 +560,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">i128</span>; <span class="number">2</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -568,7 +568,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u128</span>; <span class="number">2</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m256i</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: [<span class="ident">u128</span>; <span class="number">2</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">u</span>: [<span class="ident">u128</span>; <span class="number">2</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">u</span>) }
   }
 }
@@ -576,7 +576,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m256i</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">u128</span>; <span class="number">2</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m256i</span>) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
 }
@@ -592,7 +592,7 @@
   <span class="doccomment">/// let f = format!(&quot;{:?}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;m256i(0, 0, 0, 0, 0, 0, 0, 0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;m256i(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -611,7 +611,7 @@
   <span class="doccomment">/// let f = format!(&quot;{}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;(0, 0, 0, 0, 0, 0, 0, 0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -630,7 +630,7 @@
   <span class="doccomment">/// let f = format!(&quot;{:b}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;(0, 0, 0, 0, 0, 0, 0, 0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -649,7 +649,7 @@
   <span class="doccomment">/// let f = format!(&quot;{:e}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;(0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -668,7 +668,7 @@
   <span class="doccomment">/// let f = format!(&quot;{:E}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;(0E0, 0E0, 0E0, 0E0, 0E0, 0E0, 0E0, 0E0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -687,7 +687,7 @@
   <span class="doccomment">/// let f = format!(&quot;{:x}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;(0, 0, 0, 0, 0, 0, 0, 0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -706,7 +706,7 @@
   <span class="doccomment">/// let f = format!(&quot;{:X}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;(0, 0, 0, 0, 0, 0, 0, 0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -725,7 +725,7 @@
   <span class="doccomment">/// let f = format!(&quot;{:o}&quot;, m256i::default());</span>
   <span class="doccomment">/// assert_eq!(&amp;f, &quot;(0, 0, 0, 0, 0, 0, 0, 0)&quot;);</span>
   <span class="doccomment">/// ```</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">int</span>) <span class="kw">in</span> <span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">8</span>]<span class="op">&gt;</span><span class="ident">::from</span>(<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {

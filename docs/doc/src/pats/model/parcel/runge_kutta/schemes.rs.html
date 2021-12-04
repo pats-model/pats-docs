@@ -285,7 +285,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// (TODO: What it is)</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// (Why it is neccessary)</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">refrence</span>: <span class="kw-2">&amp;</span><span class="ident">ParcelState</span>, <span class="ident">environment</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Environment</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">refrence</span>: <span class="kw-2">&amp;</span><span class="ident">ParcelState</span>, <span class="ident">environment</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Environment</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">gamma</span> <span class="op">=</span> (<span class="ident">C_P</span> <span class="op">*</span> ((<span class="number">1.0</span> <span class="op">+</span> <span class="ident">refrence</span>.<span class="ident">mxng_rto</span> <span class="op">*</span> (<span class="ident">C_PV</span> <span class="op">/</span> <span class="ident">C_P</span>)) <span class="op">/</span> (<span class="number">1.0</span> <span class="op">+</span> <span class="ident">refrence</span>.<span class="ident">mxng_rto</span>)))
             <span class="op">/</span> (<span class="ident">C_V</span> <span class="op">*</span> ((<span class="number">1.0</span> <span class="op">+</span> <span class="ident">refrence</span>.<span class="ident">mxng_rto</span> <span class="op">*</span> (<span class="ident">C_VV</span> <span class="op">/</span> <span class="ident">C_V</span>)) <span class="op">/</span> (<span class="number">1.0</span> <span class="op">+</span> <span class="ident">refrence</span>.<span class="ident">mxng_rto</span>)));
 
@@ -304,7 +304,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">state_at_position</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">ref_state</span>: <span class="kw-2">&amp;</span><span class="ident">ParcelState</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ParcelState</span>, <span class="ident">ParcelSimulationError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ParcelState</span>, <span class="ident">ParcelSimulationError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">updated_state</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">ref_state</span>;
 
         <span class="ident">updated_state</span>.<span class="ident">pres</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">env</span>.<span class="ident">get_field_value</span>(
@@ -353,7 +353,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// (TODO: What it is)</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// (Why it is neccessary)</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">refrence</span>: <span class="kw-2">&amp;</span><span class="ident">ParcelState</span>, <span class="ident">environment</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Environment</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">refrence</span>: <span class="kw-2">&amp;</span><span class="ident">ParcelState</span>, <span class="ident">environment</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Environment</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">PseudoAdiabaticScheme</span> {
             <span class="ident">ref_temp</span>: <span class="ident">refrence</span>.<span class="ident">temp</span>,
             <span class="ident">ref_pres</span>: <span class="ident">refrence</span>.<span class="ident">pres</span>,
@@ -379,7 +379,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">state_at_position</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">ref_state</span>: <span class="kw-2">&amp;</span><span class="ident">ParcelState</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ParcelState</span>, <span class="ident">ParcelSimulationError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ParcelState</span>, <span class="ident">ParcelSimulationError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">updated_state</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">ref_state</span>;
 
         <span class="ident">updated_state</span>.<span class="ident">pres</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">env</span>.<span class="ident">get_field_value</span>(
@@ -420,7 +420,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// (TODO: What it is)</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// (Why it is neccessary)</span>
-    <span class="kw">fn</span> <span class="ident">iterate_to_temperature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target_pressure</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+    <span class="kw">fn</span> <span class="ident">iterate_to_temperature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target_pressure</span>: <span class="ident">Float</span>) -&gt; <span class="ident">Float</span> {
         <span class="kw">let</span> <span class="ident">step_count</span> <span class="op">=</span> ((<span class="self">self</span>.<span class="ident">ref_pres</span> <span class="op">-</span> <span class="ident">target_pressure</span>).<span class="ident">abs</span>() <span class="op">/</span> <span class="number">1.0</span>).<span class="ident">ceil</span>() <span class="kw">as</span> <span class="ident">usize</span>;
         <span class="kw">let</span> <span class="ident">step</span> <span class="op">=</span> (<span class="ident">target_pressure</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">ref_pres</span>) <span class="op">/</span> <span class="ident">step_count</span> <span class="kw">as</span> <span class="ident">Float</span>;
 
@@ -471,7 +471,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="ident">pres</span>: <span class="ident">Float</span>,
     <span class="ident">mxng_rto</span>: <span class="ident">Float</span>,
     <span class="ident">satr_mxng_rto</span>: <span class="ident">Float</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+) -&gt; <span class="ident">Float</span> {
     <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> (<span class="number">1.0</span> <span class="op">+</span> (<span class="ident">mxng_rto</span> <span class="op">/</span> <span class="ident">EPSILON</span>)) <span class="op">/</span> (<span class="number">1.0</span> <span class="op">+</span> (<span class="ident">mxng_rto</span> <span class="op">/</span> (<span class="ident">C_P</span> <span class="op">/</span> <span class="ident">C_PV</span>)));
 
     (<span class="ident">b</span> <span class="op">/</span> <span class="ident">pres</span>)

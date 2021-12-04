@@ -465,11 +465,11 @@
 
 <span class="doccomment">/// Declares a private mod and then a glob `use` with the visibility specified.</span>
 <span class="macro">macro_rules!</span> <span class="ident">submodule</span> {
-  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span>:<span class="ident">vis</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
+  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span>:<span class="ident">vis</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>) =&gt; {
     <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>;
     <span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span> <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>::<span class="kw-2">*</span>;
   };
-  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span>:<span class="ident">vis</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">content</span>:<span class="ident">tt</span>)<span class="op">*</span> }) <span class="op">=</span><span class="op">&gt;</span> {
+  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span>:<span class="ident">vis</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">content</span>:<span class="ident">tt</span>)<span class="op">*</span> }) =&gt; {
     <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">content</span>)<span class="op">*</span> }
     <span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span> <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>::<span class="kw-2">*</span>;
   };
@@ -561,7 +561,7 @@
   <span class="doccomment">///</span>
   <span class="doccomment">/// * **Intrinsic:** `_rdtsc`</span>
   <span class="doccomment">/// * **Assembly:** `rdtsc`</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_timestamp_counter</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_timestamp_counter</span>() -&gt; <span class="ident">u64</span> {
     <span class="comment">// Note(Lokathor): This was changed from i64 to u64 at some point, but</span>
     <span class="comment">// everyone ever was already casting this value to `u64` so crater didn&#39;t</span>
     <span class="comment">// even consider it a problem. We will follow suit.</span>
@@ -581,7 +581,7 @@
   <span class="doccomment">///</span>
   <span class="doccomment">/// * **Intrinsic:** `__rdtscp`</span>
   <span class="doccomment">/// * **Assembly:** `rdtscp`</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_timestamp_counter_p</span>(<span class="ident">aux</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_timestamp_counter_p</span>(<span class="ident">aux</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">u32</span>) -&gt; <span class="ident">u64</span> {
     <span class="kw">unsafe</span> { <span class="ident">__rdtscp</span>(<span class="ident">aux</span>) }
   }
 
@@ -593,7 +593,7 @@
   <span class="doccomment">/// ```</span>
   <span class="doccomment">/// * **Intrinsic:** `_bswap`</span>
   <span class="doccomment">/// * **Assembly:** `bswap r32`</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">byte_swap_i32</span>(<span class="ident">i</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">byte_swap_i32</span>(<span class="ident">i</span>: <span class="ident">i32</span>) -&gt; <span class="ident">i32</span> {
     <span class="kw">unsafe</span> { <span class="ident">_bswap</span>(<span class="ident">i</span>) }
   }
 
@@ -606,7 +606,7 @@
   <span class="doccomment">/// * **Intrinsic:** `_bswap64`</span>
   <span class="doccomment">/// * **Assembly:** `bswap r64`</span>
   <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span><span class="op">=</span><span class="string">&quot;x86_64&quot;</span>)]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">byte_swap_i64</span>(<span class="ident">i</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i64</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">byte_swap_i64</span>(<span class="ident">i</span>: <span class="ident">i64</span>) -&gt; <span class="ident">i64</span> {
     <span class="kw">unsafe</span> { <span class="ident">_bswap64</span>(<span class="ident">i</span>) }
   }
 
@@ -614,7 +614,7 @@
   <span class="attribute">#[<span class="ident">macro_export</span>]</span>
   <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">docs_rs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;avx&quot;</span>)))]</span>
   <span class="macro">macro_rules!</span> <span class="ident">round_op</span> {
-    (<span class="ident">Nearest</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+    (<span class="ident">Nearest</span>) =&gt; {{
       <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
       <span class="kw">use</span> <span class="ident">::core::arch::x86</span>::{
         <span class="ident">_MM_FROUND_NO_EXC</span>, <span class="ident">_MM_FROUND_TO_NEAREST_INT</span>,
@@ -625,7 +625,7 @@
       };
       <span class="ident">_MM_FROUND_NO_EXC</span> <span class="op">|</span> <span class="ident">_MM_FROUND_TO_NEAREST_INT</span>
     }};
-    (<span class="ident">NegInf</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+    (<span class="ident">NegInf</span>) =&gt; {{
       <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
       <span class="kw">use</span> <span class="ident">::core::arch::x86</span>::{
         <span class="ident">_MM_FROUND_NO_EXC</span>, <span class="ident">_MM_FROUND_TO_NEG_INF</span>,
@@ -636,7 +636,7 @@
       };
       <span class="ident">_MM_FROUND_NO_EXC</span> <span class="op">|</span> <span class="ident">_MM_FROUND_TO_NEG_INF</span>
     }};
-    (<span class="ident">PosInf</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+    (<span class="ident">PosInf</span>) =&gt; {{
       <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
       <span class="kw">use</span> <span class="ident">::core::arch::x86</span>::{
         <span class="ident">_MM_FROUND_NO_EXC</span>, <span class="ident">_MM_FROUND_TO_POS_INF</span>,
@@ -647,7 +647,7 @@
       };
       <span class="ident">_MM_FROUND_NO_EXC</span> <span class="op">|</span> <span class="ident">_MM_FROUND_TO_POS_INF</span>
     }};
-    (<span class="ident">Zero</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+    (<span class="ident">Zero</span>) =&gt; {{
       <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
       <span class="kw">use</span> <span class="ident">::core::arch::x86</span>::{
         <span class="ident">_mm256_round_pd</span>, <span class="ident">_MM_FROUND_NO_EXC</span>, <span class="ident">_MM_FROUND_TO_ZERO</span>,

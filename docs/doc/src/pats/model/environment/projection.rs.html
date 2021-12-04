@@ -242,7 +242,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// LCC projection constructor from reference longitude</span>
     <span class="doccomment">/// and two standard parallels.</span>
     <span class="doccomment">/// Defaults the reference latitude to 0.0</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">lon_0</span>: <span class="ident">Float</span>, <span class="ident">lat_1</span>: <span class="ident">Float</span>, <span class="ident">lat_2</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ProjectionError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">lon_0</span>: <span class="ident">Float</span>, <span class="ident">lat_1</span>: <span class="ident">Float</span>, <span class="ident">lat_2</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ProjectionError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="macro">approx_eq!</span>(<span class="ident">Float</span>, <span class="ident">lat_1</span>, <span class="ident">lat_2</span>) {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ProjectionError::IncorrectParams</span>(
                 <span class="string">&quot;standard parallels cannot be equal&quot;</span>,
@@ -290,7 +290,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// Function to project geographic coordinates</span>
     <span class="doccomment">/// on WGS84 ellipsoid to cartographic coordinates</span>
     <span class="doccomment">/// with previously specified LCC projection.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">project</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">lon</span>: <span class="ident">Float</span>, <span class="ident">lat</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Float</span>, <span class="ident">Float</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">project</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">lon</span>: <span class="ident">Float</span>, <span class="ident">lat</span>: <span class="ident">Float</span>) -&gt; (<span class="ident">Float</span>, <span class="ident">Float</span>) {
         <span class="kw">let</span> <span class="ident">phi</span> <span class="op">=</span> <span class="ident">lat</span>.<span class="ident">to_radians</span>();
         <span class="kw">let</span> <span class="ident">lambda</span> <span class="op">=</span> <span class="ident">lon</span>.<span class="ident">to_radians</span>();
 
@@ -307,7 +307,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// Function to inversly project cartographic coordinates</span>
     <span class="doccomment">/// on specified LCC projection to geographic coordinates</span>
     <span class="doccomment">/// on WGS84 ellipsoid.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse_project</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">Float</span>, <span class="ident">y</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Float</span>, <span class="ident">Float</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse_project</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">Float</span>, <span class="ident">y</span>: <span class="ident">Float</span>) -&gt; (<span class="ident">Float</span>, <span class="ident">Float</span>) {
         <span class="kw">let</span> <span class="ident">rho</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">n</span>.<span class="ident">signum</span>()) <span class="op">*</span> (<span class="ident">x</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">+</span> (<span class="self">self</span>.<span class="ident">rho_0</span> <span class="op">-</span> <span class="ident">y</span>).<span class="ident">powi</span>(<span class="number">2</span>)).<span class="ident">sqrt</span>();
 
         <span class="kw">let</span> <span class="ident">theta</span>;
@@ -329,24 +329,24 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     }
 }
 
-<span class="kw">fn</span> <span class="ident">t</span>(<span class="ident">phi</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">fn</span> <span class="ident">t</span>(<span class="ident">phi</span>: <span class="ident">Float</span>) -&gt; <span class="ident">Float</span> {
     ((<span class="ident">FRAC_PI_4</span> <span class="op">-</span> <span class="number">0.5</span> <span class="op">*</span> <span class="ident">phi</span>).<span class="ident">tan</span>())
         <span class="op">/</span> (((<span class="number">1.0</span> <span class="op">-</span> <span class="ident">WGS84_E</span> <span class="op">*</span> <span class="ident">phi</span>.<span class="ident">sin</span>()) <span class="op">/</span> (<span class="number">1.0</span> <span class="op">+</span> <span class="ident">WGS84_E</span> <span class="op">*</span> <span class="ident">phi</span>.<span class="ident">sin</span>())).<span class="ident">powf</span>(<span class="ident">WGS84_E</span> <span class="op">/</span> <span class="number">2.0</span>))
 }
 
-<span class="kw">fn</span> <span class="ident">m</span>(<span class="ident">phi</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">fn</span> <span class="ident">m</span>(<span class="ident">phi</span>: <span class="ident">Float</span>) -&gt; <span class="ident">Float</span> {
     <span class="ident">phi</span>.<span class="ident">cos</span>() <span class="op">/</span> (<span class="number">1.0</span> <span class="op">-</span> (<span class="ident">WGS84_E</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">*</span> (<span class="ident">phi</span>.<span class="ident">sin</span>()).<span class="ident">powi</span>(<span class="number">2</span>))).<span class="ident">sqrt</span>()
 }
 
-<span class="kw">fn</span> <span class="ident">n</span>(<span class="ident">m_1</span>: <span class="ident">Float</span>, <span class="ident">m_2</span>: <span class="ident">Float</span>, <span class="ident">t_1</span>: <span class="ident">Float</span>, <span class="ident">t_2</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">fn</span> <span class="ident">n</span>(<span class="ident">m_1</span>: <span class="ident">Float</span>, <span class="ident">m_2</span>: <span class="ident">Float</span>, <span class="ident">t_1</span>: <span class="ident">Float</span>, <span class="ident">t_2</span>: <span class="ident">Float</span>) -&gt; <span class="ident">Float</span> {
     (<span class="ident">m_1</span>.<span class="ident">ln</span>() <span class="op">-</span> <span class="ident">m_2</span>.<span class="ident">ln</span>()) <span class="op">/</span> (<span class="ident">t_1</span>.<span class="ident">ln</span>() <span class="op">-</span> <span class="ident">t_2</span>.<span class="ident">ln</span>())
 }
 
-<span class="kw">fn</span> <span class="ident">big_f</span>(<span class="ident">m_1</span>: <span class="ident">Float</span>, <span class="ident">n</span>: <span class="ident">Float</span>, <span class="ident">t_1</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">fn</span> <span class="ident">big_f</span>(<span class="ident">m_1</span>: <span class="ident">Float</span>, <span class="ident">n</span>: <span class="ident">Float</span>, <span class="ident">t_1</span>: <span class="ident">Float</span>) -&gt; <span class="ident">Float</span> {
     <span class="ident">m_1</span> <span class="op">/</span> (<span class="ident">n</span> <span class="op">*</span> <span class="ident">t_1</span>.<span class="ident">powf</span>(<span class="ident">n</span>))
 }
 
-<span class="kw">fn</span> <span class="ident">rho</span>(<span class="ident">big_f</span>: <span class="ident">Float</span>, <span class="ident">t</span>: <span class="ident">Float</span>, <span class="ident">n</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">fn</span> <span class="ident">rho</span>(<span class="ident">big_f</span>: <span class="ident">Float</span>, <span class="ident">t</span>: <span class="ident">Float</span>, <span class="ident">n</span>: <span class="ident">Float</span>) -&gt; <span class="ident">Float</span> {
     <span class="ident">WGS84_A</span> <span class="op">*</span> <span class="ident">big_f</span> <span class="op">*</span> <span class="ident">t</span>.<span class="ident">powf</span>(<span class="ident">n</span>)
 }
 
@@ -354,7 +354,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="doccomment">/// truncated infinite series is used with</span>
 <span class="doccomment">/// optimisations for reducing trigonometric</span>
 <span class="doccomment">/// functions calls.</span>
-<span class="kw">fn</span> <span class="ident">phi_for_inverse</span>(<span class="ident">t</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">fn</span> <span class="ident">phi_for_inverse</span>(<span class="ident">t</span>: <span class="ident">Float</span>) -&gt; <span class="ident">Float</span> {
     <span class="kw">let</span> <span class="ident">chi</span> <span class="op">=</span> <span class="ident">FRAC_PI_2</span> <span class="op">-</span> <span class="number">2.0</span> <span class="op">*</span> <span class="ident">t</span>.<span class="ident">atan</span>();
 
     <span class="kw">let</span> <span class="ident">big_a</span> <span class="op">=</span> (<span class="ident">WGS84_E</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="number">2.0</span>)

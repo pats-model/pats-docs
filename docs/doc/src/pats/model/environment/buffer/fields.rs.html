@@ -368,7 +368,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Input</span>,
         <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
         <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
         <span class="macro">debug!</span>(<span class="string">&quot;Buffering fields&quot;</span>);
 
         <span class="self">self</span>.<span class="ident">assign_raw_fields</span>(<span class="ident">input</span>, <span class="ident">domain_edges</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
@@ -385,7 +385,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Input</span>,
         <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
         <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">InputError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">InputError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">input_shape</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">shape</span>()<span class="question-mark">?</span>;
 
         <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">pressure</span> <span class="op">=</span> <span class="ident">read_truncated_pressure</span>(<span class="ident">data</span>, <span class="ident">domain_edges</span>)<span class="question-mark">?</span>;
@@ -472,7 +472,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">fn</span> <span class="ident">read_truncated_pressure</span>(
     <span class="ident">levels_data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
     <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">xy_shape</span> <span class="op">=</span> (
         (<span class="ident">domain_edges</span>.<span class="ident">east</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">domain_edges</span>.<span class="ident">west</span> <span class="kw">as</span> <span class="ident">isize</span>).<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>,
         (<span class="ident">domain_edges</span>.<span class="ident">south</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">domain_edges</span>.<span class="ident">north</span> <span class="kw">as</span> <span class="ident">isize</span>).<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>,
@@ -500,7 +500,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
 <span class="doccomment">/// Function to get the list of unique levels</span>
 <span class="doccomment">/// of specified type in the provided GRIB files.</span>
-<span class="kw">fn</span> <span class="ident">list_levels</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">list_levels</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="macro">debug!</span>(<span class="string">&quot;Getting levels list&quot;</span>);
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">unique_levels</span>: <span class="ident">FxHashSet</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">FxHashSet::default</span>();
@@ -533,7 +533,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="ident">short_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     <span class="ident">shape</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>),
     <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">data_levels</span> <span class="op">=</span> <span class="ident">read_raw_messages</span>(<span class="ident">short_name</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">result_data</span> <span class="op">=</span> <span class="ident">messages_to_array</span>(<span class="ident">data_levels</span>, <span class="ident">shape</span>)<span class="question-mark">?</span>;
 
@@ -545,11 +545,11 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">fn</span> <span class="ident">read_raw_messages</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
     <span class="ident">short_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">KeyedMessage</span>],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">KeyedMessage</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">KeyedMessage</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_levels</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">KeyedMessage</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[];
 
     <span class="kw">for</span> <span class="ident">msg</span> <span class="kw">in</span> <span class="ident">data</span> {
-        <span class="kw">if</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Str</span>(<span class="ident">short_name</span>.<span class="ident">to_string</span>()) {
+        <span class="kw">if</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="ident">short_name</span>.<span class="ident">to_string</span>()) {
             <span class="ident">data_levels</span>.<span class="ident">push</span>(<span class="ident">msg</span>);
         }
     }
@@ -568,7 +568,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">fn</span> <span class="ident">messages_to_array</span>(
     <span class="ident">data_levels</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">KeyedMessage</span><span class="op">&gt;</span>,
     <span class="ident">shape</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>),
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sorted_data_levels</span> <span class="op">=</span> <span class="macro">vec!</span>[];
 
     <span class="kw">for</span> <span class="ident">msg</span> <span class="kw">in</span> <span class="ident">data_levels</span> {
@@ -619,7 +619,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">fn</span> <span class="ident">truncate_field_to_extent</span>(
     <span class="ident">raw_field</span>: <span class="kw-2">&amp;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
     <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> {
+) -&gt; <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> {
     <span class="comment">//truncate in NS axis</span>
     <span class="kw">let</span> <span class="ident">truncated_field</span> <span class="op">=</span> <span class="ident">raw_field</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[.., .., <span class="ident">domain_edges</span>.<span class="ident">north</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">south</span>]);
 

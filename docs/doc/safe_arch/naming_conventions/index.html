@@ -6,7 +6,7 @@ operation (op) needs to be more specific than normal. Like this:</p>
 <li><code>add_m128</code></li>
 <li><code>add_saturating_i8_m128i</code></li>
 </ul>
-<h2 id="types" class="section-header"><a href="#types">Types</a></h2>
+<h3 id="types" class="section-header"><a href="#types">Types</a></h3>
 <p>Currently, only <code>x86</code> and <code>x86_64</code> types are supported. Among those types:</p>
 <ul>
 <li><code>m128</code> and <code>m256</code> are always considered to hold <code>f32</code> lanes.</li>
@@ -19,7 +19,7 @@ from one of the inputs, though the details there vary from op to op.</li>
 <li>The SIMD types are often referred to as “registers” because each SIMD
 typed value represents exactly one CPU register when you’re doing work.</li>
 </ul>
-<h2 id="operations" class="section-header"><a href="#operations">Operations</a></h2>
+<h3 id="operations" class="section-header"><a href="#operations">Operations</a></h3>
 <p>There’s many operations that can be performed. When possible, <code>safe_arch</code>
 tries to follow normal Rust naming (eg: adding is still <code>add</code> and left
 shifting is still <code>shl</code>), but if an operation doesn’t normally exist at all
@@ -36,7 +36,7 @@ indexed lane in two <em>different</em> registers to determine the output, that i
 <li>Vertical: <code>out[0] = a[0] + b[0]</code>, <code>out[1] = a[1] + b[1]</code></li>
 <li>Horizontal: <code>out[0] = a[0] + a[1]</code>, <code>out[1] = b[0] + b[1]</code></li>
 </ul>
-<h2 id="operation-glossary" class="section-header"><a href="#operation-glossary">Operation Glossary</a></h2>
+<h3 id="operation-glossary" class="section-header"><a href="#operation-glossary">Operation Glossary</a></h3>
 <p>Here follows the list of all the main operations and their explanations.</p>
 <ul>
 <li><code>abs</code>: Absolute value (wrapping).</li>
@@ -44,7 +44,7 @@ indexed lane in two <em>different</em> registers to determine the output, that i
 addition are available. Remember that wrapping signed addition is the same
 as wrapping unsigned addition.</li>
 <li><code>average</code>: Averages the two inputs.</li>
-<li><code>bitand</code>: Bitwise And, <code>a &amp; b</code>, like <a href="https://doc.rust-lang.org/1.56.1/core/ops/bit/trait.BitAnd.html">the trait</a>.</li>
+<li><code>bitand</code>: Bitwise And, <code>a &amp; b</code>, like <a href="https://doc.rust-lang.org/1.57.0/core/ops/bit/trait.BitAnd.html">the trait</a>.</li>
 <li><code>bitandnot</code>: Bitwise <code>(!a) &amp; b</code>. This seems a little funny at first but
 it’s useful for clearing bits. The output will be based on the <code>b</code> side’s
 bit pattern, but with all active bits in <code>a</code> cleared:
@@ -52,14 +52,14 @@ bit pattern, but with all active bits in <code>a</code> cleared:
 <li><code>bitandnot(0b0010, 0b1011) == 0b1001</code></li>
 </ul>
 </li>
-<li><code>bitor</code>: Bitwise Or, <code>a | b</code>, like <a href="https://doc.rust-lang.org/1.56.1/core/ops/bit/trait.BitOr.html">the trait</a>.</li>
-<li><code>bitxor</code>: Bitwise eXclusive Or, <code>a ^ b</code>, like <a href="https://doc.rust-lang.org/1.56.1/core/ops/bit/trait.BitXor.html">the
+<li><code>bitor</code>: Bitwise Or, <code>a | b</code>, like <a href="https://doc.rust-lang.org/1.57.0/core/ops/bit/trait.BitOr.html">the trait</a>.</li>
+<li><code>bitxor</code>: Bitwise eXclusive Or, <code>a ^ b</code>, like <a href="https://doc.rust-lang.org/1.57.0/core/ops/bit/trait.BitXor.html">the
 trait</a>.</li>
 <li><code>blend</code>: Merge the data lanes of two SIMD values by taking either the <code>b</code>
 value or <code>a</code> value for each lane. Depending on the instruction, the blend
 mask can be either an immediate or a runtime value.</li>
 <li><code>cast</code>: Convert between data types while preserving the exact bit
-patterns, like how <a href="https://doc.rust-lang.org/1.56.1/core/intrinsics/fn.transmute.html"><code>transmute</code></a> works.</li>
+patterns, like how <a href="https://doc.rust-lang.org/1.57.0/core/intrinsics/fn.transmute.html"><code>transmute</code></a> works.</li>
 <li><code>ceil</code>: “Ceiling”, rounds towards positive infinity.</li>
 <li><code>cmp</code>: Numeric comparisons of various kinds. This generally gives “mask”
 output where the output value is of the same data type as the inputs, but

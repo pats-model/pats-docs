@@ -318,7 +318,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="doccomment">/// Function computing bilinear interpolation on 2D surface</span>
 <span class="doccomment">/// using polynomial fit from 4 given points and</span>
 <span class="doccomment">/// coordinates of interpolated point.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interpolate_bilinear</span>(<span class="ident">x</span>: <span class="ident">Float</span>, <span class="ident">y</span>: <span class="ident">Float</span>, <span class="ident">points</span>: [<span class="ident">Point2D</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interpolate_bilinear</span>(<span class="ident">x</span>: <span class="ident">Float</span>, <span class="ident">y</span>: <span class="ident">Float</span>, <span class="ident">points</span>: [<span class="ident">Point2D</span>; <span class="number">4</span>]) -&gt; <span class="ident">Float</span> {
     <span class="kw">let</span> <span class="ident">lhs</span> <span class="op">=</span> <span class="ident">Matrix4::from_row_slice</span>(<span class="kw-2">&amp;</span>[
         <span class="number">1.0</span>,
         <span class="ident">points</span>[<span class="number">0</span>].<span class="ident">x</span>,
@@ -354,7 +354,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="doccomment">/// Function computing bilinear interpolation in 3D field</span>
 <span class="doccomment">/// using polynomial fit from 8 given points and</span>
 <span class="doccomment">/// coordinates of interpolated point.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interpolate_tilinear</span>(<span class="ident">x</span>: <span class="ident">Float</span>, <span class="ident">y</span>: <span class="ident">Float</span>, <span class="ident">z</span>: <span class="ident">Float</span>, <span class="ident">points</span>: [<span class="ident">Point3D</span>; <span class="number">8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Float</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interpolate_tilinear</span>(<span class="ident">x</span>: <span class="ident">Float</span>, <span class="ident">y</span>: <span class="ident">Float</span>, <span class="ident">z</span>: <span class="ident">Float</span>, <span class="ident">points</span>: [<span class="ident">Point3D</span>; <span class="number">8</span>]) -&gt; <span class="ident">Float</span> {
     <span class="kw">let</span> <span class="ident">lhs</span> <span class="op">=</span> <span class="ident">Matrix8::from_row_slice</span>(<span class="kw-2">&amp;</span>[
         <span class="number">1.0</span>,
         <span class="ident">points</span>[<span class="number">0</span>].<span class="ident">x</span>,

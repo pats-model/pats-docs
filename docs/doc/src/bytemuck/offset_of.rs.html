@@ -248,7 +248,7 @@
 <span class="doccomment">/// feature (to maintain minimum rust version support).</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">offset_of</span> {
-  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">instance</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>:<span class="ident">path</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>:<span class="ident">tt</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">instance</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>:<span class="ident">path</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>:<span class="ident">tt</span>) =&gt; {{
     <span class="attribute">#[<span class="ident">forbid</span>(<span class="ident">safe_packed_borrows</span>)]</span>
     {
       <span class="comment">// This helps us guard against field access going through a Deref impl.</span>
@@ -264,7 +264,7 @@
       <span class="ident">result</span>
     }
   }};
-  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>:<span class="ident">path</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>:<span class="ident">tt</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+  (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>:<span class="ident">path</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>:<span class="ident">tt</span>) =&gt; {{
     <span class="macro-nonterminal">$</span><span class="macro">crate::offset_of!</span>(<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span> <span class="kw">as</span> <span class="ident">Default</span><span class="op">&gt;</span><span class="ident">::default</span>(), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">Type</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>)
   }};
 }

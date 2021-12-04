@@ -527,7 +527,7 @@
     <span class="ident">R</span>: <span class="ident">Serialize</span>,
     <span class="ident">C</span>: <span class="ident">Serialize</span>,
 {
-    <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="ident">Ser</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="ident">Ser</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ser::Ok</span>, <span class="ident">Ser::Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="ident">Ser</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="ident">Ser</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ser::Ok</span>, <span class="ident">Ser::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Ser</span>: <span class="ident">Serializer</span>,
     {
@@ -542,7 +542,7 @@
     <span class="ident">R</span>: <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
     <span class="ident">C</span>: <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">deserialize</span><span class="op">&lt;</span><span class="ident">Des</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">Des</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Des::Error</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">deserialize</span><span class="op">&lt;</span><span class="ident">Des</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">Des</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Des::Error</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Des</span>: <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
     {
@@ -569,9 +569,9 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>: <span class="ident">Dim</span>, <span class="ident">C</span>: <span class="ident">Dim</span><span class="op">&gt;</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Creates a new dynamic matrix data storage from the given vector and shape.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">nrows</span>: <span class="ident">R</span>, <span class="ident">ncols</span>: <span class="ident">C</span>, <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">nrows</span>: <span class="ident">R</span>, <span class="ident">ncols</span>: <span class="ident">C</span>, <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="macro">assert!</span>(
-            <span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">*</span> <span class="ident">ncols</span>.<span class="ident">value</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">data</span>.<span class="ident">len</span>(),
+            <span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">*</span> <span class="ident">ncols</span>.<span class="ident">value</span>() <span class="op">==</span> <span class="ident">data</span>.<span class="ident">len</span>(),
             <span class="string">&quot;Data storage buffer dimension mismatch.&quot;</span>
         );
         <span class="self">Self</span> { <span class="ident">data</span>, <span class="ident">nrows</span>, <span class="ident">ncols</span> }
@@ -580,7 +580,7 @@
     <span class="doccomment">/// The underlying data storage.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
     }
 
@@ -590,7 +590,7 @@
     <span class="doccomment">/// This is unsafe because this may cause UB if the size of the vector is changed</span>
     <span class="doccomment">/// by the user.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_vec_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_vec_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>
     }
 
@@ -601,7 +601,7 @@
     <span class="doccomment">/// - If `sz` is smaller than the current size, additional elements are truncated but **not** dropped.</span>
     <span class="doccomment">///   It is the responsibility of the caller of this method to drop these elements.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">resize</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">sz</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">resize</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">sz</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
 
         <span class="kw">let</span> <span class="ident">new_data</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">sz</span> <span class="op">&lt;</span> <span class="ident">len</span> {
@@ -645,32 +645,32 @@
     <span class="doccomment">/// The number of elements on the underlying vector.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>()
     }
 
     <span class="doccomment">/// Returns true if the underlying vector contains no elements.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// A slice containing all the components stored in this storage in column-major order.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[..]
     }
 
     <span class="doccomment">/// A mutable slice containing all the components stored in this storage in column-major order.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[..]
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>: <span class="ident">Dim</span>, <span class="ident">C</span>: <span class="ident">Dim</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">vec</span>: <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">vec</span>: <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">vec</span>.<span class="ident">data</span>
     }
 }
@@ -686,27 +686,27 @@
     <span class="kw">type</span> <span class="ident">CStride</span> <span class="op">=</span> <span class="ident">Dynamic</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
+    <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">as_ptr</span>()
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Dynamic</span>, <span class="ident">C</span>) {
+    <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">Dynamic</span>, <span class="ident">C</span>) {
         (<span class="self">self</span>.<span class="ident">nrows</span>, <span class="self">self</span>.<span class="ident">ncols</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident"><span class="self">Self</span>::RStride</span>, <span class="ident"><span class="self">Self</span>::CStride</span>) {
+    <span class="kw">fn</span> <span class="ident">strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident"><span class="self">Self</span>::RStride</span>, <span class="ident"><span class="self">Self</span>::CStride</span>) {
         (<span class="ident"><span class="self">Self</span>::RStride::name</span>(), <span class="self">self</span>.<span class="ident">nrows</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="bool-val">true</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
     }
 }
@@ -716,7 +716,7 @@
     <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span>, <span class="ident">Buffer</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">into_owned</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">into_owned</span>(<span class="self">self</span>) -&gt; <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span>,
     {
@@ -724,7 +724,7 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">clone_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">clone_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span>,
     {
@@ -737,27 +737,27 @@
     <span class="kw">type</span> <span class="ident">CStride</span> <span class="op">=</span> <span class="ident">R</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
+    <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">as_ptr</span>()
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">R</span>, <span class="ident">Dynamic</span>) {
+    <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">R</span>, <span class="ident">Dynamic</span>) {
         (<span class="self">self</span>.<span class="ident">nrows</span>, <span class="self">self</span>.<span class="ident">ncols</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident"><span class="self">Self</span>::RStride</span>, <span class="ident"><span class="self">Self</span>::CStride</span>) {
+    <span class="kw">fn</span> <span class="ident">strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident"><span class="self">Self</span>::RStride</span>, <span class="ident"><span class="self">Self</span>::CStride</span>) {
         (<span class="ident"><span class="self">Self</span>::RStride::name</span>(), <span class="self">self</span>.<span class="ident">nrows</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">is_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="bool-val">true</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
     }
 }
@@ -767,7 +767,7 @@
     <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span>, <span class="ident">Buffer</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">into_owned</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">into_owned</span>(<span class="self">self</span>) -&gt; <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>,
     {
@@ -775,7 +775,7 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">clone_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">clone_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Owned</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>,
     {
@@ -790,12 +790,12 @@
  */</span>
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">C</span>: <span class="ident">Dim</span><span class="op">&gt;</span> <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">ptr_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">fn</span> <span class="ident">ptr_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">as_mut_ptr</span>()
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[..]
     }
 }
@@ -810,7 +810,7 @@
 {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C2</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">Dynamic</span>, <span class="ident">ncols</span>: <span class="ident">C2</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">Dynamic</span>, <span class="ident">ncols</span>: <span class="ident">C2</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="macro">assert_eq!</span>(<span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">*</span> <span class="ident">ncols</span>.<span class="ident">value</span>(), <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>());
         <span class="ident">VecStorage</span> {
             <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
@@ -828,7 +828,7 @@
 {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">R2</span>, <span class="ident">ncols</span>: <span class="ident">Dynamic</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">R2</span>, <span class="ident">ncols</span>: <span class="ident">Dynamic</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="macro">assert_eq!</span>(<span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">*</span> <span class="ident">ncols</span>.<span class="ident">value</span>(), <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>());
         <span class="ident">VecStorage</span> {
             <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
@@ -840,12 +840,12 @@
 
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>: <span class="ident">DimName</span><span class="op">&gt;</span> <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">ptr_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">fn</span> <span class="ident">ptr_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">as_mut_ptr</span>()
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_mut_slice_unchecked</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[..]
     }
 }
@@ -858,7 +858,7 @@
 {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Dynamic</span>, <span class="ident">C2</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">Dynamic</span>, <span class="ident">ncols</span>: <span class="ident">C2</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">Dynamic</span>, <span class="ident">ncols</span>: <span class="ident">C2</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="macro">assert_eq!</span>(<span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">*</span> <span class="ident">ncols</span>.<span class="ident">value</span>(), <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>());
         <span class="ident">VecStorage</span> {
             <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
@@ -876,7 +876,7 @@
 {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">Dynamic</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">R2</span>, <span class="ident">ncols</span>: <span class="ident">Dynamic</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">reshape_generic</span>(<span class="self">self</span>, <span class="ident">nrows</span>: <span class="ident">R2</span>, <span class="ident">ncols</span>: <span class="ident">Dynamic</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="macro">assert_eq!</span>(<span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">*</span> <span class="ident">ncols</span>.<span class="ident">value</span>(), <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>());
         <span class="ident">VecStorage</span> {
             <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
@@ -888,15 +888,15 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;abomonation-serialize&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Abomonation</span>, <span class="ident">R</span>: <span class="ident">Dim</span>, <span class="ident">C</span>: <span class="ident">Dim</span><span class="op">&gt;</span> <span class="ident">Abomonation</span> <span class="kw">for</span> <span class="ident">VecStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">entomb</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IOResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">entomb</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) -&gt; <span class="ident">IOResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">entomb</span>(<span class="ident">writer</span>)
     }
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">exhume</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bytes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> [<span class="ident">u8</span>]<span class="op">&gt;</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">exhume</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bytes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> [<span class="ident">u8</span>]<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">exhume</span>(<span class="ident">bytes</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">extent</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">extent</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">extent</span>()
     }
 }
@@ -912,7 +912,7 @@
     <span class="kw">fn</span> <span class="ident">extend</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">iter</span>: <span class="ident">I</span>) {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">extend</span>(<span class="ident">iter</span>);
         <span class="self">self</span>.<span class="ident">ncols</span> <span class="op">=</span> <span class="ident">Dynamic::new</span>(<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">nrows</span>.<span class="ident">value</span>());
-        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() <span class="op">%</span> <span class="self">self</span>.<span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>,
+        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() <span class="op">%</span> <span class="self">self</span>.<span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">==</span> <span class="number">0</span>,
           <span class="string">&quot;The number of elements produced by the given iterator was not a multiple of the number of rows.&quot;</span>);
     }
 }

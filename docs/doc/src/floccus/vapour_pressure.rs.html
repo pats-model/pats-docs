@@ -611,7 +611,7 @@
 <span class="doccomment">///Valid `specific_humidity` range: 0.00001 - 2.0\</span>
 <span class="doccomment">///Valid `pressure` range: 100Pa - 150000Pa</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">general1</span>(<span class="ident">specific_humidity</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">general1</span>(<span class="ident">specific_humidity</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">0.00001</span>..<span class="op">=</span><span class="number">2.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">specific_humidity</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;specific_humidity&quot;</span>)));
@@ -637,7 +637,7 @@
 <span class="doccomment">///Valid `dewpoint` range: 232K - 324K\</span>
 <span class="doccomment">///Valid `pressure` range: 100Pa - 150000Pa</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck1</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck1</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">232.0</span>..<span class="op">=</span><span class="number">324.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
@@ -676,7 +676,7 @@
 <span class="doccomment">///Valid `dewpoint` range: 193K - 274K\</span>
 <span class="doccomment">///Valid `pressure` range: 100Pa - 150000Pa</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck2</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck2</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">193.0</span>..<span class="op">=</span><span class="number">274.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
@@ -715,7 +715,7 @@
 <span class="doccomment">///Valid `dewpoint` range: 253K - 324K\</span>
 <span class="doccomment">///Valid `pressure` range: 100Pa - 150000Pa</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck3</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck3</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">253.0</span>..<span class="op">=</span><span class="number">324.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
@@ -750,7 +750,7 @@
 <span class="doccomment">///Returns [`InputError::OutOfRange`] when one of inputs is out of range.\</span>
 <span class="doccomment">///Valid `dewpoint` range: 253K - 324K</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck3_simplified</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck3_simplified</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">253.0</span>..<span class="op">=</span><span class="number">324.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
@@ -777,7 +777,7 @@
 <span class="doccomment">///Valid `dewpoint` range: 223K - 274K\</span>
 <span class="doccomment">///Valid `pressure` range: 100Pa - 150000Pa</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck4</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck4</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>, <span class="ident">pressure</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">223.0</span>..<span class="op">=</span><span class="number">274.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
@@ -812,7 +812,7 @@
 <span class="doccomment">///Returns [`InputError::OutOfRange`] when one of inputs is out of range.\</span>
 <span class="doccomment">///Valid `dewpoint` range: 223K - 274K</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck4_simplified</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buck4_simplified</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">223.0</span>..<span class="op">=</span><span class="number">274.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
@@ -839,7 +839,7 @@
 <span class="doccomment">///Returns [`InputError::OutOfRange`] when input is out of range.\</span>
 <span class="doccomment">///Valid `dewpoint` range: 273K - 353K</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tetens1</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tetens1</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="comment">//validate inputs</span>
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">273.0</span>..<span class="op">=</span><span class="number">353.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
@@ -868,7 +868,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">saturation_specific1</span>(
     <span class="ident">saturation_vapour_pressure</span>: <span class="ident">Float</span>,
     <span class="ident">relative_humidity</span>: <span class="ident">Float</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">0.0</span>..<span class="op">=</span><span class="number">2.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">relative_humidity</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;relative_humidity&quot;</span>)));
     }
@@ -894,7 +894,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">saturation_specific2</span>(
     <span class="ident">vapour_pressure</span>: <span class="ident">Float</span>,
     <span class="ident">relative_humidity</span>: <span class="ident">Float</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">0.00001</span>..<span class="op">=</span><span class="number">2.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">relative_humidity</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;relative_humidity&quot;</span>)));
     }
@@ -917,7 +917,7 @@
 <span class="doccomment">///Returns [`InputError::OutOfRange`] when one of inputs is out of range.\</span>
 <span class="doccomment">///Valid `dewpoint` range: 273K - 374K</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wexler1</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wexler1</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">273.0</span>..<span class="op">=</span><span class="number">374.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
     }
@@ -954,7 +954,7 @@
 <span class="doccomment">///Returns [`InputError::OutOfRange`] when one of inputs is out of range.\</span>
 <span class="doccomment">///Valid `dewpoint` range: 173K - 274K</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>, <span class="ident">logerr</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wexler2</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wexler2</span>(<span class="ident">dewpoint</span>: <span class="ident">Float</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="op">!</span>(<span class="number">173.0</span>..<span class="op">=</span><span class="number">274.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dewpoint</span>) {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::OutOfRange</span>(<span class="ident">String::from</span>(<span class="string">&quot;dewpoint&quot;</span>)));
     }

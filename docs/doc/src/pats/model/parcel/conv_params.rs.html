@@ -317,7 +317,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">compute_conv_params</span>(
     <span class="ident">parcel_log</span>: <span class="kw-2">&amp;</span>[<span class="ident">ParcelState</span>],
     <span class="ident">environment</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Environment</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ConvectiveParams</span>, <span class="ident">ParcelError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ConvectiveParams</span>, <span class="ident">ParcelError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result_params</span> <span class="op">=</span> <span class="ident">ConvectiveParams::default</span>();
 
     <span class="comment">// add parcel identification</span>
@@ -471,7 +471,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">fn</span> <span class="ident">get_env_vtemp</span>(
     <span class="ident">parcel_log</span>: <span class="kw-2">&amp;</span>[<span class="ident">ParcelState</span>],
     <span class="ident">environment</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Environment</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">ParcelError</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">ParcelError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">env_vtemp</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">parcel_log</span>
         .<span class="ident">iter</span>()
         .<span class="ident">map</span>(<span class="op">|</span><span class="ident">pst</span><span class="op">|</span> {

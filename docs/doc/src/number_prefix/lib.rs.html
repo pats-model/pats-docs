@@ -817,7 +817,7 @@
     <span class="doccomment">/// assert_eq!(NumberPrefix::decimal(1_000_000_000_f32),</span>
     <span class="doccomment">///            NumberPrefix::Prefixed(Prefix::Giga, 1_f32));</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decimal</span>(<span class="ident">amount</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decimal</span>(<span class="ident">amount</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Prefix</span>::<span class="kw-2">*</span>;
         <span class="ident"><span class="self">Self</span>::format_number</span>(<span class="ident">amount</span>, <span class="ident">Amounts::NUM_1000</span>, [<span class="ident">Kilo</span>, <span class="ident">Mega</span>, <span class="ident">Giga</span>, <span class="ident">Tera</span>, <span class="ident">Peta</span>, <span class="ident">Exa</span>, <span class="ident">Zetta</span>, <span class="ident">Yotta</span>])
     }
@@ -835,12 +835,12 @@
     <span class="doccomment">/// assert_eq!(NumberPrefix::binary(1_073_741_824_f64),</span>
     <span class="doccomment">///            NumberPrefix::Prefixed(Prefix::Gibi, 1_f64));</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">binary</span>(<span class="ident">amount</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">binary</span>(<span class="ident">amount</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Prefix</span>::<span class="kw-2">*</span>;
         <span class="ident"><span class="self">Self</span>::format_number</span>(<span class="ident">amount</span>, <span class="ident">Amounts::NUM_1024</span>, [<span class="ident">Kibi</span>, <span class="ident">Mebi</span>, <span class="ident">Gibi</span>, <span class="ident">Tebi</span>, <span class="ident">Pebi</span>, <span class="ident">Exbi</span>, <span class="ident">Zebi</span>, <span class="ident">Yobi</span>])
     }
 
-    <span class="kw">fn</span> <span class="ident">format_number</span>(<span class="kw-2">mut</span> <span class="ident">amount</span>: <span class="ident">F</span>, <span class="ident">kilo</span>: <span class="ident">F</span>, <span class="ident">prefixes</span>: [<span class="ident">Prefix</span>; <span class="number">8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">format_number</span>(<span class="kw-2">mut</span> <span class="ident">amount</span>: <span class="ident">F</span>, <span class="ident">kilo</span>: <span class="ident">F</span>, <span class="ident">prefixes</span>: [<span class="ident">Prefix</span>; <span class="number">8</span>]) -&gt; <span class="self">Self</span> {
 
         <span class="comment">// For negative numbers, flip it to positive, do the processing, then</span>
         <span class="comment">// flip it back to negative again afterwards.</span>
@@ -856,7 +856,7 @@
             <span class="ident">amount</span> <span class="op">=</span> <span class="op">-</span><span class="ident">amount</span>;
         }
 
-        <span class="kw">if</span> <span class="ident">prefix</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">prefix</span> <span class="op">==</span> <span class="number">0</span> {
             <span class="ident">NumberPrefix::Standalone</span>(<span class="ident">amount</span>)
         }
         <span class="kw">else</span> {
@@ -867,7 +867,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Prefix</span> {
-	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>.<span class="ident">symbol</span>())
 	}
 }
@@ -884,13 +884,13 @@
 	<span class="doccomment">/// assert_eq!(&quot;GIGA&quot;, Prefix::Giga.upper());</span>
 	<span class="doccomment">/// assert_eq!(&quot;GIBI&quot;, Prefix::Gibi.upper());</span>
 	<span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">upper</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">upper</span>(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Prefix</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Kilo</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;KILO&quot;</span>,  <span class="ident">Mega</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;MEGA&quot;</span>,  <span class="ident">Giga</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;GIGA&quot;</span>,   <span class="ident">Tera</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;TERA&quot;</span>,
-            <span class="ident">Peta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;PETA&quot;</span>,  <span class="ident">Exa</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;EXA&quot;</span>,   <span class="ident">Zetta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;ZETTA&quot;</span>,  <span class="ident">Yotta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;YOTTA&quot;</span>,
-            <span class="ident">Kibi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;KIBI&quot;</span>,  <span class="ident">Mebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;MEBI&quot;</span>,  <span class="ident">Gibi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;GIBI&quot;</span>,   <span class="ident">Tebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;TEBI&quot;</span>,
-            <span class="ident">Pebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;PEBI&quot;</span>,  <span class="ident">Exbi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;EXBI&quot;</span>,  <span class="ident">Zebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;ZEBI&quot;</span>,   <span class="ident">Yobi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;YOBI&quot;</span>,
+            <span class="ident">Kilo</span> =&gt; <span class="string">&quot;KILO&quot;</span>,  <span class="ident">Mega</span> =&gt; <span class="string">&quot;MEGA&quot;</span>,  <span class="ident">Giga</span>  =&gt; <span class="string">&quot;GIGA&quot;</span>,   <span class="ident">Tera</span>  =&gt; <span class="string">&quot;TERA&quot;</span>,
+            <span class="ident">Peta</span> =&gt; <span class="string">&quot;PETA&quot;</span>,  <span class="ident">Exa</span>  =&gt; <span class="string">&quot;EXA&quot;</span>,   <span class="ident">Zetta</span> =&gt; <span class="string">&quot;ZETTA&quot;</span>,  <span class="ident">Yotta</span> =&gt; <span class="string">&quot;YOTTA&quot;</span>,
+            <span class="ident">Kibi</span> =&gt; <span class="string">&quot;KIBI&quot;</span>,  <span class="ident">Mebi</span> =&gt; <span class="string">&quot;MEBI&quot;</span>,  <span class="ident">Gibi</span>  =&gt; <span class="string">&quot;GIBI&quot;</span>,   <span class="ident">Tebi</span>  =&gt; <span class="string">&quot;TEBI&quot;</span>,
+            <span class="ident">Pebi</span> =&gt; <span class="string">&quot;PEBI&quot;</span>,  <span class="ident">Exbi</span> =&gt; <span class="string">&quot;EXBI&quot;</span>,  <span class="ident">Zebi</span>  =&gt; <span class="string">&quot;ZEBI&quot;</span>,   <span class="ident">Yobi</span>  =&gt; <span class="string">&quot;YOBI&quot;</span>,
         }
     }
 
@@ -904,13 +904,13 @@
 	<span class="doccomment">/// assert_eq!(&quot;Giga&quot;, Prefix::Giga.caps());</span>
 	<span class="doccomment">/// assert_eq!(&quot;Gibi&quot;, Prefix::Gibi.caps());</span>
 	<span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">caps</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">caps</span>(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Prefix</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Kilo</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Kilo&quot;</span>,  <span class="ident">Mega</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Mega&quot;</span>,  <span class="ident">Giga</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Giga&quot;</span>,   <span class="ident">Tera</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Tera&quot;</span>,
-            <span class="ident">Peta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Peta&quot;</span>,  <span class="ident">Exa</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Exa&quot;</span>,   <span class="ident">Zetta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Zetta&quot;</span>,  <span class="ident">Yotta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Yotta&quot;</span>,
-            <span class="ident">Kibi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Kibi&quot;</span>,  <span class="ident">Mebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Mebi&quot;</span>,  <span class="ident">Gibi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Gibi&quot;</span>,   <span class="ident">Tebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Tebi&quot;</span>,
-            <span class="ident">Pebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Pebi&quot;</span>,  <span class="ident">Exbi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Exbi&quot;</span>,  <span class="ident">Zebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Zebi&quot;</span>,   <span class="ident">Yobi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Yobi&quot;</span>,
+            <span class="ident">Kilo</span> =&gt; <span class="string">&quot;Kilo&quot;</span>,  <span class="ident">Mega</span> =&gt; <span class="string">&quot;Mega&quot;</span>,  <span class="ident">Giga</span>  =&gt; <span class="string">&quot;Giga&quot;</span>,   <span class="ident">Tera</span>  =&gt; <span class="string">&quot;Tera&quot;</span>,
+            <span class="ident">Peta</span> =&gt; <span class="string">&quot;Peta&quot;</span>,  <span class="ident">Exa</span>  =&gt; <span class="string">&quot;Exa&quot;</span>,   <span class="ident">Zetta</span> =&gt; <span class="string">&quot;Zetta&quot;</span>,  <span class="ident">Yotta</span> =&gt; <span class="string">&quot;Yotta&quot;</span>,
+            <span class="ident">Kibi</span> =&gt; <span class="string">&quot;Kibi&quot;</span>,  <span class="ident">Mebi</span> =&gt; <span class="string">&quot;Mebi&quot;</span>,  <span class="ident">Gibi</span>  =&gt; <span class="string">&quot;Gibi&quot;</span>,   <span class="ident">Tebi</span>  =&gt; <span class="string">&quot;Tebi&quot;</span>,
+            <span class="ident">Pebi</span> =&gt; <span class="string">&quot;Pebi&quot;</span>,  <span class="ident">Exbi</span> =&gt; <span class="string">&quot;Exbi&quot;</span>,  <span class="ident">Zebi</span>  =&gt; <span class="string">&quot;Zebi&quot;</span>,   <span class="ident">Yobi</span>  =&gt; <span class="string">&quot;Yobi&quot;</span>,
         }
     }
 
@@ -924,13 +924,13 @@
     <span class="doccomment">/// assert_eq!(&quot;giga&quot;, Prefix::Giga.lower());</span>
     <span class="doccomment">/// assert_eq!(&quot;gibi&quot;, Prefix::Gibi.lower());</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lower</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lower</span>(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Prefix</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Kilo</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;kilo&quot;</span>,  <span class="ident">Mega</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;mega&quot;</span>,  <span class="ident">Giga</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;giga&quot;</span>,   <span class="ident">Tera</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;tera&quot;</span>,
-            <span class="ident">Peta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;peta&quot;</span>,  <span class="ident">Exa</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;exa&quot;</span>,   <span class="ident">Zetta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;zetta&quot;</span>,  <span class="ident">Yotta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;yotta&quot;</span>,
-            <span class="ident">Kibi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;kibi&quot;</span>,  <span class="ident">Mebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;mebi&quot;</span>,  <span class="ident">Gibi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;gibi&quot;</span>,   <span class="ident">Tebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;tebi&quot;</span>,
-            <span class="ident">Pebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;pebi&quot;</span>,  <span class="ident">Exbi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;exbi&quot;</span>,  <span class="ident">Zebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;zebi&quot;</span>,   <span class="ident">Yobi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;yobi&quot;</span>,
+            <span class="ident">Kilo</span> =&gt; <span class="string">&quot;kilo&quot;</span>,  <span class="ident">Mega</span> =&gt; <span class="string">&quot;mega&quot;</span>,  <span class="ident">Giga</span>  =&gt; <span class="string">&quot;giga&quot;</span>,   <span class="ident">Tera</span>  =&gt; <span class="string">&quot;tera&quot;</span>,
+            <span class="ident">Peta</span> =&gt; <span class="string">&quot;peta&quot;</span>,  <span class="ident">Exa</span>  =&gt; <span class="string">&quot;exa&quot;</span>,   <span class="ident">Zetta</span> =&gt; <span class="string">&quot;zetta&quot;</span>,  <span class="ident">Yotta</span> =&gt; <span class="string">&quot;yotta&quot;</span>,
+            <span class="ident">Kibi</span> =&gt; <span class="string">&quot;kibi&quot;</span>,  <span class="ident">Mebi</span> =&gt; <span class="string">&quot;mebi&quot;</span>,  <span class="ident">Gibi</span>  =&gt; <span class="string">&quot;gibi&quot;</span>,   <span class="ident">Tebi</span>  =&gt; <span class="string">&quot;tebi&quot;</span>,
+            <span class="ident">Pebi</span> =&gt; <span class="string">&quot;pebi&quot;</span>,  <span class="ident">Exbi</span> =&gt; <span class="string">&quot;exbi&quot;</span>,  <span class="ident">Zebi</span>  =&gt; <span class="string">&quot;zebi&quot;</span>,   <span class="ident">Yobi</span>  =&gt; <span class="string">&quot;yobi&quot;</span>,
         }
     }
 
@@ -944,13 +944,13 @@
 	<span class="doccomment">/// assert_eq!(&quot;G&quot;,  Prefix::Giga.symbol());</span>
 	<span class="doccomment">/// assert_eq!(&quot;Gi&quot;, Prefix::Gibi.symbol());</span>
 	<span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">symbol</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">symbol</span>(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Prefix</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Kilo</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;k&quot;</span>,   <span class="ident">Mega</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;M&quot;</span>,   <span class="ident">Giga</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;G&quot;</span>,   <span class="ident">Tera</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;T&quot;</span>,
-            <span class="ident">Peta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;P&quot;</span>,   <span class="ident">Exa</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;E&quot;</span>,   <span class="ident">Zetta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Z&quot;</span>,   <span class="ident">Yotta</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Y&quot;</span>,
-            <span class="ident">Kibi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Ki&quot;</span>,  <span class="ident">Mebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Mi&quot;</span>,  <span class="ident">Gibi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Gi&quot;</span>,  <span class="ident">Tebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Ti&quot;</span>,
-            <span class="ident">Pebi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Pi&quot;</span>,  <span class="ident">Exbi</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Ei&quot;</span>,  <span class="ident">Zebi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Zi&quot;</span>,  <span class="ident">Yobi</span>  <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Yi&quot;</span>,
+            <span class="ident">Kilo</span> =&gt; <span class="string">&quot;k&quot;</span>,   <span class="ident">Mega</span> =&gt; <span class="string">&quot;M&quot;</span>,   <span class="ident">Giga</span>  =&gt; <span class="string">&quot;G&quot;</span>,   <span class="ident">Tera</span>  =&gt; <span class="string">&quot;T&quot;</span>,
+            <span class="ident">Peta</span> =&gt; <span class="string">&quot;P&quot;</span>,   <span class="ident">Exa</span>  =&gt; <span class="string">&quot;E&quot;</span>,   <span class="ident">Zetta</span> =&gt; <span class="string">&quot;Z&quot;</span>,   <span class="ident">Yotta</span> =&gt; <span class="string">&quot;Y&quot;</span>,
+            <span class="ident">Kibi</span> =&gt; <span class="string">&quot;Ki&quot;</span>,  <span class="ident">Mebi</span> =&gt; <span class="string">&quot;Mi&quot;</span>,  <span class="ident">Gibi</span>  =&gt; <span class="string">&quot;Gi&quot;</span>,  <span class="ident">Tebi</span>  =&gt; <span class="string">&quot;Ti&quot;</span>,
+            <span class="ident">Pebi</span> =&gt; <span class="string">&quot;Pi&quot;</span>,  <span class="ident">Exbi</span> =&gt; <span class="string">&quot;Ei&quot;</span>,  <span class="ident">Zebi</span>  =&gt; <span class="string">&quot;Zi&quot;</span>,  <span class="ident">Yobi</span>  =&gt; <span class="string">&quot;Yi&quot;</span>,
         }
     }
 }
@@ -968,14 +968,14 @@
 
     <span class="doccomment">/// Whether this number is negative.</span>
     <span class="doccomment">/// This is used internally.</span>
-    <span class="kw">fn</span> <span class="ident">is_negative</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">is_negative</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">Amounts</span> <span class="kw">for</span> <span class="ident">f32</span> {
     <span class="kw">const</span> <span class="ident">NUM_1000</span>: <span class="self">Self</span> <span class="op">=</span> <span class="number">1000_f32</span>;
     <span class="kw">const</span> <span class="ident">NUM_1024</span>: <span class="self">Self</span> <span class="op">=</span> <span class="number">1024_f32</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_negative</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_negative</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">is_sign_negative</span>()
     }
 }
@@ -984,7 +984,7 @@
     <span class="kw">const</span> <span class="ident">NUM_1000</span>: <span class="self">Self</span> <span class="op">=</span> <span class="number">1000_f64</span>;
     <span class="kw">const</span> <span class="ident">NUM_1024</span>: <span class="self">Self</span> <span class="op">=</span> <span class="number">1024_f64</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_negative</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_negative</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">is_sign_negative</span>()
     }
 }

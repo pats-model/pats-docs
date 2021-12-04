@@ -234,7 +234,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         <span class="ident">x</span>: <span class="ident">Float</span>,
         <span class="ident">y</span>: <span class="ident">Float</span>,
         <span class="ident">field</span>: <span class="ident">SurfaceFields</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">lon</span>, <span class="ident">lat</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">projection</span>.<span class="ident">inverse_project</span>(<span class="ident">x</span>, <span class="ident">y</span>);
 
         <span class="kw">let</span> <span class="ident">west_lon_index</span> <span class="op">=</span> <span class="ident">bisection::find_left_closest</span>(
@@ -252,14 +252,14 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         )<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">field</span> {
-            <span class="ident">SurfaceFields::Temperature</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">temperature</span>.<span class="ident">view</span>(),
-            <span class="ident">SurfaceFields::Dewpoint</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">dewpoint</span>.<span class="ident">view</span>(),
-            <span class="ident">SurfaceFields::Pressure</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">pressure</span>.<span class="ident">view</span>(),
-            <span class="ident">SurfaceFields::Height</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">height</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Temperature</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">temperature</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Dewpoint</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">dewpoint</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Pressure</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">pressure</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Height</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">height</span>.<span class="ident">view</span>(),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;3d&quot;</span>)]</span>
-            <span class="ident">SurfaceFields::UWind</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">u_wind</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::UWind</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">u_wind</span>.<span class="ident">view</span>(),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;3d&quot;</span>)]</span>
-            <span class="ident">SurfaceFields::VWind</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">v_wind</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::VWind</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">v_wind</span>.<span class="ident">view</span>(),
         };
 
         <span class="kw">let</span> <span class="ident">horizontal_points</span> <span class="op">=</span> [
@@ -298,7 +298,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         <span class="ident">y</span>: <span class="ident">Float</span>,
         <span class="ident">z</span>: <span class="ident">Float</span>,
         <span class="ident">field</span>: <span class="ident">EnvFields</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Float</span>, <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">lon</span>, <span class="ident">lat</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">projection</span>.<span class="ident">inverse_project</span>(<span class="ident">x</span>, <span class="ident">y</span>);
 
         <span class="kw">let</span> <span class="ident">west_lon_index</span> <span class="op">=</span> <span class="ident">bisection::find_left_closest</span>(
@@ -316,10 +316,10 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         )<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">field</span> {
-            <span class="ident">EnvFields::Pressure</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">pressure</span>.<span class="ident">view</span>(),
-            <span class="ident">EnvFields::VirtualTemperature</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">virtual_temp</span>.<span class="ident">view</span>(),
-            <span class="ident">EnvFields::UWind</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">u_wind</span>.<span class="ident">view</span>(),
-            <span class="ident">EnvFields::VWind</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">v_wind</span>.<span class="ident">view</span>(),
+            <span class="ident">EnvFields::Pressure</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">pressure</span>.<span class="ident">view</span>(),
+            <span class="ident">EnvFields::VirtualTemperature</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">virtual_temp</span>.<span class="ident">view</span>(),
+            <span class="ident">EnvFields::UWind</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">u_wind</span>.<span class="ident">view</span>(),
+            <span class="ident">EnvFields::VWind</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">v_wind</span>.<span class="ident">view</span>(),
         };
 
         <span class="kw">let</span> <span class="ident">horizontal_points</span> <span class="op">=</span> [
@@ -345,14 +345,14 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
                     <span class="comment">// in all other cases error is returned</span>
 
                     <span class="kw">match</span> <span class="ident">err</span> {
-                        <span class="ident">SearchError::OutOfBounds</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">SearchError::OutOfBounds</span> =&gt; {
                             <span class="kw">if</span> <span class="ident">z</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">height</span>[[<span class="number">0</span>, <span class="kw-2">*</span><span class="ident">x_index</span>, <span class="kw-2">*</span><span class="ident">y_index</span>]] {
                                 <span class="prelude-val">Ok</span>(<span class="number">0</span>)
                             } <span class="kw">else</span> {
                                 <span class="prelude-val">Err</span>(<span class="ident">err</span>)
                             }
                         }
-                        <span class="ident">SearchError::EmptyArray</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>),
+                        <span class="ident">SearchError::EmptyArray</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">err</span>),
                     }
                 })<span class="question-mark">?</span>;
 

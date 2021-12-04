@@ -460,11 +460,11 @@
     <span class="kw">let</span> <span class="ident">dim3</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">nrows</span>();
 
     <span class="macro">assert!</span>(
-        <span class="ident">ncols2</span> <span class="op">=</span><span class="op">=</span> <span class="ident">dim3</span> <span class="op">&amp;&amp;</span> <span class="ident">dim1</span> <span class="op">=</span><span class="op">=</span> <span class="ident">nrows2</span>,
+        <span class="ident">ncols2</span> <span class="op">==</span> <span class="ident">dim3</span> <span class="op">&amp;&amp;</span> <span class="ident">dim1</span> <span class="op">==</span> <span class="ident">nrows2</span>,
         <span class="string">&quot;Gemv: dimensions mismatch.&quot;</span>
     );
 
-    <span class="kw">if</span> <span class="ident">ncols2</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">ncols2</span> <span class="op">==</span> <span class="number">0</span> {
         <span class="kw">if</span> <span class="ident">beta</span>.<span class="ident">is_zero</span>() {
             <span class="ident">y</span>.<span class="ident">apply</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">Status::init</span>(<span class="ident">e</span>, <span class="ident">T::zero</span>()));
         } <span class="kw">else</span> {
@@ -565,7 +565,7 @@
                 <span class="comment">// codepath only when ncols2 &gt; SMALL_DIM. Though we keep this</span>
                 <span class="comment">// here just in case if in the future we change the conditions to</span>
                 <span class="comment">// enter this codepath.</span>
-                <span class="kw">if</span> <span class="ident">ncols2</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+                <span class="kw">if</span> <span class="ident">ncols2</span> <span class="op">==</span> <span class="number">0</span> {
                     <span class="comment">// NOTE: we can&#39;t just always multiply by beta</span>
                     <span class="comment">// because we documented the guaranty that `self` is</span>
                     <span class="comment">// never read if `beta` is zero.</span>
@@ -578,7 +578,7 @@
                     <span class="kw">return</span>;
                 }
 
-                <span class="kw">if</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>() {
+                <span class="kw">if</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>() {
                     <span class="kw">let</span> (<span class="ident">rsa</span>, <span class="ident">csa</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">strides</span>();
                     <span class="kw">let</span> (<span class="ident">rsb</span>, <span class="ident">csb</span>) <span class="op">=</span> <span class="ident">b</span>.<span class="ident">strides</span>();
                     <span class="kw">let</span> (<span class="ident">rsc</span>, <span class="ident">csc</span>) <span class="op">=</span> <span class="ident">y</span>.<span class="ident">strides</span>();
@@ -600,7 +600,7 @@
                         <span class="ident">csc</span> <span class="kw">as</span> <span class="ident">isize</span>,
                     );
                     <span class="kw">return</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>() {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">TypeId::of</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>() {
                     <span class="kw">let</span> (<span class="ident">rsa</span>, <span class="ident">csa</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">strides</span>();
                     <span class="kw">let</span> (<span class="ident">rsb</span>, <span class="ident">csb</span>) <span class="op">=</span> <span class="ident">b</span>.<span class="ident">strides</span>();
                     <span class="kw">let</span> (<span class="ident">rsc</span>, <span class="ident">csc</span>) <span class="op">=</span> <span class="ident">y</span>.<span class="ident">strides</span>();

@@ -453,7 +453,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">impl</span> <span class="ident">Domain</span> {
     <span class="doccomment">/// Checks if domain specification follows conventions</span>
     <span class="doccomment">/// and limits.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ConfigError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ConfigError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span>(<span class="op">-</span><span class="number">90.0</span>..<span class="number">90.0</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">ref_lat</span>) {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ConfigError::OutOfBounds</span>(
                 <span class="string">&quot;Reference latitude is too low or too high&quot;</span>,
@@ -487,7 +487,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">default_margins</span>() <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Float</span>, <span class="ident">Float</span>) {
+    <span class="kw">fn</span> <span class="ident">default_margins</span>() -&gt; (<span class="ident">Float</span>, <span class="ident">Float</span>) {
         (<span class="number">1.0</span>, <span class="number">1.0</span>)
     }
 }
@@ -551,7 +551,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// (TODO: What it is)</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// (Why it is neccessary)</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">InputError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">InputError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">shape</span>.<span class="ident">is_none</span>() {
             <span class="kw">let</span> (<span class="ident">distinct_lonlats</span>, <span class="ident">shape</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">read_distinct_lonlats_and_shape</span>()<span class="question-mark">?</span>;
             <span class="self">self</span>.<span class="ident">distinct_lonlats</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">distinct_lonlats</span>);
@@ -564,7 +564,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// (TODO: What it is)</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// (Why it is neccessary)</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">distinct_lonlats</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">distinct_lonlats</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">distinct_lonlats</span>.<span class="ident">is_none</span>() {
             <span class="kw">let</span> (<span class="ident">distinct_lonlats</span>, <span class="ident">shape</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">read_distinct_lonlats_and_shape</span>()<span class="question-mark">?</span>;
             <span class="self">self</span>.<span class="ident">distinct_lonlats</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">distinct_lonlats</span>);
@@ -578,7 +578,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="doccomment">/// and a grid shape of input GRIB files.</span>
     <span class="kw">fn</span> <span class="ident">read_distinct_lonlats_and_shape</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span>, (<span class="ident">usize</span>, <span class="ident">usize</span>)), <span class="ident">InputError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span>, (<span class="ident">usize</span>, <span class="ident">usize</span>)), <span class="ident">InputError</span><span class="op">&gt;</span> {
         <span class="comment">// We can read any message from any file as we assume that lat-lons</span>
         <span class="comment">// are aligned in all GRIB messages</span>
 
@@ -675,17 +675,17 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 }
 
 <span class="kw">impl</span> <span class="ident">Resources</span> {
-    <span class="kw">fn</span> <span class="ident">default_threads</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u16</span> {
+    <span class="kw">fn</span> <span class="ident">default_threads</span>() -&gt; <span class="ident">u16</span> {
         <span class="number">1</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">default_memory</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">default_memory</span>() -&gt; <span class="ident">usize</span> {
         <span class="ident">usize::MAX</span> <span class="op">/</span> (<span class="number">1024</span> <span class="op">*</span> <span class="number">1024</span>)
     }
 
     <span class="doccomment">/// Checks if thread count and memory limit are</span>
     <span class="doccomment">/// above limits.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ConfigError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ConfigError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">threads</span> <span class="op">&lt;</span> <span class="number">1</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ConfigError::OutOfBounds</span>(
                 <span class="string">&quot;Available threads cannot be less than 1&quot;</span>,
@@ -703,7 +703,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Resources</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">Resources</span> {
             <span class="ident">threads</span>: <span class="ident">Resources::default_threads</span>(),
             <span class="ident">memory</span>: <span class="ident">Resources::default_memory</span>(),
@@ -728,7 +728,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">impl</span> <span class="ident">Config</span> {
     <span class="doccomment">/// Config structure constructor, responsible for</span>
     <span class="doccomment">/// deserializing configuration and checking it.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_from_file</span>(<span class="ident">file_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Config</span>, <span class="ident">ConfigError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_from_file</span>(<span class="ident">file_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Config</span>, <span class="ident">ConfigError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">fs::read</span>(<span class="ident">file_path</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">config</span>: <span class="ident">Config</span> <span class="op">=</span> <span class="ident">serde_yaml::from_slice</span>(<span class="ident">data</span>.<span class="ident">as_slice</span>())<span class="question-mark">?</span>;
 

@@ -165,7 +165,7 @@
   <span class="doccomment">/// code. It is a contract of this trait that if you implement it on your type</span>
   <span class="doccomment">/// you **must not** override this method.</span>
   <span class="attribute">#[<span class="ident">inline</span>]</span>
-  <span class="kw">fn</span> <span class="ident">zeroed</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">zeroed</span>() -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::zeroed</span>() }
   }
 }

@@ -245,7 +245,7 @@
   <span class="doccomment">/// Same as `m.into()`, just lets you be more explicit about what&#39;s happening.</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_array</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> [<span class="ident">f32</span>; <span class="number">4</span>] {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_array</span>(<span class="self">self</span>) -&gt; [<span class="ident">f32</span>; <span class="number">4</span>] {
     <span class="self">self</span>.<span class="ident">into</span>()
   }
 
@@ -255,7 +255,7 @@
   <span class="doccomment">/// happening.</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_array</span>(<span class="ident">f</span>: [<span class="ident">f32</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_array</span>(<span class="ident">f</span>: [<span class="ident">f32</span>; <span class="number">4</span>]) -&gt; <span class="self">Self</span> {
     <span class="ident">f</span>.<span class="ident">into</span>()
   }
 
@@ -266,7 +266,7 @@
   <span class="doccomment">/// Like [`f32::to_bits`](f32::to_bits), but all four lanes at once.</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_bits</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> [<span class="ident">u32</span>; <span class="number">4</span>] {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_bits</span>(<span class="self">self</span>) -&gt; [<span class="ident">u32</span>; <span class="number">4</span>] {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="self">self</span>) }
   }
 
@@ -275,7 +275,7 @@
   <span class="doccomment">/// Like [`f32::from_bits`](f32::from_bits), but all four lanes at once.</span>
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_bits</span>(<span class="ident">bits</span>: [<span class="ident">u32</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_bits</span>(<span class="ident">bits</span>: [<span class="ident">u32</span>; <span class="number">4</span>]) -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">bits</span>) }
   }
 }
@@ -283,7 +283,7 @@
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
     <span class="kw-2">*</span><span class="self">self</span>
   }
 }
@@ -292,7 +292,7 @@
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
     <span class="kw">unsafe</span> { <span class="ident">core::mem::zeroed</span>() }
   }
 }
@@ -300,7 +300,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">f32</span>; <span class="number">4</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">f32</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">arr</span>: [<span class="ident">f32</span>; <span class="number">4</span>]) -&gt; <span class="self">Self</span> {
     <span class="comment">// Safety: because this semantically moves the value from the input position</span>
     <span class="comment">// (align4) to the output position (align16) it is fine to increase our</span>
     <span class="comment">// required alignment without worry.</span>
@@ -311,7 +311,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">m128</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">f32</span>; <span class="number">4</span>] {
   <span class="attribute">#[<span class="ident">must_use</span>]</span>
   <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m128</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+  <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">m</span>: <span class="ident">m128</span>) -&gt; <span class="self">Self</span> {
     <span class="comment">// We can of course transmute to a lower alignment</span>
     <span class="kw">unsafe</span> { <span class="ident">core::mem::transmute</span>(<span class="ident">m</span>) }
   }
@@ -323,7 +323,7 @@
 
 <span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// Debug formats each float.</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;m128(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -337,7 +337,7 @@
 
 <span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// Display formats each float, and leaves the type name off of the font.</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -351,7 +351,7 @@
 
 <span class="kw">impl</span> <span class="ident">Binary</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// Binary formats each float&#39;s bit pattern (via [`f32::to_bits`]).</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -365,7 +365,7 @@
 
 <span class="kw">impl</span> <span class="ident">LowerExp</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// LowerExp formats each float.</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -379,7 +379,7 @@
 
 <span class="kw">impl</span> <span class="ident">UpperExp</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// UpperExp formats each float.</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -393,7 +393,7 @@
 
 <span class="kw">impl</span> <span class="ident">LowerHex</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// LowerHex formats each float&#39;s bit pattern (via [`f32::to_bits`]).</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -407,7 +407,7 @@
 
 <span class="kw">impl</span> <span class="ident">UpperHex</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// UpperHex formats each float&#39;s bit pattern (via [`f32::to_bits`]).</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -421,7 +421,7 @@
 
 <span class="kw">impl</span> <span class="ident">Octal</span> <span class="kw">for</span> <span class="ident">m128</span> {
   <span class="doccomment">/// Octal formats each float&#39;s bit pattern (via [`f32::to_bits`]).</span>
-  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">core::fmt::Result</span> {
+  <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
     <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;(&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">float</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">to_array</span>().<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
       <span class="kw">if</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {

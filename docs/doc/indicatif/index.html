@@ -12,7 +12,7 @@ tools and utilities for formatting anything that indicates progress.</p>
 <li><a href="https://docs.rs/console">console</a></li>
 <li><a href="https://docs.rs/dialoguer">dialoguer</a></li>
 </ul>
-<h1 id="crate-contents" class="section-header"><a href="#crate-contents">Crate Contents</a></h1>
+<h2 id="crate-contents" class="section-header"><a href="#crate-contents">Crate Contents</a></h2>
 <ul>
 <li><strong>Progress bars</strong>
 <ul>
@@ -29,7 +29,7 @@ tools and utilities for formatting anything that indicates progress.</p>
 </ul>
 </li>
 </ul>
-<h1 id="progress-bars-and-spinners" class="section-header"><a href="#progress-bars-and-spinners">Progress Bars and Spinners</a></h1>
+<h2 id="progress-bars-and-spinners" class="section-header"><a href="#progress-bars-and-spinners">Progress Bars and Spinners</a></h2>
 <p>indicatif comes with a <code>ProgressBar</code> type that supports both bounded
 progress bar uses as well as unbounded “spinner” type progress reports.
 Progress bars are <code>Sync</code> and <code>Send</code> objects which means that they are
@@ -64,7 +64,7 @@ for others.  Either by also clearing them or by replacing them with
 a new message / retaining the current message.</li>
 <li>the default template renders neither message nor prefix.</li>
 </ul>
-<h1 id="iterators" class="section-header"><a href="#iterators">Iterators</a></h1>
+<h2 id="iterators" class="section-header"><a href="#iterators">Iterators</a></h2>
 <p>Similar to <a href="https://github.com/tqdm/tqdm">tqdm</a>, progress bars can be
 associated with an iterator. For example:</p>
 
@@ -98,7 +98,7 @@ indicatif = {version = &quot;*&quot;, features = [&quot;rayon&quot;]}</code></pr
 <span class="kw">let</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="number">0</span>..<span class="number">100000</span>).<span class="ident">collect</span>();
 <span class="kw">let</span> <span class="ident">v2</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">par_iter</span>().<span class="ident">progress_with</span>(<span class="ident">pb</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">collect</span>();
 <span class="macro">assert_eq!</span>(<span class="ident">v2</span>[<span class="number">0</span>], <span class="number">1</span>);</code></pre></div>
-<h1 id="templates" class="section-header"><a href="#templates">Templates</a></h1>
+<h2 id="templates" class="section-header"><a href="#templates">Templates</a></h2>
 <p>Progress bars can be styled with simple format strings similar to the
 ones in Rust itself.  The format for a placeholder is <code>{key:options}</code>
 where the <code>options</code> part is optional.  If provided the format is this:</p>
@@ -149,7 +149,7 @@ power-of-two units, i.e. <code>MiB</code>, <code>KiB</code>, etc.</li>
 <p>The design of the progress bar can be altered with the integrated
 template functionality.  The template can be set by changing a
 <code>ProgressStyle</code> and attaching it to the progress bar.</p>
-<h1 id="human-readable-formatting" class="section-header"><a href="#human-readable-formatting">Human Readable Formatting</a></h1>
+<h2 id="human-readable-formatting" class="section-header"><a href="#human-readable-formatting">Human Readable Formatting</a></h2>
 <p>There are some formatting wrappers for showing elapsed time and
 file sizes for human users:</p>
 
@@ -157,27 +157,27 @@ file sizes for human users:</p>
 
 <span class="macro">assert_eq!</span>(<span class="string">&quot;3.00MiB&quot;</span>, <span class="ident">HumanBytes</span>(<span class="number">3</span><span class="kw-2">*</span><span class="number">1024</span><span class="kw-2">*</span><span class="number">1024</span>).<span class="ident">to_string</span>());
 <span class="macro">assert_eq!</span>(<span class="string">&quot;8 seconds&quot;</span>, <span class="ident">HumanDuration</span>(<span class="ident">Duration::from_secs</span>(<span class="number">8</span>)).<span class="ident">to_string</span>());</code></pre></div>
-<h1 id="feature-flags" class="section-header"><a href="#feature-flags">Feature Flags</a></h1>
+<h2 id="feature-flags" class="section-header"><a href="#feature-flags">Feature Flags</a></h2>
 <ul>
 <li><code>rayon</code>: adds rayon support</li>
 <li><code>improved_unicode</code>: adds improved unicode support (graphemes, better width calculation)</li>
 </ul>
 </div></details><h2 id="structs" class="section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="struct" href="struct.BinaryBytes.html" title="indicatif::BinaryBytes struct">BinaryBytes</a></div><div class="item-right docblock-short"><p>Formats bytes for human readability using ISO/IEC prefixes</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.DecimalBytes.html" title="indicatif::DecimalBytes struct">DecimalBytes</a></div><div class="item-right docblock-short"><p>Formats bytes for human readability using SI prefixes</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.FormattedDuration.html" title="indicatif::FormattedDuration struct">FormattedDuration</a></div><div class="item-right docblock-short"><p>Wraps an std duration for human basic formatting.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.HumanBytes.html" title="indicatif::HumanBytes struct">HumanBytes</a></div><div class="item-right docblock-short"><p>Formats bytes for human readability</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.HumanDuration.html" title="indicatif::HumanDuration struct">HumanDuration</a></div><div class="item-right docblock-short"><p>Wraps an std duration for human readable formatting.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.MultiProgress.html" title="indicatif::MultiProgress struct">MultiProgress</a></div><div class="item-right docblock-short"><p>Manages multiple progress bars from different threads</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.ProgressBar.html" title="indicatif::ProgressBar struct">ProgressBar</a></div><div class="item-right docblock-short"><p>A progress bar or spinner</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.ProgressBarIter.html" title="indicatif::ProgressBarIter struct">ProgressBarIter</a></div><div class="item-right docblock-short"><p>Wraps an iterator to display its progress.</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.ProgressDrawTarget.html" title="indicatif::ProgressDrawTarget struct">ProgressDrawTarget</a></div><div class="item-right docblock-short"><p>Target for draw operations</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.ProgressStyle.html" title="indicatif::ProgressStyle struct">ProgressStyle</a></div><div class="item-right docblock-short"><p>Controls the rendering style of progress bars</p>
-</div><div class="item-left module-item"><a class="struct" href="struct.WeakProgressBar.html" title="indicatif::WeakProgressBar struct">WeakProgressBar</a></div><div class="item-right docblock-short"><p>A weak reference to a <code>ProgressBar</code>.</p>
-</div></div><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="enum" href="enum.ProgressFinish.html" title="indicatif::ProgressFinish enum">ProgressFinish</a></div><div class="item-right docblock-short"><p>Behavior of a progress bar when it is finished</p>
-</div></div><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
-<div class="item-table"><div class="item-left module-item"><a class="trait" href="trait.ProgressIterator.html" title="indicatif::ProgressIterator trait">ProgressIterator</a></div><div class="item-right docblock-short"><p>Wraps an iterator to display its progress.</p>
-</div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="indicatif" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BinaryBytes.html" title="indicatif::BinaryBytes struct">BinaryBytes</a></div><div class="item-right docblock-short"><p>Formats bytes for human readability using ISO/IEC prefixes</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DecimalBytes.html" title="indicatif::DecimalBytes struct">DecimalBytes</a></div><div class="item-right docblock-short"><p>Formats bytes for human readability using SI prefixes</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.FormattedDuration.html" title="indicatif::FormattedDuration struct">FormattedDuration</a></div><div class="item-right docblock-short"><p>Wraps an std duration for human basic formatting.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.HumanBytes.html" title="indicatif::HumanBytes struct">HumanBytes</a></div><div class="item-right docblock-short"><p>Formats bytes for human readability</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.HumanDuration.html" title="indicatif::HumanDuration struct">HumanDuration</a></div><div class="item-right docblock-short"><p>Wraps an std duration for human readable formatting.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MultiProgress.html" title="indicatif::MultiProgress struct">MultiProgress</a></div><div class="item-right docblock-short"><p>Manages multiple progress bars from different threads</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ProgressBar.html" title="indicatif::ProgressBar struct">ProgressBar</a></div><div class="item-right docblock-short"><p>A progress bar or spinner</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ProgressBarIter.html" title="indicatif::ProgressBarIter struct">ProgressBarIter</a></div><div class="item-right docblock-short"><p>Wraps an iterator to display its progress.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ProgressDrawTarget.html" title="indicatif::ProgressDrawTarget struct">ProgressDrawTarget</a></div><div class="item-right docblock-short"><p>Target for draw operations</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ProgressStyle.html" title="indicatif::ProgressStyle struct">ProgressStyle</a></div><div class="item-right docblock-short"><p>Controls the rendering style of progress bars</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.WeakProgressBar.html" title="indicatif::WeakProgressBar struct">WeakProgressBar</a></div><div class="item-right docblock-short"><p>A weak reference to a <code>ProgressBar</code>.</p>
+</div></div></div><h2 id="enums" class="section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ProgressFinish.html" title="indicatif::ProgressFinish enum">ProgressFinish</a></div><div class="item-right docblock-short"><p>Behavior of a progress bar when it is finished</p>
+</div></div></div><h2 id="traits" class="section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ProgressIterator.html" title="indicatif::ProgressIterator trait">ProgressIterator</a></div><div class="item-right docblock-short"><p>Wraps an iterator to display its progress.</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="indicatif" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
     <script src="../main.js"></script>
 </body></html>

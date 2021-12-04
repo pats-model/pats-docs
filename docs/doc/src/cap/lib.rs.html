@@ -444,7 +444,7 @@
 	<span class="doccomment">/// Create a new allocator, wrapping the supplied allocator and enforcing the specified limit.</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// For no limit, simply set the limit to the theoretical maximum `usize::max_value()`.</span>
-	<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">allocator</span>: <span class="ident">H</span>, <span class="ident">limit</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+	<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">allocator</span>: <span class="ident">H</span>, <span class="ident">limit</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
 		<span class="self">Self</span> {
 			<span class="ident">allocator</span>,
 			<span class="ident">remaining</span>: <span class="ident">AtomicUsize::new</span>(<span class="ident">limit</span>),
@@ -455,12 +455,12 @@
 	<span class="doccomment">/// Return the number of bytes remaining within the limit.</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// i.e. `limit - allocated`</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remaining</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remaining</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
 		<span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>)
 	}
 
 	<span class="doccomment">/// Return the limit in bytes.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">limit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">limit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
 		<span class="self">self</span>.<span class="ident">limit</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>)
 	}
 
@@ -469,7 +469,7 @@
 	<span class="doccomment">/// For no limit, simply set the limit to the theoretical maximum `usize::max_value()`.</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// This method will return `Err` if the specified limit is less than the number of bytes already allocated.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_limit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
+	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_limit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
 		<span class="kw">loop</span> {
 			<span class="kw">let</span> <span class="ident">limit_old</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">limit</span>.<span class="ident">load</span>(<span class="ident">Ordering::Relaxed</span>);
 			<span class="kw">if</span> <span class="ident">limit</span> <span class="op">&lt;</span> <span class="ident">limit_old</span> {
@@ -507,13 +507,13 @@
 	}
 
 	<span class="doccomment">/// Return the number of bytes allocated. Always less than the limit.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allocated</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allocated</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
 		<span class="comment">// Make reasonable effort to get valid output</span>
 		<span class="kw">loop</span> {
 			<span class="kw">let</span> <span class="ident">limit_old</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">limit</span>.<span class="ident">load</span>(<span class="ident">Ordering::SeqCst</span>);
 			<span class="kw">let</span> <span class="ident">remaining</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">load</span>(<span class="ident">Ordering::SeqCst</span>);
 			<span class="kw">let</span> <span class="ident">limit</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">limit</span>.<span class="ident">load</span>(<span class="ident">Ordering::SeqCst</span>);
-			<span class="kw">if</span> <span class="ident">limit_old</span> <span class="op">=</span><span class="op">=</span> <span class="ident">limit</span> <span class="op">&amp;&amp;</span> <span class="ident">limit</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">remaining</span> {
+			<span class="kw">if</span> <span class="ident">limit_old</span> <span class="op">==</span> <span class="ident">limit</span> <span class="op">&amp;&amp;</span> <span class="ident">limit</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">remaining</span> {
 				<span class="kw">break</span> <span class="ident">limit</span> <span class="op">-</span> <span class="ident">remaining</span>;
 			}
 		}
@@ -524,7 +524,7 @@
 <span class="kw">where</span>
 	<span class="ident">H</span>: <span class="ident">GlobalAlloc</span>,
 {
-	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span> {
+	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span> {
 		<span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">l</span>.<span class="ident">size</span>();
 		<span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">fetch_sub</span>(<span class="ident">size</span>, <span class="ident">Ordering::Acquire</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="ident">size</span> {
 			<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">alloc</span>(<span class="ident">l</span>)
@@ -541,7 +541,7 @@
 		<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">dealloc</span>(<span class="ident">ptr</span>, <span class="ident">layout</span>);
 		<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">fetch_add</span>(<span class="ident">size</span>, <span class="ident">Ordering::Release</span>);
 	}
-	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc_zeroed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span> {
+	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc_zeroed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span> {
 		<span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">l</span>.<span class="ident">size</span>();
 		<span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">fetch_sub</span>(<span class="ident">size</span>, <span class="ident">Ordering::Acquire</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="ident">size</span> {
 			<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">alloc_zeroed</span>(<span class="ident">l</span>)
@@ -553,7 +553,7 @@
 		}
 		<span class="ident">res</span>
 	}
-	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">realloc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">old_l</span>: <span class="ident">Layout</span>, <span class="ident">new_s</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span> {
+	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">realloc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">old_l</span>: <span class="ident">Layout</span>, <span class="ident">new_s</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span> {
 		<span class="kw">let</span> <span class="ident">new_l</span> <span class="op">=</span> <span class="ident">Layout::from_size_align_unchecked</span>(<span class="ident">new_s</span>, <span class="ident">old_l</span>.<span class="ident">align</span>());
 		<span class="kw">let</span> (<span class="ident">old_size</span>, <span class="ident">new_size</span>) <span class="op">=</span> (<span class="ident">old_l</span>.<span class="ident">size</span>(), <span class="ident">new_l</span>.<span class="ident">size</span>());
 		<span class="kw">if</span> <span class="ident">new_size</span> <span class="op">&gt;</span> <span class="ident">old_size</span> {
@@ -589,7 +589,7 @@
 <span class="kw">where</span>
 	<span class="ident">H</span>: <span class="ident">Alloc</span>,
 {
-	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span> {
+	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span> {
 		<span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">usable_size</span>(<span class="kw-2">&amp;</span><span class="ident">l</span>).<span class="number">1</span>;
 		<span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">fetch_sub</span>(<span class="ident">size</span>, <span class="ident">Ordering::Acquire</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="ident">size</span> {
 			<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">alloc</span>(<span class="ident">l</span>)
@@ -606,12 +606,12 @@
 		<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">dealloc</span>(<span class="ident">item</span>, <span class="ident">l</span>);
 		<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">fetch_add</span>(<span class="ident">size</span>, <span class="ident">Ordering::Release</span>);
 	}
-	<span class="kw">fn</span> <span class="ident">usable_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="ident">Layout</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
+	<span class="kw">fn</span> <span class="ident">usable_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="ident">Layout</span>) -&gt; (<span class="ident">usize</span>, <span class="ident">usize</span>) {
 		<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">usable_size</span>(<span class="ident">layout</span>)
 	}
 	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">realloc</span>(
 		<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">old_l</span>: <span class="ident">Layout</span>, <span class="ident">new_s</span>: <span class="ident">usize</span>,
-	) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span> {
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span> {
 		<span class="kw">let</span> <span class="ident">new_l</span> <span class="op">=</span> <span class="ident">Layout::from_size_align_unchecked</span>(<span class="ident">new_s</span>, <span class="ident">old_l</span>.<span class="ident">align</span>());
 		<span class="kw">let</span> (<span class="ident">old_size</span>, <span class="ident">new_size</span>) <span class="op">=</span> (
 			<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">usable_size</span>(<span class="kw-2">&amp;</span><span class="ident">old_l</span>).<span class="number">1</span>,
@@ -643,7 +643,7 @@
 			<span class="ident">res</span>
 		}
 	}
-	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc_zeroed</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span> {
+	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">alloc_zeroed</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">l</span>: <span class="ident">Layout</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">AllocErr</span><span class="op">&gt;</span> {
 		<span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">usable_size</span>(<span class="kw-2">&amp;</span><span class="ident">l</span>).<span class="number">1</span>;
 		<span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">fetch_sub</span>(<span class="ident">size</span>, <span class="ident">Ordering::Acquire</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="ident">size</span> {
 			<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">alloc_zeroed</span>(<span class="ident">l</span>)
@@ -657,7 +657,7 @@
 	}
 	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">grow_in_place</span>(
 		<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">old_l</span>: <span class="ident">Layout</span>, <span class="ident">new_s</span>: <span class="ident">usize</span>,
-	) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">CannotReallocInPlace</span><span class="op">&gt;</span> {
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">CannotReallocInPlace</span><span class="op">&gt;</span> {
 		<span class="kw">let</span> <span class="ident">new_l</span> <span class="op">=</span> <span class="ident">Layout::from_size_align</span>(<span class="ident">new_s</span>, <span class="ident">old_l</span>.<span class="ident">align</span>()).<span class="ident">unwrap</span>();
 		<span class="kw">let</span> (<span class="ident">old_size</span>, <span class="ident">new_size</span>) <span class="op">=</span> (
 			<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">usable_size</span>(<span class="kw-2">&amp;</span><span class="ident">old_l</span>).<span class="number">1</span>,
@@ -681,7 +681,7 @@
 	}
 	<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">shrink_in_place</span>(
 		<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">ptr</span>: <span class="ident">ptr::NonNull</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">old_l</span>: <span class="ident">Layout</span>, <span class="ident">new_s</span>: <span class="ident">usize</span>,
-	) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">CannotReallocInPlace</span><span class="op">&gt;</span> {
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">CannotReallocInPlace</span><span class="op">&gt;</span> {
 		<span class="kw">let</span> <span class="ident">new_l</span> <span class="op">=</span> <span class="ident">Layout::from_size_align</span>(<span class="ident">new_s</span>, <span class="ident">old_l</span>.<span class="ident">align</span>()).<span class="ident">unwrap</span>();
 		<span class="kw">let</span> (<span class="ident">old_size</span>, <span class="ident">new_size</span>) <span class="op">=</span> (
 			<span class="self">self</span>.<span class="ident">allocator</span>.<span class="ident">usable_size</span>(<span class="kw-2">&amp;</span><span class="ident">old_l</span>).<span class="number">1</span>,
