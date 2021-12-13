@@ -15,7 +15,6 @@ sourcesIndex["crossbeam_epoch"] = {"name":"","dirs":[{"name":"sync","files":["li
 sourcesIndex["crossbeam_utils"] = {"name":"","dirs":[{"name":"atomic","files":["atomic_cell.rs","consume.rs","mod.rs","seq_lock.rs"]},{"name":"sync","files":["mod.rs","parker.rs","sharded_lock.rs","wait_group.rs"]}],"files":["backoff.rs","cache_padded.rs","lib.rs","thread.rs"]};
 sourcesIndex["csv"] = {"name":"","files":["byte_record.rs","cookbook.rs","deserializer.rs","error.rs","lib.rs","reader.rs","serializer.rs","string_record.rs","tutorial.rs","writer.rs"]};
 sourcesIndex["csv_core"] = {"name":"","files":["lib.rs","reader.rs","writer.rs"]};
-sourcesIndex["dtoa"] = {"name":"","files":["diyfp.rs","dtoa.rs","lib.rs"]};
 sourcesIndex["eccodes"] = {"name":"","dirs":[{"name":"codes_handle","dirs":[{"name":"keyed_message","files":["iterator.rs","mod.rs","read.rs","write.rs"]}],"files":["iterator.rs","mod.rs"]}],"files":["errors.rs","intermediate_bindings.rs","lib.rs"]};
 sourcesIndex["eccodes_sys"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["either"] = {"name":"","files":["lib.rs"]};
