@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.4&#x2F;src&#x2F;impl_owned_array.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_owned_array.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.4&#x2F;src&#x2F;impl_owned_array.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_owned_array.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -930,7 +931,7 @@
     <span class="doccomment">///     array![[ 1.,  2.,  3.,  4.],</span>
     <span class="doccomment">///            [-1., -2., -3., -4.]]);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_row</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">row</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Ix1</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ShapeError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_row</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">row</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Ix1</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ShapeError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span>,
     {
@@ -976,7 +977,7 @@
     <span class="doccomment">///     array![[1., -1.],</span>
     <span class="doccomment">///            [2., -2.]]);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_column</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">column</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Ix1</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ShapeError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_column</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">column</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Ix1</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ShapeError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span>,
     {
@@ -1028,7 +1029,7 @@
         <span class="comment">// Afterwards, `self` drops full of initialized values and dropping works as usual.</span>
         <span class="comment">// This avoids moving out of owned values in `self` while at the same time managing</span>
         <span class="comment">// the dropping if the values being overwritten in `new_array`.</span>
-        <span class="ident">Zip::from</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>).<span class="ident">and</span>(<span class="ident">new_array</span>)
+        <span class="ident">Zip::from</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>).<span class="ident">and</span>(<span class="ident">new_array</span>)
             .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">src</span>, <span class="ident">dst</span><span class="op">|</span> <span class="ident">mem::swap</span>(<span class="ident">src</span>, <span class="ident">dst</span>));
     }
 
@@ -1141,7 +1142,7 @@
 
     <span class="doccomment">/// Create new_array with the right layout for appending to `growing_axis`</span>
     <span class="attribute">#[<span class="ident">cold</span>]</span>
-    <span class="kw">fn</span> <span class="ident">change_to_contig_append_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">growing_axis</span>: <span class="ident">Axis</span>) {
+    <span class="kw">fn</span> <span class="ident">change_to_contig_append_layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">growing_axis</span>: <span class="ident">Axis</span>) {
         <span class="kw">let</span> <span class="ident">ndim</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ndim</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dim</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">raw_dim</span>();
 
@@ -1220,7 +1221,7 @@
     <span class="doccomment">///            [0., 0., 0., 0.],</span>
     <span class="doccomment">///            [1., 1., 1., 1.]]);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="ident">array</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D::Smaller</span><span class="op">&gt;</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="ident">array</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D::Smaller</span><span class="op">&gt;</span>)
         -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ShapeError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span>,
@@ -1281,7 +1282,7 @@
     <span class="doccomment">///            [1., 1., 1., 1.],</span>
     <span class="doccomment">///            [1., 1., 1., 1.]]);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">append</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="kw-2">mut</span> <span class="ident">array</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="kw-2">mut</span> <span class="ident">array</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>)
         -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ShapeError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span>,
@@ -1426,7 +1427,7 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tail_view</span> <span class="op">=</span> <span class="ident">RawArrayViewMut::new</span>(<span class="ident">tail_ptr</span>, <span class="ident">array_dim</span>, <span class="ident">tail_strides</span>);
 
             <span class="kw">if</span> <span class="ident">tail_view</span>.<span class="ident">ndim</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-                <span class="ident">sort_axes_in_default_order_tandem</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">tail_view</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">array</span>);
+                <span class="ident">sort_axes_in_default_order_tandem</span>(<span class="kw-2">&amp;mut</span> <span class="ident">tail_view</span>, <span class="kw-2">&amp;mut</span> <span class="ident">array</span>);
                 <span class="macro">debug_assert!</span>(<span class="ident">tail_view</span>.<span class="ident">is_standard_layout</span>(),
                               <span class="string">&quot;not std layout dim: {:?}, strides: {:?}&quot;</span>,
                               <span class="ident">tail_view</span>.<span class="ident">shape</span>(), <span class="ident">tail_view</span>.<span class="ident">strides</span>());
@@ -1442,7 +1443,7 @@
             }
 
             <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">SetLenOnDrop</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">A</span><span class="op">&gt;</span> {
-                <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+                <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
                     <span class="kw">unsafe</span> {
                         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">set_len</span>(<span class="self">self</span>.<span class="ident">len</span>);
                     }
@@ -1451,7 +1452,7 @@
 
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_length_guard</span> <span class="op">=</span> <span class="ident">SetLenOnDrop</span> {
                 <span class="ident">len</span>: <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>(),
-                <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>,
+                <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>,
             };
 
 
@@ -1484,7 +1485,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This is an internal function for use by move_into and IntoIter only, safety invariants may need</span>
 <span class="doccomment">/// to be upheld across the calls from those implementations.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">drop_unreachable_raw</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">self_</span>: <span class="ident">RawArrayViewMut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">data_ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">A</span>, <span class="ident">data_len</span>: <span class="ident">usize</span>)
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">drop_unreachable_raw</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">self_</span>: <span class="ident">RawArrayViewMut</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">data_ptr</span>: <span class="kw-2">*mut</span> <span class="ident">A</span>, <span class="ident">data_len</span>: <span class="ident">usize</span>)
 <span class="kw">where</span>
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
 {
@@ -1495,7 +1496,7 @@
             <span class="ident">self_</span>.<span class="ident">invert_axis</span>(<span class="ident">Axis</span>(<span class="ident">i</span>));
         }
     }
-    <span class="ident">sort_axes_in_default_order</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">self_</span>);
+    <span class="ident">sort_axes_in_default_order</span>(<span class="kw-2">&amp;mut</span> <span class="ident">self_</span>);
     <span class="comment">// with uninverted axes this is now the element with lowest address</span>
     <span class="kw">let</span> <span class="ident">array_memory_head_ptr</span> <span class="op">=</span> <span class="ident">self_</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>();
     <span class="kw">let</span> <span class="ident">data_end_ptr</span> <span class="op">=</span> <span class="ident">data_ptr</span>.<span class="ident">add</span>(<span class="ident">data_len</span>);
@@ -1557,7 +1558,7 @@
 <span class="doccomment">/// Sort axes to standard order, i.e Axis(0) has biggest stride and Axis(n - 1) least stride</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The axes should have stride &gt;= 0 before calling this method.</span>
-<span class="kw">fn</span> <span class="ident">sort_axes_in_default_order</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D</span><span class="op">&gt;</span>)
+<span class="kw">fn</span> <span class="ident">sort_axes_in_default_order</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D</span><span class="op">&gt;</span>)
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="ident">RawData</span>,
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
@@ -1565,10 +1566,10 @@
     <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">ndim</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span> {
         <span class="kw">return</span>;
     }
-    <span class="ident">sort_axes1_impl</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">a</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">a</span>.<span class="ident">strides</span>);
+    <span class="ident">sort_axes1_impl</span>(<span class="kw-2">&amp;mut</span> <span class="ident">a</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;mut</span> <span class="ident">a</span>.<span class="ident">strides</span>);
 }
 
-<span class="kw">fn</span> <span class="ident">sort_axes1_impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">adim</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="ident">astrides</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>)
+<span class="kw">fn</span> <span class="ident">sort_axes1_impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">adim</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>, <span class="ident">astrides</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>)
 <span class="kw">where</span>
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
 {
@@ -1598,7 +1599,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Axes in a and b are sorted by the strides of `a`, and `a`&#39;s axes should have stride &gt;= 0 before</span>
 <span class="doccomment">/// calling this method.</span>
-<span class="kw">fn</span> <span class="ident">sort_axes_in_default_order_tandem</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">S2</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S2</span>, <span class="ident">D</span><span class="op">&gt;</span>)
+<span class="kw">fn</span> <span class="ident">sort_axes_in_default_order_tandem</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">S2</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">a</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">b</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S2</span>, <span class="ident">D</span><span class="op">&gt;</span>)
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="ident">RawData</span>,
     <span class="ident">S2</span>: <span class="ident">RawData</span>,
@@ -1607,10 +1608,10 @@
     <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">ndim</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span> {
         <span class="kw">return</span>;
     }
-    <span class="ident">sort_axes2_impl</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">a</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">a</span>.<span class="ident">strides</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">b</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">b</span>.<span class="ident">strides</span>);
+    <span class="ident">sort_axes2_impl</span>(<span class="kw-2">&amp;mut</span> <span class="ident">a</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;mut</span> <span class="ident">a</span>.<span class="ident">strides</span>, <span class="kw-2">&amp;mut</span> <span class="ident">b</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;mut</span> <span class="ident">b</span>.<span class="ident">strides</span>);
 }
 
-<span class="kw">fn</span> <span class="ident">sort_axes2_impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">adim</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="ident">astrides</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="ident">bdim</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="ident">bstrides</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>)
+<span class="kw">fn</span> <span class="ident">sort_axes2_impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">adim</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>, <span class="ident">astrides</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>, <span class="ident">bdim</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>, <span class="ident">bstrides</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>)
 <span class="kw">where</span>
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
 {
@@ -1638,5 +1639,4 @@
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ndarray" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

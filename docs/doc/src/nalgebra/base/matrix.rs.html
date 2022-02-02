@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;nalgebra-0.29.0&#x2F;src&#x2F;base&#x2F;matrix.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matrix.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https:&#x2F;&#x2F;nalgebra.org&#x2F;img&#x2F;favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../nalgebra/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;nalgebra-0.29.0&#x2F;src&#x2F;base&#x2F;matrix.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matrix.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https:&#x2F;&#x2F;nalgebra.org&#x2F;img&#x2F;favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../nalgebra/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -2427,7 +2428,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>: <span class="ident">Dim</span>, <span class="ident">C</span>: <span class="ident">Dim</span>, <span class="ident">S</span>: <span class="ident">fmt::Debug</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">formatter</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">fmt::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">formatter</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">fmt::Error</span><span class="op">&gt;</span> {
         <span class="ident">formatter</span>
             .<span class="ident">debug_struct</span>(<span class="string">&quot;Matrix&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;data&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>)
@@ -2487,7 +2488,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;abomonation-serialize&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Scalar</span>, <span class="ident">R</span>: <span class="ident">Dim</span>, <span class="ident">C</span>: <span class="ident">Dim</span>, <span class="ident">S</span>: <span class="ident">Abomonation</span><span class="op">&gt;</span> <span class="ident">Abomonation</span> <span class="kw">for</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">entomb</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) -&gt; <span class="ident">IOResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">entomb</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">writer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">W</span>) -&gt; <span class="ident">IOResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">entomb</span>(<span class="ident">writer</span>)
     }
 
@@ -2556,7 +2557,7 @@
             <span class="kw-2">&amp;</span><span class="self">self</span>,
             <span class="ident">pos</span>: <span class="ident">usize</span>,
             <span class="ident">resolver</span>: <span class="ident"><span class="self">Self</span>::Resolver</span>,
-            <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">core::mem::MaybeUninit</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Archived</span><span class="op">&gt;</span>,
+            <span class="ident">out</span>: <span class="kw-2">&amp;mut</span> <span class="ident">core::mem::MaybeUninit</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Archived</span><span class="op">&gt;</span>,
         ) {
             <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">resolve</span>(
                 <span class="ident">pos</span> <span class="op">+</span> <span class="macro">offset_of!</span>(<span class="ident"><span class="self">Self</span>::Archived</span>, <span class="ident">data</span>),
@@ -2569,7 +2570,7 @@
     <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Archive</span>, <span class="ident">R</span>: <span class="ident">Archive</span>, <span class="ident">C</span>: <span class="ident">Archive</span>, <span class="ident">S</span>: <span class="ident">Serialize</span><span class="op">&lt;</span><span class="ident">_S</span><span class="op">&gt;</span>, <span class="ident">_S</span>: <span class="ident">Fallible</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Serialize</span><span class="op">&lt;</span><span class="ident">_S</span><span class="op">&gt;</span>
         <span class="kw">for</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>
     {
-        <span class="kw">fn</span> <span class="ident">serialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_S</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Resolver</span>, <span class="ident">_S::Error</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">serialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">_S</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Resolver</span>, <span class="ident">_S::Error</span><span class="op">&gt;</span> {
             <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">serialize</span>(<span class="ident">serializer</span>)
         }
     }
@@ -2580,7 +2581,7 @@
     <span class="kw">where</span>
         <span class="ident">S::Archived</span>: <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D</span><span class="op">&gt;</span>,
     {
-        <span class="kw">fn</span> <span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">deserializer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>, <span class="ident">D::Error</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">deserializer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>, <span class="ident">D::Error</span><span class="op">&gt;</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">Matrix</span> {
                 <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">deserialize</span>(<span class="ident">deserializer</span>)<span class="question-mark">?</span>,
                 <span class="ident">_phantoms</span>: <span class="ident">PhantomData</span>,
@@ -2780,7 +2781,7 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*const</span> <span class="ident">T</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">ptr</span>()
     }
 
@@ -2915,7 +2916,7 @@
     <span class="kw">fn</span> <span class="ident">transpose_to_uninit</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">status</span>: <span class="ident">Status</span>,
-        <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">Status::Value</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>,
+        <span class="ident">out</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">Status::Value</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>,
     ) <span class="kw">where</span>
         <span class="ident">Status</span>: <span class="ident">InitStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
         <span class="ident">T</span>: <span class="ident">Scalar</span>,
@@ -2946,7 +2947,7 @@
 
     <span class="doccomment">/// Transposes `self` and store the result into `out`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transpose_to</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transpose_to</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Scalar</span>,
         <span class="ident">R2</span>: <span class="ident">Dim</span>,
@@ -2968,7 +2969,7 @@
         <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">shape_generic</span>();
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Matrix::uninit</span>(<span class="ident">ncols</span>, <span class="ident">nrows</span>);
-        <span class="self">self</span>.<span class="ident">transpose_to_uninit</span>(<span class="ident">Uninit</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">res</span>);
+        <span class="self">self</span>.<span class="ident">transpose_to_uninit</span>(<span class="ident">Uninit</span>, <span class="kw-2">&amp;mut</span> <span class="ident">res</span>);
         <span class="comment">// Safety: res is now fully initialized.</span>
         <span class="kw">unsafe</span> { <span class="ident">res</span>.<span class="ident">assume_init</span>() }
     }
@@ -3223,7 +3224,7 @@
 
     <span class="doccomment">/// Applies a closure `f` to modify each component of `self`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>)<span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;mut</span> <span class="ident">T</span>)<span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>)
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
     {
@@ -3243,9 +3244,9 @@
     <span class="doccomment">/// joined with the components from `rhs`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zip_apply</span><span class="op">&lt;</span><span class="ident">T2</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">S2</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T2</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">S2</span><span class="op">&gt;</span>,
-        <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">T2</span>),
+        <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">T2</span>),
     ) <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
         <span class="ident">T2</span>: <span class="ident">Scalar</span>,
@@ -3277,10 +3278,10 @@
     <span class="doccomment">/// joined with the components from `b` and `c`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zip_zip_apply</span><span class="op">&lt;</span><span class="ident">T2</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">S2</span>, <span class="ident">N3</span>, <span class="ident">R3</span>, <span class="ident">C3</span>, <span class="ident">S3</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T2</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">S2</span><span class="op">&gt;</span>,
         <span class="ident">c</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">N3</span>, <span class="ident">R3</span>, <span class="ident">C3</span>, <span class="ident">S3</span><span class="op">&gt;</span>,
-        <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">T2</span>, <span class="ident">N3</span>),
+        <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">T2</span>, <span class="ident">N3</span>),
     ) <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
         <span class="ident">T2</span>: <span class="ident">Scalar</span>,
@@ -3376,11 +3377,11 @@
 
     <span class="doccomment">/// Mutably iterates through this matrix coordinates.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">MatrixIterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">MatrixIterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
     {
-        <span class="ident">MatrixIterMut::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>)
+        <span class="ident">MatrixIterMut::new</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>)
     }
 
     <span class="doccomment">/// Mutably iterates through this matrix rows.</span>
@@ -3399,7 +3400,7 @@
     <span class="doccomment">/// assert_eq!(a, expected);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">row_iter_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">RowIterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">row_iter_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">RowIterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
     {
@@ -3422,7 +3423,7 @@
     <span class="doccomment">/// assert_eq!(a, expected);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">column_iter_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">ColumnIterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">column_iter_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">ColumnIterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
     {
@@ -3436,13 +3437,13 @@
     <span class="doccomment">/// If the matrix is not empty, this pointer is guaranteed to be aligned</span>
     <span class="doccomment">/// and non-null.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_ptr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_ptr</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">T</span> {
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">ptr_mut</span>()
     }
 
     <span class="doccomment">/// Swaps two entries without bound-checking.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">swap_unchecked</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">row_cols1</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">row_cols2</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>)) {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">swap_unchecked</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">row_cols1</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">row_cols2</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>)) {
         <span class="macro">debug_assert!</span>(<span class="ident">row_cols1</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">nrows</span>() <span class="op">&amp;&amp;</span> <span class="ident">row_cols1</span>.<span class="number">1</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ncols</span>());
         <span class="macro">debug_assert!</span>(<span class="ident">row_cols2</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">nrows</span>() <span class="op">&amp;&amp;</span> <span class="ident">row_cols2</span>.<span class="number">1</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ncols</span>());
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">swap_unchecked</span>(<span class="ident">row_cols1</span>, <span class="ident">row_cols2</span>)
@@ -3450,7 +3451,7 @@
 
     <span class="doccomment">/// Swaps two entries.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">swap</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">row_cols1</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">row_cols2</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>)) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">swap</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">row_cols1</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">row_cols2</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>)) {
         <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">shape</span>();
         <span class="macro">assert!</span>(
             <span class="ident">row_cols1</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="ident">nrows</span> <span class="op">&amp;&amp;</span> <span class="ident">row_cols1</span>.<span class="number">1</span> <span class="op">&lt;</span> <span class="ident">ncols</span>,
@@ -3467,7 +3468,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The components of the slice are assumed to be ordered in column-major order.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_from_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>])
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_from_slice</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>])
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Scalar</span>,
     {
@@ -3489,7 +3490,7 @@
 
     <span class="doccomment">/// Fills this matrix with the content of another one. Both must have the same shape.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_from</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_from</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Scalar</span>,
         <span class="ident">R2</span>: <span class="ident">Dim</span>,
@@ -3513,7 +3514,7 @@
 
     <span class="doccomment">/// Fills this matrix with the content of the transpose another one.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tr_copy_from</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tr_copy_from</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">Scalar</span>,
         <span class="ident">R2</span>: <span class="ident">Dim</span>,
@@ -3539,7 +3540,7 @@
     <span class="comment">// TODO: rename `apply` to `apply_mut` and `apply_into` to `apply`?</span>
     <span class="doccomment">/// Returns `self` with each of its components replaced by the result of a closure `f` applied on it.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply_into</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>)<span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply_into</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;mut</span> <span class="ident">T</span>)<span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">apply</span>(<span class="ident">f</span>);
         <span class="self">self</span>
     }
@@ -3560,7 +3561,7 @@
     <span class="doccomment">/// Gets a mutable reference to the i-th element of this column vector without bound checking.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">vget_unchecked_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">vget_unchecked_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">T</span> {
         <span class="macro">debug_assert!</span>(<span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">nrows</span>(), <span class="string">&quot;Vector index out of bounds.&quot;</span>);
         <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">strides</span>().<span class="number">0</span>;
         <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">get_unchecked_linear_mut</span>(<span class="ident">i</span>)
@@ -3581,7 +3582,7 @@
     <span class="doccomment">/// Extracts a mutable slice containing the entire matrix entries ordered column-by-columns.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> [<span class="ident">T</span>] {
         <span class="comment">// Safety: this is OK thanks to the IsContiguous trait.</span>
         <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">as_mut_slice_unchecked</span>() }
     }
@@ -3589,7 +3590,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Scalar</span>, <span class="ident">D</span>: <span class="ident">Dim</span>, <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">D</span>, <span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">D</span>, <span class="ident">D</span>, <span class="ident">S</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Transposes the square matrix `self` in-place.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transpose_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transpose_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="macro">assert!</span>(
             <span class="self">self</span>.<span class="ident">is_square</span>(),
             <span class="string">&quot;Unable to transpose a non-square matrix in-place.&quot;</span>
@@ -3611,7 +3612,7 @@
     <span class="kw">fn</span> <span class="ident">adjoint_to_uninit</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">status</span>: <span class="ident">Status</span>,
-        <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">Status::Value</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>,
+        <span class="ident">out</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">Status::Value</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>,
     ) <span class="kw">where</span>
         <span class="ident">Status</span>: <span class="ident">InitStatus</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
         <span class="ident">R2</span>: <span class="ident">Dim</span>,
@@ -3641,7 +3642,7 @@
 
     <span class="doccomment">/// Takes the adjoint (aka. conjugate-transpose) of `self` and store the result into `out`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">adjoint_to</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">adjoint_to</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
     <span class="kw">where</span>
         <span class="ident">R2</span>: <span class="ident">Dim</span>,
         <span class="ident">C2</span>: <span class="ident">Dim</span>,
@@ -3661,7 +3662,7 @@
         <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">shape_generic</span>();
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Matrix::uninit</span>(<span class="ident">ncols</span>, <span class="ident">nrows</span>);
-        <span class="self">self</span>.<span class="ident">adjoint_to_uninit</span>(<span class="ident">Uninit</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">res</span>);
+        <span class="self">self</span>.<span class="ident">adjoint_to_uninit</span>(<span class="ident">Uninit</span>, <span class="kw-2">&amp;mut</span> <span class="ident">res</span>);
 
         <span class="comment">// Safety: res is now fully initialized.</span>
         <span class="kw">unsafe</span> { <span class="ident">res</span>.<span class="ident">assume_init</span>() }
@@ -3670,7 +3671,7 @@
     <span class="doccomment">/// Takes the conjugate and transposes `self` and store the result into `out`.</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Renamed `self.adjoint_to(out)`.&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">conjugate_transpose_to</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">conjugate_transpose_to</span><span class="op">&lt;</span><span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R2</span>, <span class="ident">C2</span>, <span class="ident">SB</span><span class="op">&gt;</span>)
     <span class="kw">where</span>
         <span class="ident">R2</span>: <span class="ident">Dim</span>,
         <span class="ident">C2</span>: <span class="ident">Dim</span>,
@@ -3724,19 +3725,19 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">SimdComplexField</span>, <span class="ident">R</span>: <span class="ident">Dim</span>, <span class="ident">C</span>: <span class="ident">Dim</span>, <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span>, <span class="ident">S</span><span class="op">&gt;</span> {
     <span class="doccomment">/// The conjugate of the complex matrix `self` computed in-place.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">conjugate_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">conjugate_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="self">self</span>.<span class="ident">apply</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">e</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">clone</span>().<span class="ident">simd_conjugate</span>())
     }
 
     <span class="doccomment">/// Divides each component of the complex matrix `self` by the given real.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unscale_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">real</span>: <span class="ident">T::SimdRealField</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unscale_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">real</span>: <span class="ident">T::SimdRealField</span>) {
         <span class="self">self</span>.<span class="ident">apply</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">e</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">clone</span>().<span class="ident">simd_unscale</span>(<span class="ident">real</span>.<span class="ident">clone</span>()))
     }
 
     <span class="doccomment">/// Multiplies each component of the complex matrix `self` by the given real.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">real</span>: <span class="ident">T::SimdRealField</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">real</span>: <span class="ident">T::SimdRealField</span>) {
         <span class="self">self</span>.<span class="ident">apply</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">e</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">clone</span>().<span class="ident">simd_scale</span>(<span class="ident">real</span>.<span class="ident">clone</span>()))
     }
 }
@@ -3744,12 +3745,12 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">SimdComplexField</span>, <span class="ident">D</span>: <span class="ident">Dim</span>, <span class="ident">S</span>: <span class="ident">RawStorageMut</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">D</span>, <span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">D</span>, <span class="ident">D</span>, <span class="ident">S</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Sets `self` to its adjoint.</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Renamed to `self.adjoint_mut()`.&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">conjugate_transform_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">conjugate_transform_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="self">self</span>.<span class="ident">adjoint_mut</span>()
     }
 
     <span class="doccomment">/// Sets `self` to its adjoint (aka. conjugate-transpose).</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">adjoint_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">adjoint_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="macro">assert!</span>(
             <span class="self">self</span>.<span class="ident">is_square</span>(),
             <span class="string">&quot;Unable to transpose a non-square matrix in-place.&quot;</span>
@@ -4136,9 +4137,9 @@
             <span class="ident">T</span>: <span class="ident">Scalar</span> <span class="op">+</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span>,
             <span class="macro-nonterminal">S</span>: <span class="ident">RawStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
         {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
+            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
                 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-                <span class="kw">fn</span> <span class="ident">val_width</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Scalar</span> <span class="op">+</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span><span class="op">&gt;</span>(<span class="macro-nonterminal">val</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span> {
+                <span class="kw">fn</span> <span class="ident">val_width</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Scalar</span> <span class="op">+</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span><span class="op">&gt;</span>(<span class="macro-nonterminal">val</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span> {
                     <span class="kw">match</span> <span class="ident">f</span>.<span class="ident">precision</span>() {
                         <span class="prelude-val">Some</span>(<span class="ident">precision</span>) =&gt; <span class="macro">format!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">fmt_str_with_precision</span>, <span class="ident">val</span>, <span class="ident">precision</span>)
                             .<span class="ident">chars</span>()
@@ -4148,7 +4149,7 @@
                 }
 
                 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
-                <span class="kw">fn</span> <span class="ident">val_width</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Scalar</span> <span class="op">+</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span><span class="op">&gt;</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="macro-nonterminal">T</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span> {
+                <span class="kw">fn</span> <span class="ident">val_width</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Scalar</span> <span class="op">+</span> <span class="macro-nonterminal">$</span><span class="kw">trait</span><span class="op">&gt;</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="macro-nonterminal">T</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">usize</span> {
                     <span class="number">4</span>
                 }
 
@@ -4451,7 +4452,7 @@
     <span class="ident">C</span>: <span class="ident">Dim</span>,
     <span class="ident">S</span>: <span class="ident">RawStorage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">H</span>) {
+    <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) {
         <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">shape</span>();
         (<span class="ident">nrows</span>, <span class="ident">ncols</span>).<span class="ident">hash</span>(<span class="ident">state</span>);
 
@@ -4466,5 +4467,4 @@
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nalgebra" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
-    <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
 </body></html>
