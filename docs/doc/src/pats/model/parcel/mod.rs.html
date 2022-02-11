@@ -154,6 +154,11 @@
 <span id="153">153</span>
 <span id="154">154</span>
 <span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
 </pre><pre class="rust"><code><span class="comment">/*
 Copyright 2021 - 2022 Jakub Lewandowski
 
@@ -185,6 +190,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">use</span> <span class="kw">super</span>::{
     <span class="ident">configuration::Config</span>,
     <span class="ident">environment</span>::{
+        <span class="ident">EnvFields::VerticalVel</span>,
         <span class="ident">Environment</span>,
         <span class="ident">SurfaceFields</span>::{<span class="ident">Dewpoint</span>, <span class="ident">Height</span>, <span class="ident">Pressure</span>, <span class="ident">Temperature</span>},
     },
@@ -280,7 +286,11 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="comment">// currently, constant initial vertical velocity (0.2 m/s)</span>
     <span class="comment">// but then lifiting can be taken into account</span>
     <span class="comment">// also as initial acceleration</span>
-    <span class="kw">let</span> <span class="ident">z_vel</span> <span class="op">=</span> <span class="number">0.2</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z_vel</span> <span class="op">=</span> <span class="number">0.2</span>;
+
+    <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;env_vertical_motion&quot;</span>) {
+        <span class="ident">z_vel</span> <span class="op">+</span><span class="op">=</span> <span class="ident">environment</span>.<span class="ident">get_field_value</span>(<span class="ident">x_pos</span>, <span class="ident">y_pos</span>, <span class="ident">z_pos</span>, <span class="ident">VerticalVel</span>)<span class="question-mark">?</span>;
+    }
 
     <span class="kw">let</span> <span class="ident">pres</span> <span class="op">=</span> <span class="ident">environment</span>.<span class="ident">get_surface_value</span>(<span class="ident">x_pos</span>, <span class="ident">y_pos</span>, <span class="ident">Pressure</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">environment</span>.<span class="ident">get_surface_value</span>(<span class="ident">x_pos</span>, <span class="ident">y_pos</span>, <span class="ident">Temperature</span>)<span class="question-mark">?</span>;

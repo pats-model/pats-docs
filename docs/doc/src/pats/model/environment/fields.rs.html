@@ -398,6 +398,32 @@
 <span id="397">397</span>
 <span id="398">398</span>
 <span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
 </pre><pre class="rust"><code><span class="comment">/*
 Copyright 2021 - 2022 Jakub Lewandowski
 
@@ -453,6 +479,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="kw">pub</span> <span class="ident">v_wind</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">spec_humidity</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">virtual_temp</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">vertical_vel</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Fields</span> {
@@ -484,7 +511,8 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
                             <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;q&quot;</span>.<span class="ident">to_string</span>())
                             <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;t&quot;</span>.<span class="ident">to_string</span>())
                             <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;u&quot;</span>.<span class="ident">to_string</span>())
-                            <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;v&quot;</span>.<span class="ident">to_string</span>())),
+                            <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;v&quot;</span>.<span class="ident">to_string</span>())
+                            <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;w&quot;</span>.<span class="ident">to_string</span>())),
                 )
             })
             .<span class="ident">collect</span>()<span class="question-mark">?</span>;
@@ -587,6 +615,10 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
     <span class="kw">let</span> <span class="ident">virtual_temp</span> <span class="op">=</span> <span class="ident">compute_virtual_temperature</span>(<span class="kw-2">&amp;</span><span class="ident">temperature</span>, <span class="kw-2">&amp;</span><span class="ident">spec_humidity</span>);
 
+    <span class="kw">let</span> <span class="ident">vertical_motion</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;w&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">vertical_motion</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">vertical_motion</span>, <span class="ident">domain_edges</span>);
+    <span class="kw">let</span> <span class="ident">vertical_vel</span> <span class="op">=</span> <span class="ident">compute_vertical_velocity</span>(<span class="kw-2">&amp;</span><span class="ident">pressure</span>, <span class="kw-2">&amp;</span><span class="ident">height</span>, <span class="kw-2">&amp;</span><span class="ident">vertical_motion</span>);
+
     <span class="prelude-val">Ok</span>(<span class="ident">Fields</span> {
         <span class="ident">lons</span>: <span class="ident">coords</span>.<span class="number">0</span>,
         <span class="ident">lats</span>: <span class="ident">coords</span>.<span class="number">1</span>,
@@ -597,6 +629,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         <span class="ident">v_wind</span>,
         <span class="ident">spec_humidity</span>,
         <span class="ident">virtual_temp</span>,
+        <span class="ident">vertical_vel</span>,
     })
 }
 
@@ -796,6 +829,25 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         });
 
     <span class="ident">virtual_temperature</span>
+}
+
+<span class="doccomment">/// What it is?</span>
+<span class="kw">fn</span> <span class="ident">compute_vertical_velocity</span>(
+    <span class="ident">pressure</span>: <span class="kw-2">&amp;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="ident">height</span>: <span class="kw-2">&amp;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="ident">vertical_motion</span>: <span class="kw-2">&amp;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+) -&gt; <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> {
+    <span class="comment">// compute thickness in negative m Pa^-1</span>
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">thickness</span> <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="ident">height</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[<span class="number">1</span>.., .., ..]) <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">height</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[<span class="number">0</span>..<span class="op">-</span><span class="number">1</span>, .., ..]))
+        <span class="op">/</span> (<span class="kw-2">&amp;</span><span class="ident">pressure</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[<span class="number">1</span>.., .., ..]) <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">pressure</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[<span class="number">0</span>..<span class="op">-</span><span class="number">1</span>, .., ..]));
+
+    <span class="comment">// thickness array doesn&#39;t have the top level, so we will copy it</span>
+    <span class="kw">let</span> <span class="ident">thickness_top</span> <span class="op">=</span> <span class="ident">thickness</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[<span class="op">-</span><span class="number">1</span>, .., ..]).<span class="ident">to_owned</span>();
+    <span class="kw">let</span> <span class="ident">thickness_top</span> <span class="op">=</span> <span class="ident">Array2::from</span>(<span class="ident">thickness_top</span>);
+    <span class="ident">thickness</span>.<span class="ident">push</span>(<span class="ident">Axis</span>(<span class="number">0</span>), <span class="ident">thickness_top</span>.<span class="ident">view</span>()).<span class="ident">unwrap</span>();
+
+    <span class="comment">// multiply vertical motion and thickness to get velocity</span>
+    <span class="ident">vertical_motion</span> <span class="op">*</span> <span class="ident">thickness</span>
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="pats" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
