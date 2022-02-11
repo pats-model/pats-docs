@@ -155,7 +155,7 @@
 <span id="154">154</span>
 <span id="155">155</span>
 </pre><pre class="rust"><code><span class="comment">/*
-Copyright 2021 Jakub Lewandowski
+Copyright 2021 - 2022 Jakub Lewandowski
 
 This file is part of Parcel Ascent Tracing System (PATS).
 
@@ -181,12 +181,6 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">mod</span> <span class="ident">logger</span>;
 <span class="kw">mod</span> <span class="ident">runge_kutta</span>;
 
-<span class="kw">use</span> <span class="ident">log::debug</span>;
-<span class="kw">use</span> <span class="ident">runge_kutta::RungeKuttaDynamics</span>;
-<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-<span class="kw">use</span> <span class="ident">chrono::NaiveDateTime</span>;
-<span class="kw">use</span> <span class="ident">floccus</span>::{<span class="ident">mixing_ratio</span>, <span class="ident">virtual_temperature</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Float</span>, <span class="ident">errors::ParcelError</span>, <span class="ident">model::parcel::conv_params::compute_conv_params</span>};
 <span class="kw">use</span> <span class="ident"><span class="self">self</span>::conv_params::ConvectiveParams</span>;
 <span class="kw">use</span> <span class="kw">super</span>::{
     <span class="ident">configuration::Config</span>,
@@ -196,6 +190,12 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     },
     <span class="ident">vec3::Vec3</span>,
 };
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">errors::ParcelError</span>, <span class="ident">model::parcel::conv_params::compute_conv_params</span>, <span class="ident">Float</span>};
+<span class="kw">use</span> <span class="ident">chrono::NaiveDateTime</span>;
+<span class="kw">use</span> <span class="ident">floccus</span>::{<span class="ident">mixing_ratio</span>, <span class="ident">virtual_temperature</span>};
+<span class="kw">use</span> <span class="ident">log::debug</span>;
+<span class="kw">use</span> <span class="ident">runge_kutta::RungeKuttaDynamics</span>;
+<span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;3d&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::environment::SurfaceFields</span>::{<span class="ident">UWind</span>, <span class="ident">VWind</span>};

@@ -260,7 +260,7 @@
 <span id="259">259</span>
 <span id="260">260</span>
 </pre><pre class="rust"><code><span class="comment">/*
-Copyright 2021 Jakub Lewandowski
+Copyright 2021 - 2022 Jakub Lewandowski
 
 This file is part of Parcel Ascent Tracing System (PATS).
 
@@ -367,7 +367,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
                 <span class="macro">error!</span>(<span class="string">&quot;Parcel simulation handling failed due to an error, check the details and rerun the model: {}&quot;</span>, <span class="ident">err</span>);
                 <span class="comment">// this is neccessary to make sure that all error messages</span>
                 <span class="comment">// are fully written to stdout before the progress bar updates</span>
-                <span class="macro">println!</span>(<span class="string">&quot;&quot;</span>);
+                <span class="macro">println!</span>();
             }
         }
         <span class="ident">parcels_bar</span>.<span class="ident">inc</span>(<span class="number">1</span>);

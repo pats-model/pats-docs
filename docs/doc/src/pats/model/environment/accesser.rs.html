@@ -190,10 +190,8 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
 </pre><pre class="rust"><code><span class="comment">/*
-Copyright 2021 Jakub Lewandowski
+Copyright 2021 - 2022 Jakub Lewandowski
 
 This file is part of Parcel Ascent Tracing System (PATS).
 
@@ -215,8 +213,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="doccomment">//! environment and surface boundary</span>
 <span class="doccomment">//! conditions data.</span>
 
-<span class="kw">use</span> <span class="ident">ndarray::s</span>;
-
+<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">bisection</span>, <span class="ident">EnvFields</span>, <span class="ident">Environment</span>, <span class="ident">SurfaceFields</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">errors</span>::{<span class="ident">EnvironmentError</span>, <span class="ident">SearchError</span>},
     <span class="ident">model::environment::interpolation</span>::{
@@ -224,8 +221,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     },
     <span class="ident">Float</span>,
 };
-
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">bisection</span>, <span class="ident">EnvFields</span>, <span class="ident">Environment</span>, <span class="ident">SurfaceFields</span>};
+<span class="kw">use</span> <span class="ident">ndarray::s</span>;
 
 <span class="kw">impl</span> <span class="ident">Environment</span> {
     <span class="doccomment">/// Function to get interpolated value of given</span>
@@ -239,12 +235,12 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         <span class="kw">let</span> (<span class="ident">lon</span>, <span class="ident">lat</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">projection</span>.<span class="ident">inverse_project</span>(<span class="ident">x</span>, <span class="ident">y</span>);
 
         <span class="kw">let</span> <span class="ident">west_lon_index</span> <span class="op">=</span> <span class="ident">bisection::find_left_closest</span>(
-            <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">lons</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[.., <span class="number">0</span>]).<span class="ident">as_slice</span>().<span class="ident">unwrap</span>(),
+            <span class="self">self</span>.<span class="ident">surfaces</span>.<span class="ident">lons</span>.<span class="ident">slice</span>(<span class="macro">s!</span>[.., <span class="number">0</span>]).<span class="ident">as_slice</span>().<span class="ident">unwrap</span>(),
             <span class="kw-2">&amp;</span><span class="ident">lon</span>,
         )<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="ident">south_lat_index</span> <span class="op">=</span> <span class="ident">bisection::find_left_closest</span>(
-            <span class="self">self</span>.<span class="ident">surface</span>
+            <span class="self">self</span>.<span class="ident">surfaces</span>
                 .<span class="ident">lats</span>
                 .<span class="ident">slice</span>(<span class="macro">s!</span>[<span class="ident">west_lon_index</span>, ..])
                 .<span class="ident">as_slice</span>()
@@ -253,10 +249,10 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         )<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">field</span> {
-            <span class="ident">SurfaceFields::Temperature</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">temperature</span>.<span class="ident">view</span>(),
-            <span class="ident">SurfaceFields::Dewpoint</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">dewpoint</span>.<span class="ident">view</span>(),
-            <span class="ident">SurfaceFields::Pressure</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">pressure</span>.<span class="ident">view</span>(),
-            <span class="ident">SurfaceFields::Height</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">height</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Temperature</span> =&gt; <span class="self">self</span>.<span class="ident">surfaces</span>.<span class="ident">temperature</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Dewpoint</span> =&gt; <span class="self">self</span>.<span class="ident">surfaces</span>.<span class="ident">dewpoint</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Pressure</span> =&gt; <span class="self">self</span>.<span class="ident">surfaces</span>.<span class="ident">pressure</span>.<span class="ident">view</span>(),
+            <span class="ident">SurfaceFields::Height</span> =&gt; <span class="self">self</span>.<span class="ident">surfaces</span>.<span class="ident">height</span>.<span class="ident">view</span>(),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;3d&quot;</span>)]</span>
             <span class="ident">SurfaceFields::UWind</span> =&gt; <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">u_wind</span>.<span class="ident">view</span>(),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;3d&quot;</span>)]</span>

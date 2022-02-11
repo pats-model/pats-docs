@@ -67,9 +67,8 @@
 <span id="66">66</span>
 <span id="67">67</span>
 <span id="68">68</span>
-<span id="69">69</span>
 </pre><pre class="rust"><code><span class="comment">/*
-Copyright 2021 Jakub Lewandowski
+Copyright 2021 - 2022 Jakub Lewandowski
 
 This file is part of Parcel Ascent Tracing System (PATS).
 
@@ -89,7 +88,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
 <span class="doccomment">//! Technical documentation of Parcel Ascent Tracing System (PATS) -</span>
 <span class="doccomment">//! the numerical model for convective parcel ascent simulation in three-dimensions.</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! This documentation provides a description of functions and structures</span>
 <span class="doccomment">//! used in the model. Its main purpose is to make it easier to maintain</span>
 <span class="doccomment">//! and contribute to the project codebase. However, it can be also useful</span>
@@ -103,7 +102,6 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">use</span> <span class="ident">env_logger::Env</span>;
 <span class="kw">use</span> <span class="ident">log</span>::{<span class="ident">error</span>, <span class="ident">info</span>};
 <span class="kw">use</span> <span class="ident">std::alloc</span>;
-
 
 <span class="kw">type</span> <span class="ident">Float</span> <span class="op">=</span> <span class="ident">f64</span>;
 
@@ -122,12 +120,12 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="doccomment">/// Furthermore, errors can occur also during model shutdown and they also</span>
 <span class="doccomment">/// can be handled.</span>
 <span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span><span class="op">=</span><span class="string">&quot;debug&quot;</span>))]</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>))]</span>
     <span class="kw">let</span> <span class="ident">logger_env</span> <span class="op">=</span> <span class="ident">Env::new</span>().<span class="ident">filter_or</span>(<span class="string">&quot;PATS_LOG_LEVEL&quot;</span>, <span class="string">&quot;info&quot;</span>);
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span><span class="op">=</span><span class="string">&quot;debug&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;debug&quot;</span>)]</span>
     <span class="kw">let</span> <span class="ident">logger_env</span> <span class="op">=</span> <span class="ident">Env::new</span>().<span class="ident">filter_or</span>(<span class="string">&quot;PATS_LOG_LEVEL&quot;</span>, <span class="string">&quot;debug&quot;</span>);
-    
+
     <span class="ident">env_logger::Builder::from_env</span>(<span class="ident">logger_env</span>)
         .<span class="ident">format_timestamp_millis</span>()
         .<span class="ident">init</span>();

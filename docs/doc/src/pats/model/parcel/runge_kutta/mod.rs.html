@@ -266,7 +266,7 @@
 <span id="265">265</span>
 <span id="266">266</span>
 </pre><pre class="rust"><code><span class="comment">/*
-Copyright 2021 Jakub Lewandowski
+Copyright 2021 - 2022 Jakub Lewandowski
 
 This file is part of Parcel Ascent Tracing System (PATS).
 
@@ -291,13 +291,13 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">mod</span> <span class="ident">schemes</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">ParcelState</span>, <span class="ident">Vec3</span>};
-<span class="kw">use</span> <span class="ident">floccus::constants::G</span>;
-<span class="kw">use</span> <span class="ident">schemes</span>::{<span class="ident">AdiabaticScheme</span>, <span class="ident">PseudoAdiabaticScheme</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::errors::ParcelSimulationError</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::model::environment::EnvFields</span>::{<span class="ident">UWind</span>, <span class="ident">VWind</span>, <span class="ident">VirtualTemperature</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">model::environment::Environment</span>, <span class="ident">Float</span>};
 <span class="kw">use</span> <span class="ident">chrono::Duration</span>;
+<span class="kw">use</span> <span class="ident">floccus::constants::G</span>;
 <span class="kw">use</span> <span class="ident">log::debug</span>;
+<span class="kw">use</span> <span class="ident">schemes</span>::{<span class="ident">AdiabaticScheme</span>, <span class="ident">PseudoAdiabaticScheme</span>};
 <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
 
 <span class="doccomment">/// (TODO: What it is)</span>

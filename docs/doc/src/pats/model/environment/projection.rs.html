@@ -199,9 +199,8 @@
 <span id="198">198</span>
 <span id="199">199</span>
 <span id="200">200</span>
-<span id="201">201</span>
 </pre><pre class="rust"><code><span class="comment">/*
-Copyright 2021 Jakub Lewandowski
+Copyright 2021 - 2022 Jakub Lewandowski
 
 This file is part of Parcel Ascent Tracing System (PATS).
 
@@ -224,11 +223,10 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="doccomment">//! Closely follows algorithms and instructions in:</span>
 <span class="doccomment">//! &lt;https://pubs.er.usgs.gov/publication/pp1395&gt;</span>
 
-<span class="kw">use</span> <span class="ident">std::f64::consts</span>::{<span class="ident">FRAC_PI_2</span>, <span class="ident">FRAC_PI_4</span>};
-<span class="kw">use</span> <span class="ident">float_cmp::approx_eq</span>;
-
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::constants</span>::{<span class="ident">WGS84_A</span>, <span class="ident">WGS84_E</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">errors::ProjectionError</span>, <span class="ident">Float</span>};
+<span class="kw">use</span> <span class="ident">float_cmp::approx_eq</span>;
+<span class="kw">use</span> <span class="ident">std::f64::consts</span>::{<span class="ident">FRAC_PI_2</span>, <span class="ident">FRAC_PI_4</span>};
 
 <span class="doccomment">/// Front-facing struct of Lambert Conformal Conic projection.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>

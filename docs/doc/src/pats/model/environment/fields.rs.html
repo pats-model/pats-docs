@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src&#x2F;model&#x2F;environment&#x2F;buffer&#x2F;fields.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fields.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../pats/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src&#x2F;model&#x2F;environment&#x2F;fields.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fields.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><script defer src="../../../../main.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../pats/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -320,8 +320,86 @@
 <span id="319">319</span>
 <span id="320">320</span>
 <span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
 </pre><pre class="rust"><code><span class="comment">/*
-Copyright 2021 Jakub Lewandowski
+Copyright 2021 - 2022 Jakub Lewandowski
 
 This file is part of Parcel Ascent Tracing System (PATS).
 
@@ -341,14 +419,13 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
 <span class="doccomment">//! Sub-module responsible for handling</span>
 <span class="doccomment">//! pressure level data buffering.</span>
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::model</span>::{<span class="ident">configuration</span>, <span class="ident">LonLat</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">errors</span>::{<span class="ident">EnvironmentError</span>, <span class="ident">InputError</span>},
-    <span class="ident">model</span>::{
-        <span class="ident">configuration::Input</span>,
-        <span class="ident">environment</span>::{<span class="ident">DomainExtent</span>, <span class="ident">Environment</span>},
-    },
+    <span class="ident">model</span>::{<span class="ident">configuration::Input</span>, <span class="ident">environment::DomainExtent</span>},
     <span class="ident">Float</span>,
 };
+<span class="kw">use</span> <span class="ident">eccodes</span>::{<span class="ident">CodesHandle</span>, <span class="ident">FallibleIterator</span>, <span class="ident">ProductKind::GRIB</span>};
 <span class="kw">use</span> <span class="ident">eccodes</span>::{
     <span class="ident">KeyType</span>::{<span class="self">self</span>, <span class="ident">FloatArray</span>, <span class="ident">Int</span>, <span class="ident">Str</span>},
     <span class="ident">KeyedMessage</span>,
@@ -358,110 +435,169 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 <span class="kw">use</span> <span class="ident">ndarray</span>::{<span class="ident">concatenate</span>, <span class="ident">s</span>, <span class="ident">stack</span>, <span class="ident">Array</span>, <span class="ident">Array2</span>, <span class="ident">Array3</span>, <span class="ident">Axis</span>, <span class="ident">Zip</span>};
 <span class="kw">use</span> <span class="ident">rustc_hash::FxHashSet</span>;
 
-<span class="kw">impl</span> <span class="ident">Environment</span> {
-    <span class="doccomment">/// Function to read pressure level data from GRIB input</span>
-    <span class="doccomment">/// in extent covering domain and margins and buffer it.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Data from GRIB files can only be read in a whole</span>
-    <span class="doccomment">/// GRIB domain, therefore it needs to be truncated.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Some useful variables are not provided by</span>
-    <span class="doccomment">/// most NWP models, therefore they need to be computed.</span>
-    <span class="kw">pub</span>(<span class="kw">in</span> <span class="ident"><span class="kw">crate</span>::model::environment</span>) <span class="kw">fn</span> <span class="ident">buffer_fields</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Input</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
-        <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
-        <span class="macro">debug!</span>(<span class="string">&quot;Buffering fields&quot;</span>);
+<span class="doccomment">/// Struct for storing environmental variables</span>
+<span class="doccomment">/// from levels above ground (currently pressure levels).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// To limit IO operations and reduce performance overhead</span>
+<span class="doccomment">/// of the model boundary conditions data is stored in the</span>
+<span class="doccomment">/// memory as 3D arrays.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Fields</span> {
+    <span class="kw">pub</span> <span class="ident">lons</span>: <span class="ident">Array2</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">lats</span>: <span class="ident">Array2</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">height</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
 
-        <span class="self">self</span>.<span class="ident">assign_raw_fields</span>(<span class="ident">input</span>, <span class="ident">domain_edges</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">compute_intermediate_fields</span>();
-        <span class="self">self</span>.<span class="ident">cast_lonlat_fields_coords</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">distinct_lonlats</span>, <span class="ident">domain_edges</span>);
+    <span class="kw">pub</span> <span class="ident">temperature</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">pressure</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">u_wind</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">v_wind</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">spec_humidity</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">virtual_temp</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+}
 
-        <span class="prelude-val">Ok</span>(())
-    }
-
-    <span class="doccomment">/// Reads variables on pressure levels from GRIB file</span>
-    <span class="doccomment">/// and buffers them in domain + margins extent.</span>
-    <span class="kw">fn</span> <span class="ident">assign_raw_fields</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
+<span class="kw">impl</span> <span class="ident">Fields</span> {
+    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">new</span>(
         <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Input</span>,
         <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">InputError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">input_shape</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">shape</span>;
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">collect</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">fields</span> <span class="op">=</span> <span class="ident">construct_fields</span>(<span class="ident">input</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>, <span class="ident">domain_edges</span>)<span class="question-mark">?</span>;
 
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">pressure</span> <span class="op">=</span> <span class="ident">read_truncated_pressure</span>(<span class="ident">data</span>, <span class="ident">domain_edges</span>)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">fields</span>)
+    }
+}
 
-        <span class="kw">let</span> <span class="ident">geopotential</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;z&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">geopotential</span>, <span class="ident">domain_edges</span>).<span class="ident">mapv</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="op">/</span> <span class="ident">G</span>);
+<span class="doccomment">/// (TODO: What it is)</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// (Why it is neccessary)</span>
+<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">collect</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">configuration::Input</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">KeyedMessage</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_levels</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">KeyedMessage</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[];
 
-        <span class="kw">let</span> <span class="ident">temperature</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;t&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">temperature</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">temperature</span>, <span class="ident">domain_edges</span>);
+    <span class="kw">for</span> <span class="ident">file</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">data_files</span> {
+        <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">CodesHandle::new_from_file</span>(<span class="ident">file</span>, <span class="ident">GRIB</span>)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">u_wind</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;u&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">u_wind</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">u_wind</span>, <span class="ident">domain_edges</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">KeyedMessage</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">handle</span>
+            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">msg</span><span class="op">|</span> {
+                <span class="prelude-val">Ok</span>(
+                    <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;typeOfLevel&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="ident">input</span>.<span class="ident">level_type</span>.<span class="ident">clone</span>())
+                        <span class="op">&amp;&amp;</span> (<span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;z&quot;</span>.<span class="ident">to_string</span>())
+                            <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;q&quot;</span>.<span class="ident">to_string</span>())
+                            <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;t&quot;</span>.<span class="ident">to_string</span>())
+                            <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;u&quot;</span>.<span class="ident">to_string</span>())
+                            <span class="op">|</span><span class="op">|</span> <span class="ident">msg</span>.<span class="ident">read_key</span>(<span class="string">&quot;shortName&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> <span class="op">==</span> <span class="ident">Str</span>(<span class="string">&quot;v&quot;</span>.<span class="ident">to_string</span>())),
+                )
+            })
+            .<span class="ident">collect</span>()<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">v_wind</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;v&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">v_wind</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">v_wind</span>, <span class="ident">domain_edges</span>);
-
-        <span class="kw">let</span> <span class="ident">spec_humidity</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;q&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">spec_humidity</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">spec_humidity</span>, <span class="ident">domain_edges</span>)
-            .<span class="ident">mapv</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="kw">if</span> <span class="ident">v</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0.0</span> { <span class="number">1.0e-8</span> } <span class="kw">else</span> { <span class="ident">v</span> }); <span class="comment">// check for negative values of specific humidity and</span>
-                                                          <span class="comment">// replace them with the smallest positive value</span>
-
-        <span class="prelude-val">Ok</span>(())
+        <span class="ident">data_levels</span>.<span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="ident">data</span>);
     }
 
-    <span class="doccomment">/// Computes and buffers additional pressure level data from</span>
-    <span class="doccomment">/// values previously read from the GRIB file.</span>
-    <span class="kw">fn</span> <span class="ident">compute_intermediate_fields</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">virtual_temperature</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">Array3::zeros</span>(<span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">temperature</span>.<span class="ident">raw_dim</span>());
-
-        <span class="ident">Zip::from</span>(<span class="kw-2">&amp;mut</span> <span class="ident">virtual_temperature</span>)
-            .<span class="ident">and</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">temperature</span>)
-            .<span class="ident">and</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">spec_humidity</span>)
-            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">tv</span>, <span class="kw-2">&amp;</span><span class="ident">t</span>, <span class="kw-2">&amp;</span><span class="ident">q</span><span class="op">|</span> {
-                <span class="kw-2">*</span><span class="ident">tv</span> <span class="op">=</span> <span class="ident">floccus::virtual_temperature::general3</span>(<span class="ident">t</span>, <span class="ident">q</span>).<span class="ident">expect</span>(
-                    <span class="string">&quot;Error while computing virtual temperature: variable out of reasonable bounds&quot;</span>,
-                );
-            });
-
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">virtual_temp</span> <span class="op">=</span> <span class="ident">virtual_temperature</span>;
+    <span class="kw">if</span> <span class="ident">data_levels</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::DataNotSufficient</span>(
+            <span class="string">&quot;Not enough variables on isobaric levels, check your input data&quot;</span>,
+        ));
     }
 
-    <span class="doccomment">/// Buffers longitudes and latitudes of pressure level data gridpoints.</span>
-    <span class="kw">fn</span> <span class="ident">cast_lonlat_fields_coords</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">distinct_lonlats</span>: <span class="kw-2">&amp;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>),
-        <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    ) {
-        <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">distinct_lonlats</span>.<span class="number">1</span>[<span class="ident">domain_edges</span>.<span class="ident">north</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">south</span>].<span class="ident">to_vec</span>();
-        <span class="kw">let</span> <span class="ident">lons</span>;
+    <span class="prelude-val">Ok</span>(<span class="ident">data_levels</span>)
+}
 
-        <span class="kw">if</span> <span class="ident">domain_edges</span>.<span class="ident">west</span> <span class="op">&lt;</span> <span class="ident">domain_edges</span>.<span class="ident">east</span> {
-            <span class="ident">lons</span> <span class="op">=</span> <span class="ident">distinct_lonlats</span>.<span class="number">0</span>[<span class="ident">domain_edges</span>.<span class="ident">west</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">east</span>].<span class="ident">to_vec</span>();
+<span class="doccomment">/// Function to read pressure level data from GRIB input</span>
+<span class="doccomment">/// in extent covering domain and margins and buffer it.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Data from GRIB files can only be read in a whole</span>
+<span class="doccomment">/// GRIB domain, therefore it needs to be truncated.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Some useful variables are not provided by</span>
+<span class="doccomment">/// most NWP models, therefore they need to be computed.</span>
+<span class="kw">fn</span> <span class="ident">construct_fields</span>(
+    <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Input</span>,
+    <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
+    <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Fields</span>, <span class="ident">EnvironmentError</span><span class="op">&gt;</span> {
+    <span class="macro">debug!</span>(<span class="string">&quot;Buffering fields&quot;</span>);
+
+    <span class="kw">let</span> <span class="ident">coords</span> <span class="op">=</span> <span class="ident">cast_lonlat_fields_coords</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">distinct_lonlats</span>, <span class="ident">domain_edges</span>);
+    <span class="kw">let</span> <span class="ident">fields</span> <span class="op">=</span> <span class="ident">assign_fields</span>(<span class="ident">input</span>, <span class="ident">domain_edges</span>, <span class="ident">data</span>, <span class="ident">coords</span>)<span class="question-mark">?</span>;
+
+    <span class="prelude-val">Ok</span>(<span class="ident">fields</span>)
+}
+
+<span class="doccomment">/// Buffers longitudes and latitudes of pressure level data gridpoints.</span>
+<span class="kw">fn</span> <span class="ident">cast_lonlat_fields_coords</span>(
+    <span class="ident">distinct_lonlats</span>: <span class="kw-2">&amp;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>),
+    <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+) -&gt; <span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Array2</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">distinct_lonlats</span>.<span class="number">1</span>[<span class="ident">domain_edges</span>.<span class="ident">north</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">south</span>].<span class="ident">to_vec</span>();
+    <span class="kw">let</span> <span class="ident">lons</span>;
+
+    <span class="kw">if</span> <span class="ident">domain_edges</span>.<span class="ident">west</span> <span class="op">&lt;</span> <span class="ident">domain_edges</span>.<span class="ident">east</span> {
+        <span class="ident">lons</span> <span class="op">=</span> <span class="ident">distinct_lonlats</span>.<span class="number">0</span>[<span class="ident">domain_edges</span>.<span class="ident">west</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">east</span>].<span class="ident">to_vec</span>();
+    } <span class="kw">else</span> {
+        <span class="kw">let</span> <span class="ident">left_half</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">distinct_lonlats</span>.<span class="number">0</span>[<span class="ident">domain_edges</span>.<span class="ident">east</span>..];
+        <span class="kw">let</span> <span class="ident">right_half</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">distinct_lonlats</span>.<span class="number">0</span>[..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">west</span>];
+
+        <span class="ident">lons</span> <span class="op">=</span> [<span class="ident">left_half</span>, <span class="ident">right_half</span>].<span class="ident">concat</span>();
+    }
+
+    <span class="kw">let</span> <span class="ident">lons</span> <span class="op">=</span> <span class="ident">Array::from_vec</span>(<span class="ident">lons</span>);
+    <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">Array::from_vec</span>(<span class="ident">lats</span>);
+
+    <span class="kw">let</span> <span class="ident">lons_view</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">lons</span>.<span class="ident">view</span>(); <span class="ident">lats</span>.<span class="ident">len</span>()];
+    <span class="kw">let</span> <span class="ident">lats_view</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">lats</span>.<span class="ident">view</span>(); <span class="ident">lons</span>.<span class="ident">len</span>()];
+
+    <span class="kw">let</span> <span class="ident">lons</span> <span class="op">=</span> <span class="ident">stack</span>(<span class="ident">Axis</span>(<span class="number">1</span>), <span class="ident">lons_view</span>.<span class="ident">as_slice</span>()).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">stack</span>(<span class="ident">Axis</span>(<span class="number">0</span>), <span class="ident">lats_view</span>.<span class="ident">as_slice</span>()).<span class="ident">unwrap</span>();
+
+    (<span class="ident">lons</span>, <span class="ident">lats</span>)
+}
+
+<span class="doccomment">/// Reads variables on pressure levels from GRIB file</span>
+<span class="doccomment">/// and buffers them in domain + margins extent.</span>
+<span class="kw">fn</span> <span class="ident">assign_fields</span>(
+    <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Input</span>,
+    <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+    <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>],
+    <span class="ident">coords</span>: <span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Array2</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Fields</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">input_shape</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">shape</span>;
+
+    <span class="kw">let</span> <span class="ident">pressure</span> <span class="op">=</span> <span class="ident">read_truncated_pressure</span>(<span class="ident">data</span>, <span class="ident">domain_edges</span>)<span class="question-mark">?</span>;
+
+    <span class="kw">let</span> <span class="ident">geopotential</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;z&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">geopotential</span>, <span class="ident">domain_edges</span>).<span class="ident">mapv</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="op">/</span> <span class="ident">G</span>);
+
+    <span class="kw">let</span> <span class="ident">temperature</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;t&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">temperature</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">temperature</span>, <span class="ident">domain_edges</span>);
+
+    <span class="kw">let</span> <span class="ident">u_wind</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;u&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">u_wind</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">u_wind</span>, <span class="ident">domain_edges</span>);
+
+    <span class="kw">let</span> <span class="ident">v_wind</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;v&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">v_wind</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">v_wind</span>, <span class="ident">domain_edges</span>);
+
+    <span class="kw">let</span> <span class="ident">spec_humidity</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;q&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
+    <span class="comment">// check for negative values of specific humidity and replace them with the smallest positive value</span>
+    <span class="kw">let</span> <span class="ident">spec_humidity</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">spec_humidity</span>, <span class="ident">domain_edges</span>).<span class="ident">mapv</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> {
+        <span class="kw">if</span> <span class="ident">v</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0.0</span> {
+            <span class="number">1.0e-8</span>
         } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">left_half</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">distinct_lonlats</span>.<span class="number">0</span>[<span class="ident">domain_edges</span>.<span class="ident">east</span>..];
-            <span class="kw">let</span> <span class="ident">right_half</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">distinct_lonlats</span>.<span class="number">0</span>[..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">west</span>];
-
-            <span class="ident">lons</span> <span class="op">=</span> [<span class="ident">left_half</span>, <span class="ident">right_half</span>].<span class="ident">concat</span>();
+            <span class="ident">v</span>
         }
+    });
 
-        <span class="kw">let</span> <span class="ident">lons</span> <span class="op">=</span> <span class="ident">Array::from_vec</span>(<span class="ident">lons</span>);
-        <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">Array::from_vec</span>(<span class="ident">lats</span>);
+    <span class="kw">let</span> <span class="ident">virtual_temp</span> <span class="op">=</span> <span class="ident">compute_virtual_temperature</span>(<span class="kw-2">&amp;</span><span class="ident">temperature</span>, <span class="kw-2">&amp;</span><span class="ident">spec_humidity</span>);
 
-        <span class="kw">let</span> <span class="ident">lons_view</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">lons</span>.<span class="ident">view</span>(); <span class="ident">lats</span>.<span class="ident">len</span>()];
-        <span class="kw">let</span> <span class="ident">lats_view</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">lats</span>.<span class="ident">view</span>(); <span class="ident">lons</span>.<span class="ident">len</span>()];
-
-        <span class="kw">let</span> <span class="ident">lons</span> <span class="op">=</span> <span class="ident">stack</span>(<span class="ident">Axis</span>(<span class="number">1</span>), <span class="ident">lons_view</span>.<span class="ident">as_slice</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">stack</span>(<span class="ident">Axis</span>(<span class="number">0</span>), <span class="ident">lats_view</span>.<span class="ident">as_slice</span>()).<span class="ident">unwrap</span>();
-
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">lons</span> <span class="op">=</span> <span class="ident">lons</span>;
-        <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">lats</span> <span class="op">=</span> <span class="ident">lats</span>;
-    }
+    <span class="prelude-val">Ok</span>(<span class="ident">Fields</span> {
+        <span class="ident">lons</span>: <span class="ident">coords</span>.<span class="number">0</span>,
+        <span class="ident">lats</span>: <span class="ident">coords</span>.<span class="number">1</span>,
+        <span class="ident">height</span>,
+        <span class="ident">temperature</span>,
+        <span class="ident">pressure</span>,
+        <span class="ident">u_wind</span>,
+        <span class="ident">v_wind</span>,
+        <span class="ident">spec_humidity</span>,
+        <span class="ident">virtual_temp</span>,
+    })
 }
 
 <span class="doccomment">/// Creates a 3d array of pressure data of shape</span>
@@ -504,7 +640,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
 <span class="doccomment">/// Function to get the list of unique levels</span>
 <span class="doccomment">/// of specified type in the provided GRIB files.</span>
-<span class="doccomment">/// </span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// This function uses `FxHashSet` to get unique list of levels,</span>
 <span class="doccomment">/// which in benchmarsk showed outstanding performance.</span>
 <span class="kw">fn</span> <span class="ident">list_levels</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">KeyedMessage</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span>, <span class="ident">InputError</span><span class="op">&gt;</span> {
@@ -641,6 +777,26 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="kw">let</span> <span class="ident">truncated_field</span> <span class="op">=</span> <span class="macro">concatenate!</span>[<span class="ident">Axis</span>(<span class="number">1</span>), <span class="ident">left_half</span>, <span class="ident">right_half</span>];
     <span class="ident">truncated_field</span>.<span class="ident">to_owned</span>()
 }
+
+<span class="doccomment">/// Computes and buffers additional pressure level data from</span>
+<span class="doccomment">/// values previously read from the GRIB file.</span>
+<span class="kw">fn</span> <span class="ident">compute_virtual_temperature</span>(
+    <span class="ident">temperature</span>: <span class="kw-2">&amp;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+    <span class="ident">spec_humidity</span>: <span class="kw-2">&amp;</span><span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>,
+) -&gt; <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">virtual_temperature</span>: <span class="ident">Array3</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Array3::zeros</span>(<span class="ident">temperature</span>.<span class="ident">raw_dim</span>());
+
+    <span class="ident">Zip::from</span>(<span class="kw-2">&amp;mut</span> <span class="ident">virtual_temperature</span>)
+        .<span class="ident">and</span>(<span class="ident">temperature</span>)
+        .<span class="ident">and</span>(<span class="ident">spec_humidity</span>)
+        .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">tv</span>, <span class="kw-2">&amp;</span><span class="ident">t</span>, <span class="kw-2">&amp;</span><span class="ident">q</span><span class="op">|</span> {
+            <span class="kw-2">*</span><span class="ident">tv</span> <span class="op">=</span> <span class="ident">floccus::virtual_temperature::general3</span>(<span class="ident">t</span>, <span class="ident">q</span>).<span class="ident">expect</span>(
+                <span class="string">&quot;Error while computing virtual temperature: variable out of reasonable bounds&quot;</span>,
+            );
+        });
+
+    <span class="ident">virtual_temperature</span>
+}
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="pats" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="pats" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
 </body></html>
