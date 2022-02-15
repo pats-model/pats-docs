@@ -606,7 +606,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="kw">let</span> <span class="ident">spec_humidity</span> <span class="op">=</span> <span class="ident">read_raw_field</span>(<span class="string">&quot;q&quot;</span>, <span class="ident">input_shape</span>, <span class="ident">data</span>)<span class="question-mark">?</span>;
     <span class="comment">// check for negative values of specific humidity and replace them with the smallest positive value</span>
     <span class="kw">let</span> <span class="ident">spec_humidity</span> <span class="op">=</span> <span class="ident">truncate_field_to_extent</span>(<span class="kw-2">&amp;</span><span class="ident">spec_humidity</span>, <span class="ident">domain_edges</span>).<span class="ident">mapv</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> {
-        <span class="kw">if</span> <span class="ident">v</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0.0</span> {
+        <span class="kw">if</span> <span class="ident">v</span> <span class="op">&lt;</span> <span class="number">1.0e-8</span> {
             <span class="number">1.0e-8</span>
         } <span class="kw">else</span> {
             <span class="ident">v</span>
