@@ -359,12 +359,6 @@
 <span id="357">357</span>
 <span id="358">358</span>
 <span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
 </pre><pre class="rust"><code><span class="comment">/*
 Copyright 2021 - 2022 Jakub Lewandowski
 
@@ -567,9 +561,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
     <span class="doccomment">/// Function to read distinct longitudes and latitudes</span>
     <span class="doccomment">/// and a grid shape of input GRIB files.</span>
-    <span class="kw">fn</span> <span class="ident">read_distinct_lonlats_and_shape</span>(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Shape</span>), <span class="ident">InputError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read_distinct_lonlats_and_shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Shape</span>), <span class="ident">InputError</span><span class="op">&gt;</span> {
         <span class="comment">// We can read any message from any file as we assume that lat-lons</span>
         <span class="comment">// are aligned in all GRIB messages</span>
 
@@ -581,20 +573,19 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
             <span class="string">&quot;One or more input files does not contain any valid GRIB message&quot;</span>,
         ))<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">distinct_latitudes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">distinct_longitudes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">distinct_latitudes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> <span class="op">=</span>
+            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FloatArray</span>(<span class="ident">lats</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;distinctLatitudes&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
+                <span class="ident">lats</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="kw">as</span> <span class="ident">Float</span>).<span class="ident">collect</span>()
+            } <span class="kw">else</span> {
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::IncorrectKeyType</span>(<span class="string">&quot;distinctLatitudes&quot;</span>));
+            };
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FloatArray</span>(<span class="ident">lats</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;distinctLatitudes&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
-            <span class="ident">distinct_latitudes</span> <span class="op">=</span> <span class="ident">lats</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="kw">as</span> <span class="ident">Float</span>).<span class="ident">collect</span>();
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::IncorrectKeyType</span>(<span class="string">&quot;distinctLatitudes&quot;</span>));
-        }
-
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FloatArray</span>(<span class="ident">lons</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;distinctLongitudes&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
-            <span class="ident">distinct_longitudes</span> <span class="op">=</span> <span class="ident">lons</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="kw">as</span> <span class="ident">Float</span>).<span class="ident">collect</span>();
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::IncorrectKeyType</span>(<span class="string">&quot;distinctLongitudes&quot;</span>));
-        }
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">distinct_longitudes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span> <span class="op">=</span>
+            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FloatArray</span>(<span class="ident">lons</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;distinctLongitudes&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
+                <span class="ident">lons</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span> <span class="kw">as</span> <span class="ident">Float</span>).<span class="ident">collect</span>()
+            } <span class="kw">else</span> {
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::IncorrectKeyType</span>(<span class="string">&quot;distinctLongitudes&quot;</span>));
+            };
 
         <span class="comment">// Values array in GRIB has (0,0) point at north pole</span>
         <span class="ident">distinct_latitudes</span>
@@ -607,20 +598,17 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
         });
 
         <span class="comment">// Read the shape</span>
-        <span class="kw">let</span> <span class="ident">ni</span>;
-        <span class="kw">let</span> <span class="ident">nj</span>;
-
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Int</span>(<span class="ident">val</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;Ni&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
-            <span class="ident">ni</span> <span class="op">=</span> <span class="ident">val</span> <span class="kw">as</span> <span class="ident">usize</span>;
+        <span class="kw">let</span> <span class="ident">ni</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Int</span>(<span class="ident">val</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;Ni&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
+            <span class="ident">val</span> <span class="kw">as</span> <span class="ident">usize</span>
         } <span class="kw">else</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::IncorrectKeyType</span>(<span class="string">&quot;Ni&quot;</span>));
-        }
+        };
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Int</span>(<span class="ident">val</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;Nj&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
-            <span class="ident">nj</span> <span class="op">=</span> <span class="ident">val</span> <span class="kw">as</span> <span class="ident">usize</span>;
+        <span class="kw">let</span> <span class="ident">nj</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Int</span>(<span class="ident">val</span>) <span class="op">=</span> <span class="ident">any_message</span>.<span class="ident">read_key</span>(<span class="string">&quot;Nj&quot;</span>)<span class="question-mark">?</span>.<span class="ident">value</span> {
+            <span class="ident">val</span> <span class="kw">as</span> <span class="ident">usize</span>
         } <span class="kw">else</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">InputError::IncorrectKeyType</span>(<span class="string">&quot;Nj&quot;</span>));
-        }
+        };
 
         <span class="prelude-val">Ok</span>(((<span class="ident">distinct_longitudes</span>, <span class="ident">distinct_latitudes</span>), (<span class="ident">ni</span>, <span class="ident">nj</span>)))
     }

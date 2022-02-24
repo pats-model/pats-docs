@@ -233,7 +233,6 @@
 <span id="231">231</span>
 <span id="232">232</span>
 <span id="233">233</span>
-<span id="234">234</span>
 </pre><pre class="rust"><code><span class="comment">/*
 Copyright 2021 - 2022 Jakub Lewandowski
 
@@ -346,15 +345,14 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
     <span class="comment">// if there&#39;s only one parcel to release in some direction</span>
     <span class="comment">// we use the special case for projection</span>
-    <span class="kw">let</span> <span class="ident">lon_0</span>;
     <span class="kw">let</span> <span class="ident">lat_1</span>;
     <span class="kw">let</span> <span class="ident">lat_2</span>;
 
-    <span class="kw">if</span> <span class="ident">sides</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="number">0.1</span> {
-        <span class="ident">lon_0</span> <span class="op">=</span> <span class="ident">domain</span>.<span class="ident">ref_lon</span>;
+    <span class="kw">let</span> <span class="ident">lon_0</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">sides</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="number">0.1</span> {
+        <span class="ident">domain</span>.<span class="ident">ref_lon</span>
     } <span class="kw">else</span> {
-        <span class="ident">lon_0</span> <span class="op">=</span> <span class="ident">approx_central_lon</span>(<span class="ident">domain</span>.<span class="ident">ref_lon</span>, <span class="ident">domain</span>.<span class="ident">ref_lat</span>, <span class="ident">sides</span>.<span class="number">0</span>);
-    }
+        <span class="ident">approx_central_lon</span>(<span class="ident">domain</span>.<span class="ident">ref_lon</span>, <span class="ident">domain</span>.<span class="ident">ref_lat</span>, <span class="ident">sides</span>.<span class="number">0</span>)
+    };
 
     <span class="kw">if</span> <span class="ident">sides</span>.<span class="number">1</span> <span class="op">&lt;</span> <span class="number">0.1</span> {
         <span class="ident">lat_1</span> <span class="op">=</span> <span class="ident">domain</span>.<span class="ident">ref_lat</span> <span class="op">-</span> <span class="number">1.0</span>;

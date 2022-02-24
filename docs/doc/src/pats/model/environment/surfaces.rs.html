@@ -254,7 +254,6 @@
 <span id="252">252</span>
 <span id="253">253</span>
 <span id="254">254</span>
-<span id="255">255</span>
 </pre><pre class="rust"><code><span class="comment">/*
 Copyright 2021 - 2022 Jakub Lewandowski
 
@@ -384,16 +383,15 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
     <span class="ident">domain_edges</span>: <span class="ident">DomainExtent</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
 ) -&gt; <span class="ident">LonLat</span><span class="op">&lt;</span><span class="ident">Array2</span><span class="op">&lt;</span><span class="ident">Float</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">distinct_lonlats</span>.<span class="number">1</span>[<span class="ident">domain_edges</span>.<span class="ident">north</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">south</span>].<span class="ident">to_vec</span>();
-    <span class="kw">let</span> <span class="ident">lons</span>;
 
-    <span class="kw">if</span> <span class="ident">domain_edges</span>.<span class="ident">west</span> <span class="op">&lt;</span> <span class="ident">domain_edges</span>.<span class="ident">east</span> {
-        <span class="ident">lons</span> <span class="op">=</span> <span class="ident">distinct_lonlats</span>.<span class="number">0</span>[<span class="ident">domain_edges</span>.<span class="ident">west</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">east</span>].<span class="ident">to_vec</span>();
+    <span class="kw">let</span> <span class="ident">lons</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">domain_edges</span>.<span class="ident">west</span> <span class="op">&lt;</span> <span class="ident">domain_edges</span>.<span class="ident">east</span> {
+        <span class="ident">distinct_lonlats</span>.<span class="number">0</span>[<span class="ident">domain_edges</span>.<span class="ident">west</span>..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">east</span>].<span class="ident">to_vec</span>()
     } <span class="kw">else</span> {
         <span class="kw">let</span> <span class="ident">left_half</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">distinct_lonlats</span>.<span class="number">0</span>[<span class="ident">domain_edges</span>.<span class="ident">east</span>..];
         <span class="kw">let</span> <span class="ident">right_half</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">distinct_lonlats</span>.<span class="number">0</span>[..<span class="op">=</span><span class="ident">domain_edges</span>.<span class="ident">west</span>];
 
-        <span class="ident">lons</span> <span class="op">=</span> [<span class="ident">left_half</span>, <span class="ident">right_half</span>].<span class="ident">concat</span>();
-    }
+        [<span class="ident">left_half</span>, <span class="ident">right_half</span>].<span class="ident">concat</span>()
+    };
 
     <span class="kw">let</span> <span class="ident">lons</span> <span class="op">=</span> <span class="ident">Array::from_vec</span>(<span class="ident">lons</span>);
     <span class="kw">let</span> <span class="ident">lats</span> <span class="op">=</span> <span class="ident">Array::from_vec</span>(<span class="ident">lats</span>);
