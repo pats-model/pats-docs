@@ -192,6 +192,7 @@
 <span id="190">190</span>
 <span id="191">191</span>
 <span id="192">192</span>
+<span id="193">193</span>
 </pre><pre class="rust"><code><span class="comment">/*
 Copyright 2021 - 2022 Jakub Lewandowski
 
@@ -316,6 +317,7 @@ along with Parcel Ascent Tracing System (PATS). If not, see https://www.gnu.org/
 
         <span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">field</span> {
             <span class="ident">EnvFields::Pressure</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">pressure</span>.<span class="ident">view</span>(),
+            <span class="ident">EnvFields::Temperature</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">temperature</span>.<span class="ident">view</span>(),
             <span class="ident">EnvFields::VirtualTemperature</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">virtual_temp</span>.<span class="ident">view</span>(),
             <span class="ident">EnvFields::UWind</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">u_wind</span>.<span class="ident">view</span>(),
             <span class="ident">EnvFields::VWind</span> =&gt; <span class="self">self</span>.<span class="ident">fields</span>.<span class="ident">v_wind</span>.<span class="ident">view</span>(),

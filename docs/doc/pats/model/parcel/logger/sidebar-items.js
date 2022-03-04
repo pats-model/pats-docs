@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["construct_parcel_id","(TODO: What it is)"],["save_parcel_log","(TODO: What it is)"]]});
+initSidebarItems({"fn":[["annotate_parcel_log","(TODO: What it is)"],["construct_parcel_id","(TODO: What it is)"],["save_parcel_log","(TODO: What it is)"]],"struct":[["AnnotatedParcelState","(TODO: What it is)"]]});
